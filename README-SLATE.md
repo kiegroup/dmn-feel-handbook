@@ -1,3 +1,6 @@
+https://pandoc.org/MANUAL.html
+https://michelf.ca/projects/php-markdown/extra/
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>

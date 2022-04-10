@@ -25,3 +25,6 @@ doc/
 
 # Vagrant artifacts
 ubuntu-*-console.log
+
+# I am using locally rbenv
+.ruby-version

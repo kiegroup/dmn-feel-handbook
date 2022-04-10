@@ -1,245 +1,1640 @@
 ---
-title: API Reference
+title: Drools DMN FEEL handbook
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
+# language_tabs: # must be one of https://git.io/vQNgJ
+#   - shell
+#   - ruby
+#   - python
+#   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - Refer to the <a href='https://www.drools.org/learn/documentation.html'>full Drools doc (here)</a>.
 
-includes:
-  - errors
+# includes:
+#   - errors
 
 search: true
 
 code_clipboard: true
 
 meta:
-  - name: description
-    content: Documentation for the Kittn API
+  - name: Drools DMN FEEL handbook
+    content: FEEL Pocket reference, FEEL handbook, FEEL vademecum of the FEEL expression language from the DMN specification
 ---
 
-# Introduction
+# DMN FEEL handbook
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+This is a vademecum for the FEEL expression language from the DMN specification, as also implemented by the Drools DMN open source engine.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This is not intented as an exahustive documentation of the DMN capabilities of Drools; this is intended as a handy a pocket reference for FEEL usage.
+You can refer to the complete <a href='https://www.drools.org/learn/documentation.html'>Drools DMN Engine documentation</a> on the main Drools website <a href='https://www.drools.org/learn/documentation.html'>here</a>.
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+# Boolean functions 
 
-# Authentication
+This chapter explores the DMN FEEL specification built-in functions for `boolean`s.
 
-> To authorize, use this code:
+## not( negand )
 
-```ruby
-require 'kittn'
+> Examples
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+``` {.FEEL}
+not( true ) = false
+not( null ) = null
 ```
 
-```python
-import kittn
+| Parameter          | Type                                            |
+|-|-|
+| `negand`           | `boolean`                                       |
 
-api = kittn.authorize('meowmeowmeow')
-```
+Performs the logical negation of the `negand` operand.
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
+# String functions
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
+This chapter explores the DMN FEEL specification built-in functions for `string`s.
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+In FEEL, Unicode characters are counted based on their code points.
 </aside>
 
-# Kittens
+## substring( string, start position, length? )
 
-## Get All Kittens
+> Examples:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
+```FEEL
+substring( "testing",3 ) = "sting"
+substring( "testing",3,3 ) = "sti"
+substring( "testing", -2, 1 ) = "n"
+substring( "\U01F40Eab", 2 ) = "ab"
 ```
 
-```python
-import kittn
+Returns the substring from the start position for the specified length. The first character is at position value `1`.
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `start position`   | `number`                                        |
+| `length`  (Optional)           | `number`                                        |
 
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<aside class="notice">
+In FEEL, the string literal <code>"\U01F40Eab"</code> is the <code>"🐎ab"</code> string
+(horse emoji followed by "a" and "b" characters).
 </aside>
 
-## Get a Specific Kitten
+## string length( string )
 
-```ruby
-require 'kittn'
+> Examples: 
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
+``` {.FEEL}
+string length( "tes" ) = 3
+string length( "\U01F40Eab" ) = 3
 ```
 
-```python
-import kittn
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
+Calculates the length of the specified string.
+
+## upper case( string )
+
+> Examples:
+
+``` {.FEEL}
+upper case( "aBc4" ) = "ABC4"
 ```
 
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+
+Produces an uppercase version of the specified string.
+
+## lower case( string )
+
+> Examples:
+
+``` {.FEEL}
+lower case( "aBc4" ) = "abc4"
 ```
 
-```javascript
-const kittn = require('kittn');
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+Produces a lowercase version of the specified string.
+
+## substring before( string, match )
+
+> Examples:
+
+``` {.FEEL}
+substring before( "testing", "ing" ) = "test"
+substring before( "testing", "xyz" ) = ""
 ```
 
-> The above command returns JSON structured like this:
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `match`            | `string`                                        |
 
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
+Calculates the substring before the match.
+
+## substring after( string, match )
+
+> Examples:
+
+``` {.FEEL}
+substring after( "testing", "test" ) = "ing"
+substring after( "", "a" ) = ""
 ```
 
-This endpoint retrieves a specific kitten.
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `match`            | `string`                                        |
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+Calculates the substring after the match.
 
-### HTTP Request
+## replace( input, pattern, replacement, flags? )
 
-`GET http://example.com/kittens/<ID>`
+> Examples: 
 
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
+``` {.FEEL}
+replace( "abcd", "(ab)|(a)", "[1=$1][2=$2]" ) = "[1=ab][2=]cd"
 ```
 
-```python
-import kittn
+| Parameter          | Type                                            |
+|-|-|
+| `input`            | `string`                                        |
+| `pattern`          | `string`                                        |
+| `replacement`      | `string`                                        |
+| `flags` (Optional) | `string`                                        |
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
+Calculates the regular expression replacement.
+
+<aside class="notice">
+This function uses regular expression parameters as defined in
+<a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
+</aside>
+
+## contains( string, match )
+
+> Examples: 
+
+``` {.FEEL}
+contains( "testing", "to" ) = false
 ```
 
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
+Returns `true` if the string contains the match.
+
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `match`            | `string`                                        |
+
+## starts with( string, match )
+
+> Examples:
+
+``` {.FEEL}
+starts with( "testing", "te" ) = true
 ```
 
-```javascript
-const kittn = require('kittn');
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `match`            | `string`                                        |
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
+Returns `true` if the string starts with the match
+
+## ends with( string, match )
+
+> Examples:
+
+``` {.FEEL}
+ends with( "testing", "g" ) = true
 ```
 
-> The above command returns JSON structured like this:
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `match`            | `string`                                        |
 
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
+Returns `true` if the string ends with the match.
+
+## matches( input, pattern, flags? )
+
+> Examples:
+
+``` {.FEEL}
+matches( "teeesting", "^te*sting" ) = true
 ```
 
-This endpoint deletes a specific kitten.
+| Parameter          | Type                                            |
+|-|-|
+| `input`            | `string`                                        |
+| `pattern`          | `string`                                        |
+| `flags` (Optional) | `string`                                        |
 
-### HTTP Request
+Returns `true` if the input matches the regular expression.
 
-`DELETE http://example.com/kittens/<ID>`
+<aside class="notice">
+This function uses regular expression parameters as defined in
+<a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
+</aside>
 
-### URL Parameters
+## split( string, delimiter )
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+> Examples:
 
+``` {.FEEL}
+split( "John Doe", "\\s" ) = ["John", "Doe"]
+split( "a;b;c;;", ";" ) = ["a","b","c","",""]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `string`           | `string`                                        |
+| `delimiter`        | `string` for a regular expression pattern       |
+
+Returns a list of the original string and splits it at the delimiter
+regular expression pattern.
+
+<aside class="notice">
+This function uses regular expression parameters as defined in
+<a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
+</aside>
+
+# List functions
+
+This chapter explores the DMN FEEL specification built-in functions for `list`s.
+
+<aside class="notice">
+In FEEL, the index of the first element in a list is <code>1</code>. The index of
+the last element in a list can be identified as <code>-1</code>.
+</aside>
+
+## list contains( list, element )
+
+> Examples:
+
+``` {.FEEL}
+list contains( [1,2,3], 2 ) = true
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `element`          | Any type, including null                        |
+
+Returns `true` if the list contains the element.
+
+## count( list )
+
+> Examples:
+
+``` {.FEEL}
+count( [1,2,3] ) = 3
+count( [] ) = 0
+count( [1,[2,3]] ) = 2
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Counts the elements in the list.
+
+## min( list )
+
+> Alternative signature: `min( e1, e2, ..., eN )`
+
+> Examples:
+
+``` {.FEEL}
+min( [1,2,3] ) = 1
+min( 1 ) = 1
+min( [1] ) = 1
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Returns the minimum comparable element in the list.
+
+## max( list )
+
+> Alternative signature: `max( e1, e2, ..., eN )`
+
+> Examples:
+
+``` {.FEEL}
+max( 1,2,3 ) = 3
+max( [] ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Returns the maximum comparable element in the list.
+
+## sum( list )
+
+> Alternative signature: `sum( n1, n2, ..., nN )`
+
+> Examples:
+
+``` {.FEEL}
+sum( [1,2,3] ) = 6
+sum( 1,2,3 ) = 6
+sum( 1 ) = 1
+sum( [] ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `number` elements                     |
+
+Returns the sum of the numbers in the list.
+
+## mean( list )
+
+> Alternative signature: `mean( n1, n2, ..., nN )`
+
+> Examples:
+
+``` {.FEEL}
+mean( [1,2,3] ) = 2
+mean( 1,2,3 ) = 2
+mean( 1 ) = 1
+mean( [] ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `number` elements                     |
+
+Calculates the average (arithmetic mean) of the elements in the
+list.
+
+## all( list )
+
+> Alternative signature: `all( b1, b2, ..., bN )`
+
+> Examples:
+
+``` {.FEEL}
+all( [false,null,true] ) = false
+all( true ) = true
+all( [true] ) = true
+all( [] ) = true
+all( 0 ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `boolean` elements                    |
+
+Returns `true` if all elements in the list are true.
+
+## any( list )
+
+> Alternative signature: `any( b1, b2, ..., bN )`
+
+> Examples:
+
+``` {.FEEL}
+any( [false,null,true] ) = true
+any( false ) = false
+any( [] ) = false
+any( 0 ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `boolean` elements                    |
+
+Returns `true` if any element in the list is true.
+
+## sublist( list, start position, length? )
+
+> Examples:
+
+``` {.FEEL}
+sublist( [4,5,6], 1, 2 ) = [4,5]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `start position`   | `number`                                        |
+| `length`      (Optional)      | `number`                                        |
+
+Returns the sublist from the start position, limited to the length
+elements.
+
+## append( list, item )
+
+> Examples:
+
+``` {.FEEL}
+append( [1], 2, 3 ) = [1,2,3]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `item`             | Any type                                        |
+
+Creates a list that is appended to the item or items.
+
+## concatenate( list )
+
+> Examples: 
+
+``` {.FEEL}
+concatenate( [1,2],[3] ) = [1,2,3]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Creates a list that is the result of the concatenated lists.
+
+## insert before( list, position, newItem )
+
+> Examples: 
+
+``` {.FEEL}
+insert before( [1,3],1,2 ) = [2,1,3]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `position`         | `number`                                        |
+| `newItem`          | Any type                                        |
+
+Creates a list with the `newItem` inserted at the specified
+position.
+
+## remove( list, position )
+
+> Examples:
+
+``` {.FEEL}
+remove( [1,2,3], 2 ) = [1,3]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `position`         | `number`                                        |
+
+Creates a list with the removed element excluded from the specified
+position.
+
+## reverse( list )
+
+> Examples:
+
+``` {.FEEL}
+reverse( [1,2,3] ) = [3,2,1]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Returns a reversed list.
+
+## index of( list, match )
+
+> Examples:
+
+``` {.FEEL}
+index of( [1,2,3,2],2 ) = [2,4]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `match`            | Any type                                        |
+
+Returns indexes matching the element.
+
+## union( list )
+
+> Examples:
+
+``` {.FEEL}
+union( [1,2],[2,3] ) = [1,2,3]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Returns a list of all the elements from multiple lists and excludes
+duplicates.
+
+## distinct values( list )
+
+> Examples:
+
+``` {.FEEL}
+distinct values( [1,2,3,2,1] ) = [1,2,3]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Returns a list of elements from a single list and excludes
+duplicates.
+
+
+## flatten( list )
+
+> Examples
+
+``` {.FEEL}
+flatten( [[1,2],[[3]], 4] ) = [1,2,3,4]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+
+Returns a flattened list.
+
+## product( list )
+
+> Alternative signature: `product( n1, n2, ..., nN )`
+
+> Examples:
+
+``` {.FEEL}
+product( [2, 3, 4] ) = 24
+product( 2, 3, 4 ) = 24
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `number` elements                     |
+
+Returns the product of the numbers in the list.
+
+## median( list )
+
+> Alternative signature: `median( n1, n2, ..., nN )`
+
+> Examples:
+
+``` {.FEEL}
+median( 8, 2, 5, 3, 4 ) = 4
+median( [6, 1, 2, 3] ) = 2.5
+median( [ ] ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `number` elements                     |
+
+Returns the median of the numbers in the list. If the number of
+elements is odd, the result is the middle element. If the number of
+elements is even, the result is the average of the two middle
+elements.
+
+## stddev( list )
+
+> Alternative signature: `stddev( n1, n2, ..., nN )`
+
+> Examples:
+
+``` {.FEEL}
+stddev( 2, 4, 7, 5 ) = 2.081665999466132735282297706979931
+stddev( [47] ) = null
+stddev( 47 ) = null
+stddev( [ ] ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `number` elements                     |
+
+Returns the standard deviation of the numbers in the list.
+
+## mode( list )
+
+> Alternative signature: `mode( n1, n2, ..., nN )`
+
+> Examples:
+
+``` {.FEEL}
+mode( 6, 3, 9, 6, 6 ) = [6]
+mode( [6, 1, 9, 6, 1] ) = [1, 6]
+mode( [ ] ) = [ ]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list` of `number` elements                     |
+
+Returns the mode of the numbers in the list. If multiple elements
+are returned, the numbers are sorted in ascending order.
+
+# Numeric functions
+
+This chapter explores the DMN FEEL specification built-in functions for `number`s.
+
+## decimal( n, scale )
+
+> Examples: 
+
+``` {.FEEL}
+decimal( 1/3, 2 ) = .33
+decimal( 1.5, 0 ) = 2
+decimal( 2.5, 0 ) = 2
+decimal( 1.035, 2 ) = 1.04
+decimal( 1.045, 2 ) = 1.04
+decimal( 1.055, 2 ) = 1.06
+decimal( 1.065, 2 ) = 1.06
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+| `scale`            | `number` in the range `[−6111..6176]`           |
+
+Returns a number with the specified scale.
+
+<aside class="notice">
+This function is implemented to be consistent with the
+<code>FEEL:number</code> definition for rounding decimal numbers to the
+nearest even decimal number.
+</aside>
+
+## floor( n )
+
+> Examples:
+
+``` {.FEEL}
+floor( 1.5 ) = 1
+floor( -1.5 ) = -2
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+Returns the greatest integer that is less than or equal to the
+specified number.
+
+## ceiling( n )
+
+> Examples:
+
+``` {.FEEL}
+ceiling( 1.5 ) = 2
+ceiling( -1.5 ) = -1
+```
+
+Returns the smallest integer that is greater than or equal to the
+specified number.
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+## abs( n )
+
+> Examples:
+
+``` {.FEEL}
+abs( 10 ) = 10
+abs( -10 ) = 10
+abs( @"PT5H" ) = @"PT5H"
+abs( @"-PT5H" ) = @"PT5H"
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`, `days and time duration`, or  `years and months duration`                     |
+
+Returns the absolute value.
+
+## modulo( dividend, divisor )
+
+> Examples:
+
+``` {.FEEL}
+modulo( 12, 5 ) = 2
+modulo( -12,5 )= 3
+modulo( 12,-5 )= -3
+modulo( -12,-5 )= -2
+modulo( 10.1, 4.5 )= 1.1
+modulo( -10.1, 4.5 )= 3.4
+modulo( 10.1, -4.5 )= -3.4
+modulo( -10.1, -4.5 )= -1.1
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `dividend`         | `number`                                        |
+| `divisor`          | `number`                                        |
+
+Returns the remainder of the division of the dividend by the
+divisor. If either the dividend or divisor is negative, the result
+is of the same sign as the divisor.
+
+<aside class="notice">
+This function is also expressed as
+<code>modulo(dividend, divisor) = dividend - divisor*floor(dividen/divisor)</code>.
+</aside>
+
+## sqrt( number )
+
+> Examples:
+
+``` {.FEEL}
+sqrt( 16 ) = 4
+```
+
+Returns the square root of the specified number.
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+## log( number )
+
+> Examples:
+
+``` {.FEEL}
+decimal( log( 10 ), 2 ) = 2.30
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+Returns the logarithm of the specified number.
+
+## exp( number )
+
+> Examples:
+
+``` {.FEEL}
+decimal( exp( 5 ), 2 ) = 148.41
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+Returns Euler's number `e` raised to the power of the specified
+number.
+
+## odd( number )
+
+> Examples:
+
+``` {.FEEL}
+odd( 5 ) = true
+odd( 2 ) = false
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+Returns `true` if the specified number is odd.
+
+## even( number )
+
+> Examples:
+
+``` {.FEEL}
+even( 5 ) = false
+even ( 2 ) = true
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+
+Returns `true` if the specified number is even.
+
+# Date and time functions
+
+This chapter explores the DMN FEEL specification built-in functions for temporal `date and time` comparisons.
+
+## is( value1, value2 )
+
+> Examples:
+
+``` {.FEEL}
+is( date( "2012-12-25" ), time( "23:00:50" ) ) = false
+is( date( "2012-12-25" ), date( "2012-12-25" ) ) = true
+is( time( "23:00:50z" ), time( "23:00:50" ) ) = false
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `value1`           | Any type                                        |
+| `value2`           | Any type                                        |
+
+Returns `true` if both values are the same element in the FEEL
+semantic domain.
+
+# Range functions
+
+The following functions support temporal ordering operations to
+establish relationships between single scalar values and ranges of such
+values. These functions are similar to the components in the Health
+Level Seven (HL7) International [Clinical Quality Language (CQL) 1.4
+syntax](https://cql.hl7.org/08-a-cqlsyntax.html).
+
+## before( )
+
+> Examples:
+
+``` {.FEEL}
+before( 1, 10 ) = true
+before( 10, 1 ) = false
+before( 1, [1..10] ) = false
+before( 1, (1..10] ) = true
+before( 1, [5..10] ) = true
+before( [1..10], 10 ) = false
+before( [1..10), 10 ) = true
+before( [1..10], 15 ) = true
+before( [1..10], [15..20] ) = true
+before( [1..10], [10..20] ) = false
+before( [1..10), [10..20] ) = true
+before( [1..10], (10..20] ) = true
+```
+
+Returns `true` when an element `A` is before an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `before( point1 point2 )`
+
+b.  `before( point, range )`
+
+c.  `before( range, point )`
+
+d.  `before( range1,range2 )`
+
+Semantic:
+
+a.  `point1 < point2`
+
+b.  `point < range.start or ( point = range.start and not(range.start included) )`
+
+c.  `range.end < point or ( range.end = point and not(range.end included) )`
+
+d.  `range1.end < range2.start or (( not(range1.end included) or not(range2.start included) ) and range1.end = range2.start )`
+
+## after( )
+
+> Examples:
+
+``` {.FEEL}
+after( 10, 5 ) = true
+after( 5, 10 ) = false
+after( 12, [1..10] ) = true
+after( 10, [1..10) ) = true
+after( 10, [1..10] ) = false
+after( [11..20], 12 ) = false
+after( [11..20], 10 ) = true
+after( (11..20], 11 ) = true
+after( [11..20], 11 ) = false
+after( [11..20], [1..10] ) = true
+after( [1..10], [11..20] ) = false
+after( [11..20], [1..11) ) = true
+after( (11..20], [1..11] ) = true
+```
+
+Returns `true` when an element `A` is after an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `after( point1 point2 )`
+
+b.  `after( point range )`
+
+c.  `after( range, point )`
+
+d.  `after( range1 range2 )`
+
+Semantic:
+
+a.  `point1 > point2`
+
+b.  `point > range.end or ( point = range.end and not(range.end included) )`
+
+c.  `range.start > point or ( range.start = point and not(range.start included) )`
+
+d.  `range1.start > range2.end or (( not(range1.start included) or not(range2.end included) ) and range1.start = range2.end )`
+
+## meets( )
+
+> Examples:
+
+``` {.FEEL}
+meets( [1..5], [5..10] ) = true
+meets( [1..5), [5..10] ) = false
+meets( [1..5], (5..10] ) = false
+meets( [1..5], [6..10] ) = false
+```
+
+Returns `true` when an element `A` meets an element `B` and when the
+relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `meets( range1, range2 )`
+
+Semantic:
+
+a.  `range1.end included and range2.start included and range1.end = range2.start`
+
+## met by( )
+
+> Examples:
+
+``` {.FEEL}
+met by( [5..10], [1..5] ) = true
+met by( [5..10], [1..5) ) = false
+met by( (5..10], [1..5] ) = false
+met by( [6..10], [1..5] ) = false
+```
+
+Returns `true` when an element `A` is met by an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `met by( range1, range2 )`
+
+Semantic:
+
+a.  `range1.start included and range2.end included and range1.start = range2.end`
+
+## overlaps( )
+
+> Examples:
+
+``` {.FEEL}
+overlaps( [1..5], [3..8] ) = true
+overlaps( [3..8], [1..5] ) = true
+overlaps( [1..8], [3..5] ) = true
+overlaps( [3..5], [1..8] ) = true
+overlaps( [1..5], [6..8] ) = false
+overlaps( [6..8], [1..5] ) = false
+overlaps( [1..5], [5..8] ) = true
+overlaps( [1..5], (5..8] ) = false
+overlaps( [1..5), [5..8] ) = false
+overlaps( [1..5), (5..8] ) = false
+overlaps( [5..8], [1..5] ) = true
+overlaps( (5..8], [1..5] ) = false
+overlaps( [5..8], [1..5) ) = false
+overlaps( (5..8], [1..5) ) = false
+```
+
+Returns `true` when an element `A` overlaps an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `overlaps( range1, range2 )`
+
+Semantic:
+
+a.  `( range1.end > range2.start or (range1.end = range2.start and (range1.end included or range2.end included)) ) and ( range1.start < range2.end or (range1.start = range2.end and range1.start included and range2.end included) )`
+
+## overlaps before( )
+
+> Examples:
+
+``` {.FEEL}
+overlaps before( [1..5], [3..8] ) = true
+overlaps before( [1..5], [6..8] ) = false
+overlaps before( [1..5], [5..8] ) = true
+overlaps before( [1..5], (5..8] ) = false
+overlaps before( [1..5), [5..8] ) = false
+overlaps before( [1..5), (1..5] ) = true
+overlaps before( [1..5], (1..5] ) = true
+overlaps before( [1..5), [1..5] ) = false
+overlaps before( [1..5], [1..5] ) = false
+```
+
+Returns `true` when an element `A` overlaps before an element `B`
+and when the relevant requirements for evaluating to `true` are also
+met.
+
+Signatures:
+
+a.  `overlaps before( range1 range2 )`
+
+Semantic:
+
+a.  `( range1.start < range2.start or (range1.start = range2.start and range1.start included and range2.start included) ) and ( range1.end > range2.start or (range1.end = range2.start and range1.end included and range2.start included) ) and ( range1.end < range2.end or (range1.end = range2.end and (not(range1.end included) or range2.end included )) )`
+
+## overlaps after( )
+
+> Examples:
+
+``` {.FEEL}
+overlaps after( [3..8], [1..5] )= true
+overlaps after( [6..8], [1..5] )= false
+overlaps after( [5..8], [1..5] )= true
+overlaps after( (5..8], [1..5] )= false
+overlaps after( [5..8], [1..5) )= false
+overlaps after( (1..5], [1..5) )= true
+overlaps after( (1..5], [1..5] )= true
+overlaps after( [1..5], [1..5) )= false
+overlaps after( [1..5], [1..5] )= false
+overlaps after( (1..5), [1..5] )= false
+overlaps after( (1..5], [1..6] )= false
+overlaps after( (1..5], (1..5] )= false
+overlaps after( (1..5], [2..5] )= false
+```
+
+Returns `true` when an element `A` overlaps after an element `B` and
+when the relevant requirements for evaluating to `true` are also
+met.
+
+Signatures:
+
+a.  `overlaps after( range1 range2 )`
+
+Semantic:
+
+a.  `( range2.start < range1.start or (range2.start = range1.start and range2.start included and not( range1.start included)) ) and ( range2.end > range1.start or (range2.end = range1.start  and range2.end included and range1.start included) ) and ( range2.end < range1.end or (range2.end = range1.end and (not(range2.end included) or range1.end included)) )`
+
+## finishes( )
+
+> Examples:
+
+``` {.FEEL}
+finishes( 10, [1..10] ) = true
+finishes( 10, [1..10) ) = false
+finishes( [5..10], [1..10] ) = true
+finishes( [5..10), [1..10] ) = false
+finishes( [5..10), [1..10) ) = true
+finishes( [1..10], [1..10] ) = true
+finishes( (1..10], [1..10] ) = true
+```
+
+Returns `true` when an element `A` finishes an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `finishes( point, range )`
+
+b.  `finishes( range1, range2 )`
+
+Semantic:
+
+a.  `range.end included and range.end = point`
+
+b.  `range1.end included = range2.end included and range1.end = range2.end and ( range1.start > range2.start or (range1.start = range2.start and (not(range1.start included) or range2.start included)) )`
+
+## finished by( )
+
+> Examples:
+
+``` {.FEEL}
+finished by( [1..10], 10 ) = true
+finished by( [1..10), 10 ) = false
+finished by( [1..10], [5..10] ) = true
+finished by( [1..10], [5..10) ) = false
+finished by( [1..10), [5..10) ) = true
+finished by( [1..10], [1..10] ) = true
+finished by( [1..10], (1..10] ) = true
+```
+
+Returns `true` when an element `A` is finished by an element `B` and
+when the relevant requirements for evaluating to `true` are also
+met.
+
+Signatures:
+
+a.  `finished by( range, point )`
+
+b.  `finished by( range1 range2 )`
+
+Semantic:
+
+a.  `range.end included and range.end = point`
+
+b.  `range1.end included = range2.end included and range1.end = range2.end and ( range1.start < range2.start or (range1.start = range2.start and (range1.start included or not(range2.start included))) )`
+
+## includes( )
+
+> Examples:
+
+``` {.FEEL}
+includes( [1..10], 5 ) = true
+includes( [1..10], 12 ) = false
+includes( [1..10], 1 ) = true
+includes( [1..10], 10 ) = true
+includes( (1..10], 1 ) = false
+includes( [1..10), 10 ) = false
+includes( [1..10], [4..6] ) = true
+includes( [1..10], [1..5] ) = true
+includes( (1..10], (1..5] ) = true
+includes( [1..10], (1..10) ) = true
+includes( [1..10), [5..10) ) = true
+includes( [1..10], [1..10) ) = true
+includes( [1..10], (1..10] ) = true
+includes( [1..10], [1..10] ) = true
+```
+
+Returns `true` when an element `A` includes an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `includes( range, point )`
+
+b.  `includes( range1, range2 )`
+
+Semantic:
+
+a.  `(range.start < point and range.end > point) or (range.start = point and range.start included) or (range.end = point and range.end included)`
+
+b.  `( range1.start < range2.start or (range1.start = range2.start and (range1.start included or not(range2.start included))) ) and ( range1.end > range2.end or (range1.end = range2.end and (range1.end included or not(range2.end included))) )`
+
+## during( )
+
+> Examples:
+
+``` {.FEEL}
+during( 5, [1..10] ) = true
+during( 12, [1..10] ) = false
+during( 1, [1..10] ) = true
+during( 10, [1..10] ) = true
+during( 1, (1..10] ) = false
+during( 10, [1..10) ) = false
+during( [4..6], [1..10] ) = true
+during( [1..5], [1..10] ) = true
+during( (1..5], (1..10] ) = true
+during( (1..10), [1..10] ) = true
+during( [5..10), [1..10) ) = true
+during( [1..10), [1..10] ) = true
+during( (1..10], [1..10] ) = true
+during( [1..10], [1..10] ) = true
+```
+
+Returns `true` when an element `A` is during an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `during( point, range )`
+
+b.  `during( range1 range2 )`
+
+Semantic:
+
+a.  `(range.start < point and range.end > point) or (range.start = point and range.start included) or (range.end = point and range.end included)`
+
+b.  `( range2.start < range1.start or (range2.start = range1.start and (range2.start included or not(range1.start included))) ) and ( range2.end > range1.end or (range2.end = range1.end and (range2.end included or not(range1.end included))) )`
+
+## starts( )
+
+> Examples:
+
+``` {.FEEL}
+starts( 1, [1..10] ) = true
+starts( 1, (1..10] ) = false
+starts( 2, [1..10] ) = false
+starts( [1..5], [1..10] ) = true
+starts( (1..5], (1..10] ) = true
+starts( (1..5], [1..10] ) = false
+starts( [1..5], (1..10] ) = false
+starts( [1..10], [1..10] ) = true
+starts( [1..10), [1..10] ) = true
+starts( (1..10), (1..10) ) = true
+```
+
+Returns `true` when an element `A` starts an element `B` and when
+the relevant requirements for evaluating to `true` are also met.
+
+Signatures:
+
+a.  `starts( point, range )`
+
+b.  `starts( range1, range2 )`
+
+Semantic:
+
+a.  `range.start = point and range.start included`
+
+b.  `range1.start = range2.start and range1.start included = range2.start included and ( range1.end < range2.end or (range1.end = range2.end and (not(range1.end included) or range2.end included)) )`
+
+## started by( )
+
+> Examples:
+
+``` {.FEEL}
+started by( [1..10], 1 ) = true
+started by( (1..10], 1 ) = false
+started by( [1..10], 2 ) = false
+started by( [1..10], [1..5] ) = true
+started by( (1..10], (1..5] ) = true
+started by( [1..10], (1..5] ) = false
+started by( (1..10], [1..5] ) = false
+started by( [1..10], [1..10] ) = true
+started by( [1..10], [1..10) ) = true
+started by( (1..10), (1..10) ) = true
+```
+
+Returns `true` when an element `A` is started by an element `B` and
+when the relevant requirements for evaluating to `true` are also
+met.
+
+Signatures:
+
+a.  `started by( range, point )`
+
+b.  `started by( range1, range2 )`
+
+Semantic:
+
+a.  `range.start = point and range.start included`
+
+b.  `range1.start = range2.start and range1.start included = range2.start included and ( range2.end < range1.end or (range2.end = range1.end and (not(range2.end included) or range1.end included)) )`
+
+## coincides( )
+
+> Examples:
+
+``` {.FEEL}
+coincides( 5, 5 ) = true
+coincides( 3, 4 ) = false
+coincides( [1..5], [1..5] ) = true
+coincides( (1..5), [1..5] ) = false
+coincides( [1..5], [2..6] ) = false
+```
+
+Returns `true` when an element `A` coincides with an element `B` and
+when the relevant requirements for evaluating to `true` are also
+met.
+
+Signatures:
+
+a.  `coincides( point1, point2 )`
+
+b.  `coincides( range1, range2 )`
+
+Semantic:
+
+a.  `point1 = point2`
+
+b.  `range1.start = range2.start and range1.start included = range2.start included and range1.end = range2.end and range1.end included = range2.end included`
+
+# Temporal functions
+
+This chapter explores the DMN FEEL specification built-in functions for temporal operations.
+
+## day of year( date )
+
+> Examples:
+
+``` {.FEEL}
+day of year( date(2019, 9, 17) ) = 260
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `date`             | `date` or `date and time`                       |
+
+Returns the Gregorian number of the day of the year.
+
+## day of week( date )
+
+> Examples:
+
+``` {.FEEL}
+day of week( date(2019, 9, 17) ) = "Tuesday"
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `date`             | `date` or `date and time`                       |
+
+Returns the Gregorian day of the week: `"Monday"`, `"Tuesday"`,
+`"Wednesday"`, `"Thursday"`, `"Friday"`, `"Saturday"`, or
+`"Sunday"`.
+
+## month of year( date )
+
+> Examples:
+
+``` {.FEEL}
+month of year( date(2019, 9, 17) ) = "September"
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `date`             | `date` or `date and time`                       |
+
+Returns the Gregorian month of the year: `"January"`, `"February"`,
+`"March"`, `"April"`, `"May"`, `"June"`, `"July"`, `"August"`,
+`"September"`, `"October"`, `"November"`, or `"December"`.
+
+## month of year( date )
+
+| Parameter          | Type                                            |
+|-|-|
+| `date`             | `date` or `date and time`                       |
+
+Returns the Gregorian week of the year as defined by ISO 8601.
+
+> Examples:
+
+``` {.FEEL}
+week of year( date(2019, 9, 17) ) = 38
+week of year( date(2003, 12, 29) ) = 1
+week of year( date(2004, 1, 4) ) = 1
+week of year( date(2005, 1, 1) ) = 53
+week of year( date(2005, 1, 3) ) = 1
+week of year( date(2005, 1, 9) ) = 1
+```
+
+# Sort functions
+
+This chapter explores the DMN FEEL specification built-in functions for sorting operations.
+
+## sort( list, precedes )
+
+> Examples:
+
+``` {.FEEL}
+sort( list: [3,1,4,5,2], precedes: function(x,y) x < y ) = [1,2,3,4,5]
+```
+
+Returns a list of the same elements but ordered according to the
+sorting function.
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`             | `list`                                          |
+| `precedes`         | `function`                                      |
+
+# Context functions
+
+This chapter explores the DMN FEEL specification built-in functions for `context`s.
+
+## get value( m, key )
+
+> Examples:
+
+``` {.FEEL}
+get value( {key1 : "value1"}, "key1" ) = "value1"
+get value( {key1 : "value1"}, "unexistent-key" ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `m`                | `context`                                       |
+| `key`              | `string`                                        |
+
+Returns the value from the context for the specified entry key.
+
+## get entries( m )
+
+> Examples:
+
+``` {.FEEL}
+get entries( {key1 : "value1", key2 : "value2"} ) =
+  [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `m`                | `context`                                       |
+
+Returns a list of key-value pairs for the specified context.
+
+# Conversion functions
+
+The following functions support conversion between values of different
+types. Some of these functions use specific string formats, such as the
+following examples:
+
+-   `date string`: Follows the format defined in the [XML Schema Part 2:
+    Datatypes](https://www.w3.org/TR/xmlschema-2/#date) document, such
+    as `2020-06-01`
+
+-   `time string`: Follows one of the following formats:
+
+    -   Format defined in the [XML Schema Part 2:
+        Datatypes](https://www.w3.org/TR/xmlschema-2/#time) document,
+        such as `23:59:00z`
+
+    -   Format for a local time defined by ISO 8601 followed by `@` and
+        an IANA Timezone, such as `00:01:00@Etc/UTC`
+
+-   `date time string`: Follows the format of a `date string` followed
+    by `T` and a `time string`, such as `2012-12-25T11:00:00Z`
+
+-   `duration string`: Follows the format of `days and time duration`
+    and `years and months duration` defined in the [XQuery 1.0 and XPath
+    2.0 Data Model](https://www.w3.org/TR/xpath-datamodel/#types), such
+    as `P1Y2M`
+
+## date( from: string )
+
+> Examples:
+
+``` {.FEEL}
+date( "2012-12-25" ) - date( "2012-12-24" ) = duration( "P1D" )
+```
+
+| Parameter          | Type               | Format                    |
+|-|-|-|
+| `from`             | `string`           | `date string`             |
+
+Converts `from` to a `date` value.
+
+## date( from: date and time )
+
+> Examples:
+
+``` {.FEEL}
+date(date and time( "2012-12-25T11:00:00Z" )) = date( "2012-12-25" )
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `from`             | `date and time`                                 |
+
+Converts `from` to a `date` value and sets time components to null.
+
+## date( year, month, day )
+
+> Examples:
+
+``` {.FEEL}
+date( 2012, 12, 25 ) = date( "2012-12-25" )
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `year`             | `number`                                        |
+| `month`            | `number`                                        |
+| `day`              | `number`                                        |
+
+Produces a `date` from the specified year, month, and day values.
+
+## date and time( date, time )
+
+> Examples:
+
+``` {.FEEL}
+date and time ( "2012-12-24T23:59:00" ) = date and time(date( "2012-12-24" ), time( "23:59:00" ))
+```
+
+Produces a `date and time` from the specified date and ignores any
+time components and the specified time.
+
+| Parameter          | Type                                            |
+|-|-|
+| `date`             | `date` or `date and time`                       |
+| `time`             | `time`                                          |
+
+## date and time( from )
+
+> Examples:
+
+``` {.FEEL}
+date and time( "2012-12-24T23:59:00" ) + duration( "PT1M" ) = date and time( "2012-12-25T00:00:00" )
+```
+
+| Parameter          | Type               | Format                    |
+|-|-|-|
+| `from`             | `string`           | `date time string`        |
+
+Produces a `date and time` from the specified string.
+
+## time( from: string )
+
+> Examples:
+
+``` {.FEEL}
+time( "23:59:00z" ) + duration( "PT2M" ) = time( "00:01:00@Etc/UTC" )
+```
+
+Produces a `time` from the specified string.
+
+| Parameter          | Type               | Format                    |
+|-|-|-|
+| `from`             | `string`           | `time string`             |
+
+## time( from: date and time )
+
+> Examples:
+
+``` {.FEEL}
+time(date and time( "2012-12-25T11:00:00Z" )) = time( "11:00:00Z" )
+```
+
+Produces a `time` from the specified parameter and ignores any date
+components.
+
+| Parameter          | Type                                            |
+|-|-|
+| `from`             | `time` or `date and time`                       |
+
+## time( hour, minute, second, offset? )
+
+> Examples:
+
+``` {.FEEL}
+time( "23:59:00z" ) = time(23, 59, 0, duration( "PT0H" ))
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `hour`             | `number`                                        |
+| `minute`           | `number`                                        |
+| `second`           | `number`                                        |
+| `offset`     (Optional)      | `days and time duration` or null                |
+
+Produces a `time` from the specified hour, minute, and second
+component values.
+
+## number( from, grouping separator, decimal separator )
+
+> Examples:
+
+``` {.FEEL}
+number( "1 000,0", " ", "," ) = number( "1,000.0", ",", "." )
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `from`             | `string` representing a valid number            |
+| `grouping separator` | Space (` `), comma (`,`), period (`.`), or null   |
+| `decimal separator` | Same types as `grouping separator`, but the values cannot match     |
+
+Converts `from` to a `number` using the specified separators.
+
+## string( from )
+
+> Examples:
+
+``` {.FEEL}
+string( 1.1 ) = "1.1"
+string( null ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `from`             | Non-null value                                  |
+
+Provides a string representation of the specified parameter.
+
+## duration( from )
+
+> Examples:
+
+``` {.FEEL}
+date and time( "2012-12-24T23:59:00" ) - date and time( "2012-12-22T03:45:00" ) = duration( "P2DT20H14M" )
+duration( "P2Y2M" ) = duration( "P26M" )
+```
+
+| Parameter          | Type               | Format                    |
+|-|-|-|
+| `from`             | `string`           | `duration string`         |
+
+Converts `from` to a `days and time duration` value or
+`years and months duration` value.
+
+## years and months duration( from, to )
+
+> Examples:
+
+``` {.FEEL}
+years and months duration( date( "2011-12-22" ), date( "2013-08-24" ) ) = duration( "P1Y8M" )
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `from`             | `date` or `date and time`                       |
+| `to`               | `date` or `date and time`                       |
+
+Calculates the `years and months duration` between the two specified
+parameters.
