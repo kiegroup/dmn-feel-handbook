@@ -30,6 +30,243 @@ This is not intented as an exahustive documentation of the DMN capabilities of D
 
 You can refer to the complete <a href='https://www.drools.org/learn/documentation.html'>Drools DMN Engine documentation</a> on the main Drools website <a href='https://www.drools.org/learn/documentation.html'>here</a>.
 
+The FEEL (Friendly Enough Expression Language) is intended as a common ground between business analysts, programmers, domain experts and stakeholders.
+
+The FEEL language design include the following features:
+
+ - Side-effect free
+ - Simple data model with numbers, dates, strings, lists, and contexts
+ - Simple syntax designed for a broad audience
+ - Three-valued logic (`true`, `false`, `null`)
+
+The following sections presents basic FEEL syntax. You can refer to the other sections for details of the built-in and extended FEEL functions.
+
+# FEEL values
+
+FEEL: supports the following data types:
+
+- Numbers
+- Strings
+- Boolean values
+- Dates
+- Time
+- Date and time
+- Days and time duration
+- Years and months duration
+- Functions
+- Contexts
+- Ranges (or intervals)
+- Lists
+
+## number
+
+> Examples:
+
+```text
+47
+-9.123
+1.2*10**3 // expression resulting in 1.2e3
+```
+
+Numbers in FEEL are based on the <a href="http://ieeexplore.ieee.org/document/4610935/">IEEE 754-2008</a> Decimal 128 format, with 34 digits of precision. Internally, numbers are represented in Java as `BigDecimals` with `MathContext DECIMAL128`. FEEL supports only one number data type, so the same type is used to represent both integers and floating point numbers.
+
+FEEL numbers use a dot (`.`) as a decimal separator. FEEL does not support `-INF`, `+INF`, or `NaN`. FEEL uses `null` to represent invalid numbers.
+
+FEEL specification does not support a literal scientific notation. E.g., `1.2e3` is not valid FEEL syntax. You can use `1.2*10**3` instead.
+
+Drools extends the DMN specification and supports additional number notations:
+
+- **Scientific**: You can use scientific notation with the suffix `e<exp>` or `E<exp>`. For example, `1.2e3` is the same as writing the expression `1.2*10**3`, but is a literal instead of an expression.
+- **Hexadecimal**: You can use hexadecimal numbers with the prefix `0x`. For example, `0xff` is the same as the decimal number `255`. Both uppercase and lowercase letters are supported. For example, `0XFF` is the same as `0xff`.
+- **Type suffixes**: You can use the type suffixes `f`, `F`, `d`, `D`, `l`, and `L`. These suffixes are ignored.
+
+## string
+
+> Example:
+
+```text
+"John Doe"
+```
+
+Strings in FEEL are any sequence of characters delimited by double quotation marks.
+
+## boolean
+
+> Example:
+
+```text
+true
+```
+
+FEEL uses three-valued boolean logic, so a boolean logic expression may have values `true`, `false`, or `null`.
+
+## date
+
+> Example:
+
+```text
+date( "2017-06-23" )
+```
+
+Date literals are not supported in FEEL, but you can use the built-in `date()` function to construct date values.
+Date strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#date">XML Schema Part 2: Datatypes</a> document.
+The format is `"YYYY-MM-DD"` where `YYYY` is the year with four digits, `MM` is the number of the month with two digits, and `DD` is the number of the day.
+
+Date objects have time equal to `"00:00:00"`, which is midnight. The dates are considered to be local, without a timezone.
+
+## time
+
+> Examples:
+
+```text
+time( "04:25:12" )
+time( "14:10:00+02:00" )
+time( "22:35:40.345-05:00" )
+time( "15:00:30z" )
+time( "09:30:00@Europe/Rome" )
+```
+
+Time literals are not supported in FEEL, but you can use the built-in `time()` function to construct date values.
+Time strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#time">XML Schema Part 2: Datatypes</a> document.
+The format is `"hh:mm:ss[.uuu][(+-)hh:mm]"` where `hh` is the hour of the day (from `00` to `23`), `mm` is the minutes in the hour, and `ss` is the number of seconds in the minute. Optionally, the string may define the number of milliseconds (`uuu`) within the second and contain a positive (`+`) or negative (`-`) offset from UTC time to define its timezone.
+Instead of using an offset, you can use the letter `z` to represent the UTC time, which is the same as an offset of `-00:00`.
+Instead of using an offset, you can also use the symbol `@` followed by a IANA timezone.
+If no offset is defined, the time is considered to be local.
+
+Time values that define an offset or a timezone cannot be compared to local times that do not define an offset or a timezone.
+
+## date and time
+
+> Examples:
+
+```text
+date and time( "2017-10-22T23:59:00" )
+date and time( "2017-06-13T14:10:00+02:00" )
+date and time( "2017-02-05T22:35:40.345-05:00" )
+date and time( "2017-06-13T15:00:30z" )
+date and time( "2017-06-13T09:30:00@Europe/Rome" )
+```
+
+Date and time literals are not supported in FEEL, but you can use the built-in `date and time()` function to construct `date and time` values.
+Date and time strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">XML Schema Part 2: Datatypes</a> document.
+The format is `"<date>T<time>"`, where `<date>` and `<time>` follow the prescribed XML schema formatting, conjoined by `T`.
+
+## days and time duration
+
+> Examples:
+
+```text
+duration( "P1DT23H12M30S" )
+duration( "P23D" )
+duration( "PT12H" )
+duration( "PT35M" )
+```
+
+Days and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `days and time duration` values.
+Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only days, hours, minutes and seconds. Months and years are not supported.
+
+## years and month duration
+
+> Examples:
+
+```text
+duration( "P3Y5M" )
+duration( "P2Y" )
+duration( "P10M" )
+duration( "P25M" )
+```
+
+Years and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `years and month duration` values.
+Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only years and months. Days, hours, minutes, or seconds are not supported.
+
+## function
+
+> Example:
+
+```text
+function(a, b) a + b
+```
+
+FEEL has function literals (or anonymous functions, lambda functions) that you can use to create functions. 
+
+In the example, the FEEL expression creates a function that adds the parameters a and b and returns the result.
+
+## context
+
+> Example:
+
+```text
+{ x : 5, y : 3 }
+```
+
+FEEL has `context` literals that you can use to create contexts. A `context` in FEEL is a list of key and value pairs, similar to maps in languages like Java.
+
+In the example, the expression creates a context with two entries, `x` and `y`, representing a coordinate in a chart.
+
+In DMN 1.2, another way to create contexts is to create an item definition that contains the list of keys as attributes, and then declare the variable as having that item definition type.
+
+The Drools DMN API supports DMN `ItemDefinition` structural types in a `DMNContext` represented in two ways:
+
+- User-defined Java type: Must be a valid JavaBeans object defining properties and getters for each of the components in the DMN `ItemDefinition`. If necessary, you can also use the `@FEELProperty` annotation for those getters representing a component name which would result in an invalid Java identifier.
+
+- `java.util.Map` interface: The map needs to define the appropriate entries, with the keys corresponding to the component name in the DMN `ItemDefinition`.
+
+## range (or interval)
+
+> Example interval between 1 and 10, including the boundaries (a closed interval on both endpoints):
+
+```text
+[ 1 .. 10 ]
+```
+
+> Example interval between 1 hour and 12 hours, including the lower boundary (a closed interval), but excluding the upper boundary (an open interval):
+
+```text
+[ duration("PT1H") .. duration("PT12H") )
+```
+
+The syntax of a range is defined in the following formats:
+
+![FEEL range ebnf](range_ebnf.png)
+
+The expression for the endpoint must return a comparable value, and the lower bound endpoint must be lower than the upper bound endpoint.
+
+You can use ranges in decision tables to test for ranges of values, or use ranges in simple literal expressions.
+
+For example, the following literal expression returns `true` if the value of a variable `x` is between `0` and `100`:<br/>
+`x in [ 1 .. 100 ]`
+
+## list
+
+> Example:
+
+```text
+[ 2, 3, 4, 5 ]
+```
+
+FEEL has `list` literals that you can use to create lists of items.
+A `list` in FEEL is represented by a comma-separated list of values enclosed in square brackets.
+
+> Example to return the second element of a list `x`:
+
+```text
+x[2]
+```
+
+> Example to return the second-to-last element of a list `x`:
+
+```text
+x[-2]
+```
+
+All lists in FEEL contain elements of the same type and are immutable.
+Elements in a list can be accessed by index, where the first element is `1`.
+Negative indexes can access elements starting from the end of the list so that `-1` is the last element.
+
+Elements in a list can also be counted by the function count, which uses the list of elements as the parameter.
+For example, the following expression returns `4`:<br/>
+`count([ 2, 3, 4, 5 ])`
+
 # String functions
 
 This chapter explores the DMN FEEL specification built-in functions for `string`s.
