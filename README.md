@@ -8,3 +8,5 @@ This is not intented as an exahustive documentation of the DMN capabilities of D
 Looking for a gentle introduction to the DMN standard? We have just the right crash course on DMN, freely available for you at: [learn-dmn-in-15-minutes.com](https://learn-dmn-in-15-minutes.com).
 
 You can refer to the complete [Drools DMN Engine documentation](https://www.drools.org/learn/documentation.html) on the main Drools website [here](https://www.drools.org/learn/documentation.html).
+
+https://www.drools.org/learn/dmn.html
