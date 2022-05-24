@@ -28,3 +28,6 @@ ubuntu-*-console.log
 
 # I am using locally rbenv
 .ruby-version
+
+# Used to perform semi-automatic translation following: https://pandoc.org/MANUAL.html https://michelf.ca/projects/php-markdown/extra/
+temp

@@ -13,7 +13,7 @@ toc_footers:
 # includes:
 #   - errors
 
-search: true
+search: false
 
 code_clipboard: true
 
@@ -26,7 +26,7 @@ meta:
 
 This is a vademecum for the FEEL expression language from the DMN specification, as also implemented by the Drools DMN open source engine.
 
-This is not intented as an exahustive documentation of the DMN capabilities of Drools; this is intended as a handy a pocket reference for FEEL usage.
+This is not intented as an exahustive documentation of the <a href='https://www.drools.org/learn/dmn.html'>DMN capabilities of Drools</a>; this is intended as a handy a pocket reference for FEEL usage.
 You can refer to the complete <a href='https://www.drools.org/learn/documentation.html'>Drools DMN Engine documentation</a> on the main Drools website <a href='https://www.drools.org/learn/documentation.html'>here</a>.
 
 # Boolean functions 
@@ -160,6 +160,7 @@ Calculates the substring after the match.
 > Examples: 
 
 ``` {.FEEL}
+replace( "banana", "a", "o" ) = "bonono"
 replace( "abcd", "(ab)|(a)", "[1=$1][2=$2]" ) = "[1=ab][2=]cd"
 ```
 
@@ -264,6 +265,51 @@ regular expression pattern.
 This function uses regular expression parameters as defined in
 <a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
 </aside>
+
+## string join( list, delimiter )
+
+> Examples:
+
+``` {.FEEL}
+string join(["a","b","c"], "_and_") = "a_and_b_and_c"
+string join(["a","b","c"], "") = "abc"
+string join(["a","b","c"], null) = "abc"
+string join(["a"], "X") = "a"
+string join(["a",null,"c"], "X") = "aXc"
+string join([], "X") = ""
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`           | `list` of `string`                                        |
+| `delimiter`        | `string`        |
+
+Returns a string which is composed by joining all the string elements from the list parameter, separated by the delimiter.
+The `delimiter` can be an empty string.
+Null elements in the list parameter are ignored.
+If `list` is empty, the result is the empty string.
+If `delimiter` is null, the string elements are joined without a separator.
+
+## string join( list )
+
+> Examples:
+
+``` {.FEEL}
+string join(["a","b","c"], "_and_") = "a_and_b_and_c"
+string join(["a","b","c"], "") = "abc"
+string join(["a","b","c"], null) = "abc"
+string join(["a"], "X") = "a"
+string join(["a",null,"c"], "X") = "aXc"
+string join([], "X") = ""
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `list`           | `list` of `string`                                        |
+
+Returns a string which is composed by joining all the string elements from the list parameter.
+Null elements in the `list` parameter are ignored.
+If `list` is empty, the result is the empty string.
 
 # List functions
 
@@ -579,6 +625,7 @@ Returns a flattened list.
 
 ``` {.FEEL}
 product( [2, 3, 4] ) = 24
+product( [] ) = null
 product( 2, 3, 4 ) = 24
 ```
 
@@ -680,10 +727,13 @@ nearest even decimal number.
 
 ## floor( n )
 
+> Alternative signature: `floor( n, scale )`
+
 > Examples:
 
 ``` {.FEEL}
 floor( 1.5 ) = 1
+floor( -1.56, 1 ) = -1.6
 floor( -1.5 ) = -2
 ```
 
@@ -691,24 +741,103 @@ floor( -1.5 ) = -2
 |-|-|
 | `n`                | `number`                                        |
 
-Returns the greatest integer that is less than or equal to the
-specified number.
+Returns `n` with given scale and rounding mode _flooring_.
+If at least one of `n` or `scale` is null, the result is null.
 
 ## ceiling( n )
+
+> Alternative signature: `ceiling( n, scale )`
 
 > Examples:
 
 ``` {.FEEL}
 ceiling( 1.5 ) = 2
+ceiling( -1.56, 1 ) = -1.5
 ceiling( -1.5 ) = -1
 ```
 
-Returns the smallest integer that is greater than or equal to the
-specified number.
+Returns `n` with given scale and rounding mode _ceiling_.
+If at least one of `n` or `scale` is null, the result is null.
 
 | Parameter          | Type                                            |
 |-|-|
 | `n`                | `number`                                        |
+
+## round up( n, scale )
+
+> Examples:
+
+``` {.FEEL}
+round up( 5.5, 0 ) = 6 
+round up( -5.5, 0 ) = -6 
+round up( 1.121, 2 ) = 1.13
+round up( -1.126, 2 ) = -1.13
+```
+
+Returns `n` with given scale and rounding mode _round up_.
+If at least one of `n` or `scale` is null, the result is null.
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+| `scale`            | `number`                                        |
+
+## round down( n, scale )
+
+> Examples:
+
+``` {.FEEL}
+round down( 5.5, 0 ) = 5 
+round down( -5.5, 0 ) = -5 
+round down( 1.121, 2 ) = 1.12
+round down( -1.126, 2 ) = -1.12
+```
+
+Returns `n` with given scale and rounding mode _round down_.
+If at least one of `n` or `scale` is null, the result is null.
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+| `scale`            | `number`                                        |
+
+## round half up( n, scale )
+
+> Examples:
+
+``` {.FEEL}
+round half up( 5.5, 0 ) = 6 
+round half up( -5.5, 0 ) = -6 
+round half up( 1.121, 2 ) = 1.12
+round half up( -1.126, 2 ) = -1.13
+```
+
+Returns `n` with given scale and rounding mode _round half up_.
+If at least one of `n` or `scale` is null, the result is null.
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+| `scale`            | `number`                                        |
+
+## round hald down( n, scale )
+
+> Examples:
+
+``` {.FEEL}
+round half down( 5.5, 0 ) = 5 
+round half down( -5.5, 0 ) = -5 
+round half down( 1.121, 2 ) = 1.12
+round half down( -1.126, 2 ) = -1.13
+```
+
+Returns `n` with given scale and rounding mode _round half down_.
+If at least one of `n` or `scale` is null, the result is null.
+
+| Parameter          | Type                                            |
+|-|-|
+| `n`                | `number`                                        |
+| `scale`            | `number`                                        |
 
 ## abs( n )
 
@@ -841,6 +970,7 @@ This chapter explores the DMN FEEL specification built-in functions for temporal
 is( date( "2012-12-25" ), time( "23:00:50" ) ) = false
 is( date( "2012-12-25" ), date( "2012-12-25" ) ) = true
 is( time( "23:00:50z" ), time( "23:00:50" ) ) = false
+is( time( "23:00:50z" ), time( "23:00:50+00:00" ) ) = true
 ```
 
 | Parameter          | Type                                            |
@@ -1018,7 +1148,7 @@ a.  `overlaps( range1, range2 )`
 
 Semantic:
 
-a.  `( range1.end > range2.start or (range1.end = range2.start and (range1.end included or range2.end included)) ) and ( range1.start < range2.end or (range1.start = range2.end and range1.start included and range2.end included) )`
+a. `( range1.end > range2.start or (range1.end = range2.start and range1.end included and range2.end included) ) and ( range1.start < range2.end or (range1.start = range2.end and range1.start included and range2.end included) )`
 
 ## overlaps before( )
 
@@ -1046,7 +1176,7 @@ a.  `overlaps before( range1 range2 )`
 
 Semantic:
 
-a.  `( range1.start < range2.start or (range1.start = range2.start and range1.start included and range2.start included) ) and ( range1.end > range2.start or (range1.end = range2.start and range1.end included and range2.start included) ) and ( range1.end < range2.end or (range1.end = range2.end and (not(range1.end included) or range2.end included )) )`
+a. `( range1.start < range2.start or (range1.start = range2.start and range1.start included and not(range2.start included)) ) and ( range1.end > range2.start or (range1.end = range2.start and range1.end included and range2.start included) ) and ( range1.end < range2.end or (range1.end = range2.end and (not(range1.end included) or range2.end included )) )`
 
 ## overlaps after( )
 
@@ -1428,6 +1558,91 @@ get entries( {key1 : "value1", key2 : "value2"} ) =
 
 Returns a list of key-value pairs for the specified context.
 
+## context( entries )
+
+> Examples:
+
+``` {.FEEL}
+context([{key:"a", value:1}, {key:"b", value:2}]) = {a:1, b:2}
+context([{key:"a", value:1}, {key:"b", value:2, something: "else"}]) = {a:1, b:2}
+context([{key:"a", value:1}, {key:"b"}]) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `entries`          | `list` of `context` , each item SHALL have two entries having keys named "key" and "value" respectively                                     |
+
+Returns a new context that includes all specified entries.
+If a context item contains additional entries beyond the required "key" and "value" entries, the additional entries are ignored.
+If a context item is missing the required "key" and "value" entries, the final result is null.
+See also: get entries() built-in function.
+
+## context put( context, key, value )
+
+> Examples:
+
+``` {.FEEL}
+context put({x:1}, "y", 2) = {x:1, y:2}
+context put({x:1, y:0}, "y", 2) = {x:1, y:2}
+context put({x:1, y:0, z:0}, "y", 2) = {x:1, y:2, z:0}
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `context`          | `context`                                     |
+| `key`          | `string`                                     |
+| `value`          | `Any` type                                     |
+
+Returns a new context that includes the new entry, or overrides the existing value if an entry for the same key already exists in the supplied context parameter.
+A new entry is added as the last entry of the new context.
+If overriding an existing entry, the order of the keys maintains the same order as in the original context.
+
+## context put( context, keys, value )
+
+> Examples:
+
+``` {.FEEL}
+context put({x:1}, ["y"], 2) = context put({x:1}, "y", 2)
+context put({x:1}, ["y"], 2) = {x:1, y:2}
+context put({x:1, y: {a: 0} }, ["y", "a"], 2) = context put({x:1, y: {a: 0} }, "y", context put({a: 0}, ["a"], 2))
+context put({x:1, y: {a: 0} }, ["y", "a"], 2) = {x:1, y: {a: 2} }
+context put({x:1, y: {a: 0} }, [], 2) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `context`          | `context`                                     |
+| `keys`          | `list` of `string`                                     |
+| `value`          | `Any` type                                     |
+
+Returns the composite of nested invocations to `context put()` for each item in `keys` hierarchy in context.
+
+If `keys` is a list of 1 element, this is equivalent to `context put(context, key', value)`, where `key'` is the only element in the list keys.
+
+If `keys` is a list of 2 or more elements, this is equivalent of calling `context put(context, key', value')`, with: <br/>
+`key'` is the head element in the list keys, <br/>
+`value'` is the result of invocation of `context put(context', keys', value)`, where: <br/>
+`context'` is the result of `context.key'`, <br/>
+`keys'` is the remainder of the list keys without the head element `key'`.
+
+If `keys` is an empty list or null, the result is null.
+
+## context merge( contexts )
+
+> Examples:
+
+``` {.FEEL}
+context merge([{x:1}, {y:2}]) = {x:1, y:2}
+context merge([{x:1, y:0}, {y:2}]) = {x:1, y:2}
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `contexts`          | `list` of `context`                                     |
+
+Returns a new context that includes all entries from the given contexts; if some of the keys are equal, the entries are overridden.
+The entries are overridden in the same order as specified by the supplied parameter, with new entries added as the last entry in the new context.
+
 # Conversion functions
 
 The following functions support conversion between values of different
@@ -1638,3 +1853,61 @@ years and months duration( date( "2011-12-22" ), date( "2013-08-24" ) ) = durati
 
 Calculates the `years and months duration` between the two specified
 parameters.
+
+# Miscellaneous functions
+
+These functions provide support utilities for several miscellaneous use-cases.
+For example, when a decision depends on the current date, like deciding the support SLA over the weekends, additional charges for weekend delivery, etc.
+
+It is important to note that the functions in this section are intended to be side-effect-free, but they are not deterministic and not idempotent from the perspective of an external observer.
+
+As a user, you are encouraged to isolate the decision logic that uses these functions in specific DRG elements, such as Decisions.
+The encapsulation enables them to be overridden with synthetic values during scenario testing, that remain constant across executions of the DMN model's test cases.
+
+## now()
+
+> Examples:
+
+```text
+now()
+```
+
+Returns the current `date and time`.
+
+## today()
+
+> Examples:
+
+```text
+today()
+```
+
+Returns the current `date`.
+
+# KIE Extended functions
+
+These functions are provided as an extension to the DMN Standard to enable support for various use-cases on top of the <a href='https://www.drools.org/learn/dmn.html'>Drools DMN Engine</a>.
+
+## invoke( namespace, modelName, decisionName, parameters )
+
+> Examples:
+
+```text
+invoke(
+    "http://namespace_of_model",
+    "my model name",
+    "my decision name",
+    { a:1, b:2 }
+)
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `namespace`        | `string`                                        |
+| `modelName`        | `string`                                        |
+| `decisionName`     | `string`                                        |
+| `parameters`       | `context`                                       |
+
+Returns the result of the decision evaluation in the specified DMN model available to the `DMNRuntime` environment in the current DMN model is executed.
+
+This function is _deprecated_ in favor of encouraging the usage of DMN Standard capabilities wherever possible; since DMNv1.2 it shall be possible to use the DMN standard's _Import_ functionality to import Business Knowledge Model (BKM) nodes and Decision Service nodes, to be invoked from another model.
