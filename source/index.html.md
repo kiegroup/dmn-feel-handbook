@@ -28,6 +28,8 @@ This is a vademecum for the FEEL expression language from the DMN specification,
 
 This is not intented as an exahustive documentation of the DMN capabilities of Drools; this is intended as a handy a pocket reference for FEEL usage, a FEEL pocket guide, a FEEL reference, a FEEL quick reference, a FEEL cheatsheet,<br/>**a FEEL handbook**.
 
+Looking for a gentle introduction to the DMN standard? We have just the right crash course on DMN, freely available for you at: <a href="https://learn-dmn-in-15-minutes.com">learn-dmn-in-15-minutes.com</a>.
+
 You can refer to the complete <a href='https://www.drools.org/learn/documentation.html'>Drools DMN Engine documentation</a> on the main Drools website <a href='https://www.drools.org/learn/documentation.html'>here</a>.
 
 The FEEL (Friendly Enough Expression Language) is intended as a common ground between business analysts, programmers, domain experts and stakeholders.
@@ -39,7 +41,7 @@ The FEEL language design include the following features:
  - Simple syntax designed for a broad audience
  - Three-valued logic (`true`, `false`, `null`)
 
-The following sections presents basic FEEL syntax. You can refer to the other sections for details of the built-in and extended FEEL functions.
+The following chapters presents basic FEEL syntax. You can refer to the other chapters for details of the built-in and extended FEEL functions.
 
 # FEEL values
 
@@ -266,6 +268,79 @@ Negative indexes can access elements starting from the end of the list so that `
 Elements in a list can also be counted by the function count, which uses the list of elements as the parameter.
 For example, the following expression returns `4`:<br/>
 `count([ 2, 3, 4, 5 ])`
+
+# FEEL expressions
+
+This chapter explores some of the most useful FEEL operators to build basic expressions.
+
+## if expression
+
+> Examples:
+
+```FEEL
+if 20 > 0 then "YES" else "NO" = "YES"
+if (20 - (10 * 2)) > 0 then "YES" else "NO" = "NO"
+if (2 ** 3) = 16 then "YES" else "NO" = "YES"
+if (4 / 2) != 2 then "YES" else "NO" = "NO"
+```
+
+You can use the `if expression` as the classic if-then-else operator in other languages.
+
+<aside class="warning">
+Please notice that the `else` part is always mandatory.
+</aside>
+
+## for expression
+
+> Examples:
+
+```FEEL
+for i in [1, 2, 3] return i * i = [1, 4, 9]
+for i in [1,2,3], j in [1,2,3] return i*j = [1, 2, 3, 2, 4, 6, 3, 6, 9]
+```
+
+You can use the `for expression` to produce new values based on the iteration context(s).
+
+This is similar to list comprehension and mapping from Functional Programming.
+
+## quantified expression
+
+These operators (`some`, `every`) are similar to list comprehension for filtering from Functional Programming concepts.
+
+### some (name) in (list) satisfies (predicate)
+
+> Examples:
+
+```FEEL
+some i in [1, 2, 3] satisfies i > 3 = true
+some i in [1, 2, 3] satisfies i > 4 = false
+```
+
+You can use the `some` to check if at least some element satisfies specific conditions from iteration context(s) built from the supplied list.
+
+### every (name) in (list) satisfies (predicate)
+
+> Examples:
+
+```FEEL
+every i in [1, 2, 3] satisfies i > 1 = false
+every i in [1, 2, 3] satisfies i > 0 = true
+```
+
+You can use the `every` to check if all the elements satisfies specific conditions from iteration context(s) built from the supplied list.
+
+## in expression
+
+> Examples:
+
+```FEEL
+1 in [1..10] = true
+1 in (1..10] = false
+10 in [1..10] = true
+10 in [1..10) = false
+```
+
+You can use the `in expression` to check if a given value is matched by a specified range.
 
 # String functions
 
