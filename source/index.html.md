@@ -8,7 +8,8 @@ title: Drools DMN FEEL handbook
 #   - javascript
 
 toc_footers:
-  - Open the <a href='https://www.drools.org/learn/documentation.html'>full Drools manual (here)</a>.
+  - Open the <a href='https://www.drools.org/learn/documentation.html'>full Drools manual (here)</a>
+  - <a href='https://www.drools.org/learn/dmn.html'>Drools DMN open source engine</a>
 
 # includes:
 #   - errors
@@ -24,7 +25,7 @@ meta:
 
 # DMN FEEL handbook
 
-This is a vademecum for the FEEL expression language from the DMN specification, as also implemented by the <a href='https://www.drools.org/learn/dmn.html'>Drools DMN open source engine</a>.
+This is a vademecum for the FEEL expression language from the <a href="https://www.omg.org/dmn">DMN specification</a>, as also implemented by the <a href='https://www.drools.org/learn/dmn.html'>Drools DMN open source engine</a>.
 
 This is not intented as an exahustive documentation of the DMN capabilities of Drools; this is intended as a handy a pocket reference for FEEL usage, a FEEL pocket guide, a FEEL reference, a FEEL quick reference, a FEEL cheatsheet,<br/>**a FEEL handbook**.
 
@@ -287,7 +288,7 @@ if (4 / 2) != 2 then "YES" else "NO" = "NO"
 You can use the `if expression` as the classic if-then-else operator in other languages.
 
 <aside class="warning">
-Please notice that the `else` part is always mandatory.
+Please notice that the <code>else</code> part is always mandatory.
 </aside>
 
 ## for expression
