@@ -8,7 +8,7 @@ title: Drools DMN FEEL handbook
 #   - javascript
 
 toc_footers:
-  - Refer to the <a href='https://www.drools.org/learn/documentation.html'>full Drools doc (here)</a>.
+  - Open the <a href='https://www.drools.org/learn/documentation.html'>full Drools manual (here)</a>.
 
 # includes:
 #   - errors
@@ -19,34 +19,16 @@ code_clipboard: true
 
 meta:
   - name: Drools DMN FEEL handbook
-    content: FEEL Pocket reference, FEEL handbook, FEEL vademecum of the FEEL expression language from the DMN specification
+    content: FEEL handbook, FEEL vademecum, FEEL cheatsheet, FEEL pocket reference of the FEEL expression language from the DMN specification
 ---
 
 # DMN FEEL handbook
 
-This is a vademecum for the FEEL expression language from the DMN specification, as also implemented by the Drools DMN open source engine.
+This is a vademecum for the FEEL expression language from the DMN specification, as also implemented by the <a href='https://www.drools.org/learn/dmn.html'>Drools DMN open source engine</a>.
 
-This is not intented as an exahustive documentation of the <a href='https://www.drools.org/learn/dmn.html'>DMN capabilities of Drools</a>; this is intended as a handy a pocket reference for FEEL usage.
+This is not intented as an exahustive documentation of the DMN capabilities of Drools; this is intended as a handy a pocket reference for FEEL usage, a FEEL pocket guide, a FEEL reference, a FEEL quick reference, a FEEL cheatsheet,<br/>**a FEEL handbook**.
+
 You can refer to the complete <a href='https://www.drools.org/learn/documentation.html'>Drools DMN Engine documentation</a> on the main Drools website <a href='https://www.drools.org/learn/documentation.html'>here</a>.
-
-# Boolean functions 
-
-This chapter explores the DMN FEEL specification built-in functions for `boolean`s.
-
-## not( negand )
-
-> Examples
-
-``` {.FEEL}
-not( true ) = false
-not( null ) = null
-```
-
-| Parameter          | Type                                            |
-|-|-|
-| `negand`           | `boolean`                                       |
-
-Performs the logical negation of the `negand` operand.
 
 # String functions
 
@@ -957,6 +939,25 @@ even ( 2 ) = true
 | `n`                | `number`                                        |
 
 Returns `true` if the specified number is even.
+
+# Boolean functions 
+
+This chapter explores the DMN FEEL specification built-in functions for `boolean`s.
+
+## not( negand )
+
+> Examples
+
+``` {.FEEL}
+not( true ) = false
+not( null ) = null
+```
+
+| Parameter          | Type                                            |
+|-|-|
+| `negand`           | `boolean`                                       |
+
+Performs the logical negation of the `negand` operand.
 
 # Date and time functions
 
