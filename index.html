@@ -1,0 +1,3324 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta
+            name="Drools DMN FEEL handbook"
+            content="FEEL handbook, FEEL vademecum, FEEL cheatsheet, FEEL pocket reference of the FEEL expression language from the DMN specification"
+        >
+    <title>Drools DMN FEEL handbook</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-c9d8fa83.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch-18c3ed8e.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar-cad8cdcb.png" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <img src="images/logo-a56c74fb.png" class="logo" alt="" />
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#dmn-feel-handbook" class="toc-h1 toc-link" data-title="DMN FEEL handbook">DMN FEEL handbook</a>
+          </li>
+          <li>
+            <a href="#feel-values" class="toc-h1 toc-link" data-title="FEEL values">FEEL values</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#number" class="toc-h2 toc-link" data-title="number">number</a>
+                  </li>
+                  <li>
+                    <a href="#string" class="toc-h2 toc-link" data-title="string">string</a>
+                  </li>
+                  <li>
+                    <a href="#boolean" class="toc-h2 toc-link" data-title="boolean">boolean</a>
+                  </li>
+                  <li>
+                    <a href="#date" class="toc-h2 toc-link" data-title="date">date</a>
+                  </li>
+                  <li>
+                    <a href="#time" class="toc-h2 toc-link" data-title="time">time</a>
+                  </li>
+                  <li>
+                    <a href="#date-and-time" class="toc-h2 toc-link" data-title="date and time">date and time</a>
+                  </li>
+                  <li>
+                    <a href="#days-and-time-duration" class="toc-h2 toc-link" data-title="days and time duration">days and time duration</a>
+                  </li>
+                  <li>
+                    <a href="#years-and-month-duration" class="toc-h2 toc-link" data-title="years and month duration">years and month duration</a>
+                  </li>
+                  <li>
+                    <a href="#function" class="toc-h2 toc-link" data-title="function">function</a>
+                  </li>
+                  <li>
+                    <a href="#context" class="toc-h2 toc-link" data-title="context">context</a>
+                  </li>
+                  <li>
+                    <a href="#range-or-interval" class="toc-h2 toc-link" data-title="range (or interval)">range (or interval)</a>
+                  </li>
+                  <li>
+                    <a href="#list" class="toc-h2 toc-link" data-title="list">list</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#feel-expressions" class="toc-h1 toc-link" data-title="FEEL expressions">FEEL expressions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#if-expression" class="toc-h2 toc-link" data-title="if expression">if expression</a>
+                  </li>
+                  <li>
+                    <a href="#for-expression" class="toc-h2 toc-link" data-title="for expression">for expression</a>
+                  </li>
+                  <li>
+                    <a href="#quantified-expression" class="toc-h2 toc-link" data-title="quantified expression">quantified expression</a>
+                  </li>
+                  <li>
+                    <a href="#in-expression" class="toc-h2 toc-link" data-title="in expression">in expression</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#string-functions" class="toc-h1 toc-link" data-title="String functions">String functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#substring-string-start-position-length" class="toc-h2 toc-link" data-title="substring( string, start position, length? )">substring( string, start position, length? )</a>
+                  </li>
+                  <li>
+                    <a href="#string-length-string" class="toc-h2 toc-link" data-title="string length( string )">string length( string )</a>
+                  </li>
+                  <li>
+                    <a href="#upper-case-string" class="toc-h2 toc-link" data-title="upper case( string )">upper case( string )</a>
+                  </li>
+                  <li>
+                    <a href="#lower-case-string" class="toc-h2 toc-link" data-title="lower case( string )">lower case( string )</a>
+                  </li>
+                  <li>
+                    <a href="#substring-before-string-match" class="toc-h2 toc-link" data-title="substring before( string, match )">substring before( string, match )</a>
+                  </li>
+                  <li>
+                    <a href="#substring-after-string-match" class="toc-h2 toc-link" data-title="substring after( string, match )">substring after( string, match )</a>
+                  </li>
+                  <li>
+                    <a href="#replace-input-pattern-replacement-flags" class="toc-h2 toc-link" data-title="replace( input, pattern, replacement, flags? )">replace( input, pattern, replacement, flags? )</a>
+                  </li>
+                  <li>
+                    <a href="#contains-string-match" class="toc-h2 toc-link" data-title="contains( string, match )">contains( string, match )</a>
+                  </li>
+                  <li>
+                    <a href="#starts-with-string-match" class="toc-h2 toc-link" data-title="starts with( string, match )">starts with( string, match )</a>
+                  </li>
+                  <li>
+                    <a href="#ends-with-string-match" class="toc-h2 toc-link" data-title="ends with( string, match )">ends with( string, match )</a>
+                  </li>
+                  <li>
+                    <a href="#matches-input-pattern-flags" class="toc-h2 toc-link" data-title="matches( input, pattern, flags? )">matches( input, pattern, flags? )</a>
+                  </li>
+                  <li>
+                    <a href="#split-string-delimiter" class="toc-h2 toc-link" data-title="split( string, delimiter )">split( string, delimiter )</a>
+                  </li>
+                  <li>
+                    <a href="#string-join-list-delimiter" class="toc-h2 toc-link" data-title="string join( list, delimiter )">string join( list, delimiter )</a>
+                  </li>
+                  <li>
+                    <a href="#string-join-list" class="toc-h2 toc-link" data-title="string join( list )">string join( list )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#list-functions" class="toc-h1 toc-link" data-title="List functions">List functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#list-contains-list-element" class="toc-h2 toc-link" data-title="list contains( list, element )">list contains( list, element )</a>
+                  </li>
+                  <li>
+                    <a href="#count-list" class="toc-h2 toc-link" data-title="count( list )">count( list )</a>
+                  </li>
+                  <li>
+                    <a href="#min-list" class="toc-h2 toc-link" data-title="min( list )">min( list )</a>
+                  </li>
+                  <li>
+                    <a href="#max-list" class="toc-h2 toc-link" data-title="max( list )">max( list )</a>
+                  </li>
+                  <li>
+                    <a href="#sum-list" class="toc-h2 toc-link" data-title="sum( list )">sum( list )</a>
+                  </li>
+                  <li>
+                    <a href="#mean-list" class="toc-h2 toc-link" data-title="mean( list )">mean( list )</a>
+                  </li>
+                  <li>
+                    <a href="#all-list" class="toc-h2 toc-link" data-title="all( list )">all( list )</a>
+                  </li>
+                  <li>
+                    <a href="#any-list" class="toc-h2 toc-link" data-title="any( list )">any( list )</a>
+                  </li>
+                  <li>
+                    <a href="#sublist-list-start-position-length" class="toc-h2 toc-link" data-title="sublist( list, start position, length? )">sublist( list, start position, length? )</a>
+                  </li>
+                  <li>
+                    <a href="#append-list-item" class="toc-h2 toc-link" data-title="append( list, item )">append( list, item )</a>
+                  </li>
+                  <li>
+                    <a href="#concatenate-list" class="toc-h2 toc-link" data-title="concatenate( list )">concatenate( list )</a>
+                  </li>
+                  <li>
+                    <a href="#insert-before-list-position-newitem" class="toc-h2 toc-link" data-title="insert before( list, position, newItem )">insert before( list, position, newItem )</a>
+                  </li>
+                  <li>
+                    <a href="#remove-list-position" class="toc-h2 toc-link" data-title="remove( list, position )">remove( list, position )</a>
+                  </li>
+                  <li>
+                    <a href="#reverse-list" class="toc-h2 toc-link" data-title="reverse( list )">reverse( list )</a>
+                  </li>
+                  <li>
+                    <a href="#index-of-list-match" class="toc-h2 toc-link" data-title="index of( list, match )">index of( list, match )</a>
+                  </li>
+                  <li>
+                    <a href="#union-list" class="toc-h2 toc-link" data-title="union( list )">union( list )</a>
+                  </li>
+                  <li>
+                    <a href="#distinct-values-list" class="toc-h2 toc-link" data-title="distinct values( list )">distinct values( list )</a>
+                  </li>
+                  <li>
+                    <a href="#flatten-list" class="toc-h2 toc-link" data-title="flatten( list )">flatten( list )</a>
+                  </li>
+                  <li>
+                    <a href="#product-list" class="toc-h2 toc-link" data-title="product( list )">product( list )</a>
+                  </li>
+                  <li>
+                    <a href="#median-list" class="toc-h2 toc-link" data-title="median( list )">median( list )</a>
+                  </li>
+                  <li>
+                    <a href="#stddev-list" class="toc-h2 toc-link" data-title="stddev( list )">stddev( list )</a>
+                  </li>
+                  <li>
+                    <a href="#mode-list" class="toc-h2 toc-link" data-title="mode( list )">mode( list )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#numeric-functions" class="toc-h1 toc-link" data-title="Numeric functions">Numeric functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#decimal-n-scale" class="toc-h2 toc-link" data-title="decimal( n, scale )">decimal( n, scale )</a>
+                  </li>
+                  <li>
+                    <a href="#floor-n" class="toc-h2 toc-link" data-title="floor( n )">floor( n )</a>
+                  </li>
+                  <li>
+                    <a href="#ceiling-n" class="toc-h2 toc-link" data-title="ceiling( n )">ceiling( n )</a>
+                  </li>
+                  <li>
+                    <a href="#round-up-n-scale" class="toc-h2 toc-link" data-title="round up( n, scale )">round up( n, scale )</a>
+                  </li>
+                  <li>
+                    <a href="#round-down-n-scale" class="toc-h2 toc-link" data-title="round down( n, scale )">round down( n, scale )</a>
+                  </li>
+                  <li>
+                    <a href="#round-half-up-n-scale" class="toc-h2 toc-link" data-title="round half up( n, scale )">round half up( n, scale )</a>
+                  </li>
+                  <li>
+                    <a href="#round-hald-down-n-scale" class="toc-h2 toc-link" data-title="round hald down( n, scale )">round hald down( n, scale )</a>
+                  </li>
+                  <li>
+                    <a href="#abs-n" class="toc-h2 toc-link" data-title="abs( n )">abs( n )</a>
+                  </li>
+                  <li>
+                    <a href="#modulo-dividend-divisor" class="toc-h2 toc-link" data-title="modulo( dividend, divisor )">modulo( dividend, divisor )</a>
+                  </li>
+                  <li>
+                    <a href="#sqrt-number" class="toc-h2 toc-link" data-title="sqrt( number )">sqrt( number )</a>
+                  </li>
+                  <li>
+                    <a href="#log-number" class="toc-h2 toc-link" data-title="log( number )">log( number )</a>
+                  </li>
+                  <li>
+                    <a href="#exp-number" class="toc-h2 toc-link" data-title="exp( number )">exp( number )</a>
+                  </li>
+                  <li>
+                    <a href="#odd-number" class="toc-h2 toc-link" data-title="odd( number )">odd( number )</a>
+                  </li>
+                  <li>
+                    <a href="#even-number" class="toc-h2 toc-link" data-title="even( number )">even( number )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#boolean-functions" class="toc-h1 toc-link" data-title="Boolean functions">Boolean functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#not-negand" class="toc-h2 toc-link" data-title="not( negand )">not( negand )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#date-and-time-functions" class="toc-h1 toc-link" data-title="Date and time functions">Date and time functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#is-value1-value2" class="toc-h2 toc-link" data-title="is( value1, value2 )">is( value1, value2 )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#range-functions" class="toc-h1 toc-link" data-title="Range functions">Range functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#before" class="toc-h2 toc-link" data-title="before( )">before( )</a>
+                  </li>
+                  <li>
+                    <a href="#after" class="toc-h2 toc-link" data-title="after( )">after( )</a>
+                  </li>
+                  <li>
+                    <a href="#meets" class="toc-h2 toc-link" data-title="meets( )">meets( )</a>
+                  </li>
+                  <li>
+                    <a href="#met-by" class="toc-h2 toc-link" data-title="met by( )">met by( )</a>
+                  </li>
+                  <li>
+                    <a href="#overlaps" class="toc-h2 toc-link" data-title="overlaps( )">overlaps( )</a>
+                  </li>
+                  <li>
+                    <a href="#overlaps-before" class="toc-h2 toc-link" data-title="overlaps before( )">overlaps before( )</a>
+                  </li>
+                  <li>
+                    <a href="#overlaps-after" class="toc-h2 toc-link" data-title="overlaps after( )">overlaps after( )</a>
+                  </li>
+                  <li>
+                    <a href="#finishes" class="toc-h2 toc-link" data-title="finishes( )">finishes( )</a>
+                  </li>
+                  <li>
+                    <a href="#finished-by" class="toc-h2 toc-link" data-title="finished by( )">finished by( )</a>
+                  </li>
+                  <li>
+                    <a href="#includes" class="toc-h2 toc-link" data-title="includes( )">includes( )</a>
+                  </li>
+                  <li>
+                    <a href="#during" class="toc-h2 toc-link" data-title="during( )">during( )</a>
+                  </li>
+                  <li>
+                    <a href="#starts" class="toc-h2 toc-link" data-title="starts( )">starts( )</a>
+                  </li>
+                  <li>
+                    <a href="#started-by" class="toc-h2 toc-link" data-title="started by( )">started by( )</a>
+                  </li>
+                  <li>
+                    <a href="#coincides" class="toc-h2 toc-link" data-title="coincides( )">coincides( )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#temporal-functions" class="toc-h1 toc-link" data-title="Temporal functions">Temporal functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#day-of-year-date" class="toc-h2 toc-link" data-title="day of year( date )">day of year( date )</a>
+                  </li>
+                  <li>
+                    <a href="#day-of-week-date" class="toc-h2 toc-link" data-title="day of week( date )">day of week( date )</a>
+                  </li>
+                  <li>
+                    <a href="#month-of-year-date" class="toc-h2 toc-link" data-title="month of year( date )">month of year( date )</a>
+                  </li>
+                  <li>
+                    <a href="#month-of-year-date-2" class="toc-h2 toc-link" data-title="month of year( date )">month of year( date )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sort-functions" class="toc-h1 toc-link" data-title="Sort functions">Sort functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#sort-list-precedes" class="toc-h2 toc-link" data-title="sort( list, precedes )">sort( list, precedes )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#context-functions" class="toc-h1 toc-link" data-title="Context functions">Context functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-value-m-key" class="toc-h2 toc-link" data-title="get value( m, key )">get value( m, key )</a>
+                  </li>
+                  <li>
+                    <a href="#get-entries-m" class="toc-h2 toc-link" data-title="get entries( m )">get entries( m )</a>
+                  </li>
+                  <li>
+                    <a href="#context-entries" class="toc-h2 toc-link" data-title="context( entries )">context( entries )</a>
+                  </li>
+                  <li>
+                    <a href="#context-put-context-key-value" class="toc-h2 toc-link" data-title="context put( context, key, value )">context put( context, key, value )</a>
+                  </li>
+                  <li>
+                    <a href="#context-put-context-keys-value" class="toc-h2 toc-link" data-title="context put( context, keys, value )">context put( context, keys, value )</a>
+                  </li>
+                  <li>
+                    <a href="#context-merge-contexts" class="toc-h2 toc-link" data-title="context merge( contexts )">context merge( contexts )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#conversion-functions" class="toc-h1 toc-link" data-title="Conversion functions">Conversion functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#date-from-string" class="toc-h2 toc-link" data-title="date( from: string )">date( from: string )</a>
+                  </li>
+                  <li>
+                    <a href="#date-from-date-and-time" class="toc-h2 toc-link" data-title="date( from: date and time )">date( from: date and time )</a>
+                  </li>
+                  <li>
+                    <a href="#date-year-month-day" class="toc-h2 toc-link" data-title="date( year, month, day )">date( year, month, day )</a>
+                  </li>
+                  <li>
+                    <a href="#date-and-time-date-time" class="toc-h2 toc-link" data-title="date and time( date, time )">date and time( date, time )</a>
+                  </li>
+                  <li>
+                    <a href="#date-and-time-from" class="toc-h2 toc-link" data-title="date and time( from )">date and time( from )</a>
+                  </li>
+                  <li>
+                    <a href="#time-from-string" class="toc-h2 toc-link" data-title="time( from: string )">time( from: string )</a>
+                  </li>
+                  <li>
+                    <a href="#time-from-date-and-time" class="toc-h2 toc-link" data-title="time( from: date and time )">time( from: date and time )</a>
+                  </li>
+                  <li>
+                    <a href="#time-hour-minute-second-offset" class="toc-h2 toc-link" data-title="time( hour, minute, second, offset? )">time( hour, minute, second, offset? )</a>
+                  </li>
+                  <li>
+                    <a href="#number-from-grouping-separator-decimal-separator" class="toc-h2 toc-link" data-title="number( from, grouping separator, decimal separator )">number( from, grouping separator, decimal separator )</a>
+                  </li>
+                  <li>
+                    <a href="#string-from" class="toc-h2 toc-link" data-title="string( from )">string( from )</a>
+                  </li>
+                  <li>
+                    <a href="#duration-from" class="toc-h2 toc-link" data-title="duration( from )">duration( from )</a>
+                  </li>
+                  <li>
+                    <a href="#years-and-months-duration-from-to" class="toc-h2 toc-link" data-title="years and months duration( from, to )">years and months duration( from, to )</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#miscellaneous-functions" class="toc-h1 toc-link" data-title="Miscellaneous functions">Miscellaneous functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#now" class="toc-h2 toc-link" data-title="now()">now()</a>
+                  </li>
+                  <li>
+                    <a href="#today" class="toc-h2 toc-link" data-title="today()">today()</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#kie-extended-functions" class="toc-h1 toc-link" data-title="KIE Extended functions">KIE Extended functions</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#invoke-namespace-modelname-decisionname-parameters" class="toc-h2 toc-link" data-title="invoke( namespace, modelName, decisionName, parameters )">invoke( namespace, modelName, decisionName, parameters )</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li>Open the <a href='https://www.drools.org/learn/documentation.html'>full Drools manual (here)</a></li>
+            <li><a href='https://www.drools.org/learn/dmn.html'>Drools DMN open source engine</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='dmn-feel-handbook'>DMN FEEL handbook</h1>
+<p>This is a vademecum for the FEEL expression language from the <a href="https://www.omg.org/dmn">DMN specification</a>, as also implemented by the <a href='https://www.drools.org/learn/dmn.html'>Drools DMN open source engine</a>.</p>
+
+<p>This is not intented as an exahustive documentation of the DMN capabilities of Drools; this is intended as a handy a pocket reference for FEEL usage, a FEEL pocket guide, a FEEL reference, a FEEL quick reference, a FEEL cheatsheet,<br/><strong>a FEEL handbook</strong>.</p>
+
+<p>Looking for a gentle introduction to the DMN standard? We have just the right crash course on DMN, freely available for you at: <a href="https://learn-dmn-in-15-minutes.com">learn-dmn-in-15-minutes.com</a>.</p>
+
+<p>You can refer to the complete <a href='https://www.drools.org/learn/documentation.html'>Drools DMN Engine documentation</a> on the main Drools website <a href='https://www.drools.org/learn/documentation.html'>here</a>.</p>
+
+<p>The FEEL (Friendly Enough Expression Language) is intended as a common ground between business analysts, programmers, domain experts and stakeholders.</p>
+
+<p>The FEEL language design include the following features:</p>
+
+<ul>
+<li>Side-effect free</li>
+<li>Simple data model with numbers, dates, strings, lists, and contexts</li>
+<li>Simple syntax designed for a broad audience</li>
+<li>Three-valued logic (<code>true</code>, <code>false</code>, <code>null</code>)</li>
+</ul>
+
+<p>The following chapters presents basic FEEL syntax. You can refer to the other chapters for details of the built-in and extended FEEL functions.</p>
+<h1 id='feel-values'>FEEL values</h1>
+<p>FEEL: supports the following data types:</p>
+
+<ul>
+<li>Numbers</li>
+<li>Strings</li>
+<li>Boolean values</li>
+<li>Dates</li>
+<li>Time</li>
+<li>Date and time</li>
+<li>Days and time duration</li>
+<li>Years and months duration</li>
+<li>Functions</li>
+<li>Contexts</li>
+<li>Ranges (or intervals)</li>
+<li>Lists</li>
+</ul>
+<h2 id='number'>number</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>47
+-9.123
+1.2*10**3 // expression resulting in 1.2e3
+</code></pre></div>
+<p>Numbers in FEEL are based on the <a href="http://ieeexplore.ieee.org/document/4610935/">IEEE 754-2008</a> Decimal 128 format, with 34 digits of precision. Internally, numbers are represented in Java as <code>BigDecimals</code> with <code>MathContext DECIMAL128</code>. FEEL supports only one number data type, so the same type is used to represent both integers and floating point numbers.</p>
+
+<p>FEEL numbers use a dot (<code>.</code>) as a decimal separator. FEEL does not support <code>-INF</code>, <code>+INF</code>, or <code>NaN</code>. FEEL uses <code>null</code> to represent invalid numbers.</p>
+
+<p>FEEL specification does not support a literal scientific notation. E.g., <code>1.2e3</code> is not valid FEEL syntax. You can use <code>1.2*10**3</code> instead.</p>
+
+<p>Drools extends the DMN specification and supports additional number notations:</p>
+
+<ul>
+<li><strong>Scientific</strong>: You can use scientific notation with the suffix <code>e&lt;exp&gt;</code> or <code>E&lt;exp&gt;</code>. For example, <code>1.2e3</code> is the same as writing the expression <code>1.2*10**3</code>, but is a literal instead of an expression.</li>
+<li><strong>Hexadecimal</strong>: You can use hexadecimal numbers with the prefix <code>0x</code>. For example, <code>0xff</code> is the same as the decimal number <code>255</code>. Both uppercase and lowercase letters are supported. For example, <code>0XFF</code> is the same as <code>0xff</code>.</li>
+<li><strong>Type suffixes</strong>: You can use the type suffixes <code>f</code>, <code>F</code>, <code>d</code>, <code>D</code>, <code>l</code>, and <code>L</code>. These suffixes are ignored.</li>
+</ul>
+<h2 id='string'>string</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>"John Doe"
+</code></pre></div>
+<p>Strings in FEEL are any sequence of characters delimited by double quotation marks.</p>
+<h2 id='boolean'>boolean</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>true
+</code></pre></div>
+<p>FEEL uses three-valued boolean logic, so a boolean logic expression may have values <code>true</code>, <code>false</code>, or <code>null</code>.</p>
+<h2 id='date'>date</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date( "2017-06-23" )
+</code></pre></div>
+<p>Date literals are not supported in FEEL, but you can use the built-in <code>date()</code> function to construct date values.
+Date strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#date">XML Schema Part 2: Datatypes</a> document.
+The format is <code>&quot;YYYY-MM-DD&quot;</code> where <code>YYYY</code> is the year with four digits, <code>MM</code> is the number of the month with two digits, and <code>DD</code> is the number of the day.</p>
+
+<p>Date objects have time equal to <code>&quot;00:00:00&quot;</code>, which is midnight. The dates are considered to be local, without a timezone.</p>
+<h2 id='time'>time</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>time( "04:25:12" )
+time( "14:10:00+02:00" )
+time( "22:35:40.345-05:00" )
+time( "15:00:30z" )
+time( "09:30:00@Europe/Rome" )
+</code></pre></div>
+<p>Time literals are not supported in FEEL, but you can use the built-in <code>time()</code> function to construct date values.
+Time strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#time">XML Schema Part 2: Datatypes</a> document.
+The format is <code>&quot;hh:mm:ss[.uuu][(+-)hh:mm]&quot;</code> where <code>hh</code> is the hour of the day (from <code>00</code> to <code>23</code>), <code>mm</code> is the minutes in the hour, and <code>ss</code> is the number of seconds in the minute. Optionally, the string may define the number of milliseconds (<code>uuu</code>) within the second and contain a positive (<code>+</code>) or negative (<code>-</code>) offset from UTC time to define its timezone.
+Instead of using an offset, you can use the letter <code>z</code> to represent the UTC time, which is the same as an offset of <code>-00:00</code>.
+Instead of using an offset, you can also use the symbol <code>@</code> followed by a IANA timezone.
+If no offset is defined, the time is considered to be local.</p>
+
+<p>Time values that define an offset or a timezone cannot be compared to local times that do not define an offset or a timezone.</p>
+<h2 id='date-and-time'>date and time</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date and time( "2017-10-22T23:59:00" )
+date and time( "2017-06-13T14:10:00+02:00" )
+date and time( "2017-02-05T22:35:40.345-05:00" )
+date and time( "2017-06-13T15:00:30z" )
+date and time( "2017-06-13T09:30:00@Europe/Rome" )
+</code></pre></div>
+<p>Date and time literals are not supported in FEEL, but you can use the built-in <code>date and time()</code> function to construct <code>date and time</code> values.
+Date and time strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">XML Schema Part 2: Datatypes</a> document.
+The format is <code>&quot;&lt;date&gt;T&lt;time&gt;&quot;</code>, where <code>&lt;date&gt;</code> and <code>&lt;time&gt;</code> follow the prescribed XML schema formatting, conjoined by <code>T</code>.</p>
+<h2 id='days-and-time-duration'>days and time duration</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>duration( "P1DT23H12M30S" )
+duration( "P23D" )
+duration( "PT12H" )
+duration( "PT35M" )
+</code></pre></div>
+<p>Days and time duration literals are not supported in FEEL, but you can use the built-in <code>duration()</code> function to construct <code>days and time duration</code> values.
+Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only days, hours, minutes and seconds. Months and years are not supported.</p>
+<h2 id='years-and-month-duration'>years and month duration</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>duration( "P3Y5M" )
+duration( "P2Y" )
+duration( "P10M" )
+duration( "P25M" )
+</code></pre></div>
+<p>Years and time duration literals are not supported in FEEL, but you can use the built-in <code>duration()</code> function to construct <code>years and month duration</code> values.
+Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only years and months. Days, hours, minutes, or seconds are not supported.</p>
+<h2 id='function'>function</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>function(a, b) a + b
+</code></pre></div>
+<p>FEEL has function literals (or anonymous functions, lambda functions) that you can use to create functions. </p>
+
+<p>In the example, the FEEL expression creates a function that adds the parameters a and b and returns the result.</p>
+<h2 id='context'>context</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{ x : 5, y : 3 }
+</code></pre></div>
+<p>FEEL has <code>context</code> literals that you can use to create contexts. A <code>context</code> in FEEL is a list of key and value pairs, similar to maps in languages like Java.</p>
+
+<p>In the example, the expression creates a context with two entries, <code>x</code> and <code>y</code>, representing a coordinate in a chart.</p>
+
+<p>In DMN 1.2, another way to create contexts is to create an item definition that contains the list of keys as attributes, and then declare the variable as having that item definition type.</p>
+
+<p>The Drools DMN API supports DMN <code>ItemDefinition</code> structural types in a <code>DMNContext</code> represented in two ways:</p>
+
+<ul>
+<li><p>User-defined Java type: Must be a valid JavaBeans object defining properties and getters for each of the components in the DMN <code>ItemDefinition</code>. If necessary, you can also use the <code>@FEELProperty</code> annotation for those getters representing a component name which would result in an invalid Java identifier.</p></li>
+<li><p><code>java.util.Map</code> interface: The map needs to define the appropriate entries, with the keys corresponding to the component name in the DMN <code>ItemDefinition</code>.</p></li>
+</ul>
+<h2 id='range-or-interval'>range (or interval)</h2>
+<blockquote>
+<p>Example interval between 1 and 10, including the boundaries (a closed interval on both endpoints):</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>[ 1 .. 10 ]
+</code></pre></div>
+<blockquote>
+<p>Example interval between 1 hour and 12 hours, including the lower boundary (a closed interval), but excluding the upper boundary (an open interval):</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>[ duration("PT1H") .. duration("PT12H") )
+</code></pre></div>
+<p>The syntax of a range is defined in the following formats:</p>
+
+<p><img src="images/range_ebnf-39d37d2b.png" alt="FEEL range ebnf" /></p>
+
+<p>The expression for the endpoint must return a comparable value, and the lower bound endpoint must be lower than the upper bound endpoint.</p>
+
+<p>You can use ranges in decision tables to test for ranges of values, or use ranges in simple literal expressions.</p>
+
+<p>For example, the following literal expression returns <code>true</code> if the value of a variable <code>x</code> is between <code>0</code> and <code>100</code>:<br/>
+<code>x in [ 1 .. 100 ]</code></p>
+<h2 id='list'>list</h2>
+<blockquote>
+<p>Example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>[ 2, 3, 4, 5 ]
+</code></pre></div>
+<p>FEEL has <code>list</code> literals that you can use to create lists of items.
+A <code>list</code> in FEEL is represented by a comma-separated list of values enclosed in square brackets.</p>
+
+<blockquote>
+<p>Example to return the second element of a list <code>x</code>:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>x[2]
+</code></pre></div>
+<blockquote>
+<p>Example to return the second-to-last element of a list <code>x</code>:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>x[-2]
+</code></pre></div>
+<p>All lists in FEEL contain elements of the same type and are immutable.
+Elements in a list can be accessed by index, where the first element is <code>1</code>.
+Negative indexes can access elements starting from the end of the list so that <code>-1</code> is the last element.</p>
+
+<p>Elements in a list can also be counted by the function count, which uses the list of elements as the parameter.
+For example, the following expression returns <code>4</code>:<br/>
+<code>count([ 2, 3, 4, 5 ])</code></p>
+<h1 id='feel-expressions'>FEEL expressions</h1>
+<p>This chapter explores some of the most useful FEEL operators to build basic expressions.</p>
+<h2 id='if-expression'>if expression</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>if 20 &gt; 0 then "YES" else "NO" = "YES"
+if (20 - (10 * 2)) &gt; 0 then "YES" else "NO" = "NO"
+if (2 ** 3) = 16 then "YES" else "NO" = "YES"
+if (4 / 2) != 2 then "YES" else "NO" = "NO"
+</code></pre></div>
+<p>You can use the <code>if expression</code> as the classic if-then-else operator in other languages.</p>
+
+<aside class="warning">
+Please notice that the <code>else</code> part is always mandatory.
+</aside>
+<h2 id='for-expression'>for expression</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>for i in [1, 2, 3] return i * i = [1, 4, 9]
+for i in [1,2,3], j in [1,2,3] return i*j = [1, 2, 3, 2, 4, 6, 3, 6, 9]
+</code></pre></div>
+<p>You can use the <code>for expression</code> to produce new values based on the iteration context(s).</p>
+
+<p>This is similar to list comprehension and mapping from Functional Programming.</p>
+<h2 id='quantified-expression'>quantified expression</h2>
+<p>These operators (<code>some</code>, <code>every</code>) are similar to list comprehension for filtering from Functional Programming concepts.</p>
+<h3 id='some-name-in-list-satisfies-predicate'>some (name) in (list) satisfies (predicate)</h3>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>some i in [1, 2, 3] satisfies i &gt; 3 = true
+some i in [1, 2, 3] satisfies i &gt; 4 = false
+</code></pre></div>
+<p>You can use the <code>some</code> to check if at least some element satisfies specific conditions from iteration context(s) built from the supplied list.</p>
+<h3 id='every-name-in-list-satisfies-predicate'>every (name) in (list) satisfies (predicate)</h3>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>every i in [1, 2, 3] satisfies i &gt; 1 = false
+every i in [1, 2, 3] satisfies i &gt; 0 = true
+</code></pre></div>
+<p>You can use the <code>every</code> to check if all the elements satisfies specific conditions from iteration context(s) built from the supplied list.</p>
+<h2 id='in-expression'>in expression</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>1 in [1..10] = true
+1 in (1..10] = false
+10 in [1..10] = true
+10 in [1..10) = false
+</code></pre></div>
+<p>You can use the <code>in expression</code> to check if a given value is matched by a specified range.</p>
+<h1 id='string-functions'>String functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for <code>string</code>s.</p>
+
+<aside class="notice">
+In FEEL, Unicode characters are counted based on their code points.
+</aside>
+<h2 id='substring-string-start-position-length'>substring( string, start position, length? )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>substring( "testing",3 ) = "sting"
+substring( "testing",3,3 ) = "sti"
+substring( "testing", -2, 1 ) = "n"
+substring( "\U01F40Eab", 2 ) = "ab"
+</code></pre></div>
+<p>Returns the substring from the start position for the specified length. The first character is at position value <code>1</code>.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>start position</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>length</code>  (Optional)</td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+In FEEL, the string literal <code>"\U01F40Eab"</code> is the <code>"🐎ab"</code> string
+(horse emoji followed by "a" and "b" characters).
+</aside>
+<h2 id='string-length-string'>string length( string )</h2>
+<blockquote>
+<p>Examples: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>string length( "tes" ) = 3
+string length( "\U01F40Eab" ) = 3
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Calculates the length of the specified string.</p>
+<h2 id='upper-case-string'>upper case( string )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>upper case( "aBc4" ) = "ABC4"
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Produces an uppercase version of the specified string.</p>
+<h2 id='lower-case-string'>lower case( string )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>lower case( "aBc4" ) = "abc4"
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Produces a lowercase version of the specified string.</p>
+<h2 id='substring-before-string-match'>substring before( string, match )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>substring before( "testing", "ing" ) = "test"
+substring before( "testing", "xyz" ) = ""
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Calculates the substring before the match.</p>
+<h2 id='substring-after-string-match'>substring after( string, match )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>substring after( "testing", "test" ) = "ing"
+substring after( "", "a" ) = ""
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Calculates the substring after the match.</p>
+<h2 id='replace-input-pattern-replacement-flags'>replace( input, pattern, replacement, flags? )</h2>
+<blockquote>
+<p>Examples: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>replace( "banana", "a", "o" ) = "bonono"
+replace( "abcd", "(ab)|(a)", "[1=$1][2=$2]" ) = "[1=ab][2=]cd"
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>input</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>pattern</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>replacement</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>flags</code> (Optional)</td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Calculates the regular expression replacement.</p>
+
+<aside class="notice">
+This function uses regular expression parameters as defined in
+<a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
+</aside>
+<h2 id='contains-string-match'>contains( string, match )</h2>
+<blockquote>
+<p>Examples: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>contains( "testing", "to" ) = false
+</code></pre></div>
+<p>Returns <code>true</code> if the string contains the match.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+<h2 id='starts-with-string-match'>starts with( string, match )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>starts with( "testing", "te" ) = true
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if the string starts with the match</p>
+<h2 id='ends-with-string-match'>ends with( string, match )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>ends with( "testing", "g" ) = true
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if the string ends with the match.</p>
+<h2 id='matches-input-pattern-flags'>matches( input, pattern, flags? )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>matches( "teeesting", "^te*sting" ) = true
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>input</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>pattern</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>flags</code> (Optional)</td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if the input matches the regular expression.</p>
+
+<aside class="notice">
+This function uses regular expression parameters as defined in
+<a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
+</aside>
+<h2 id='split-string-delimiter'>split( string, delimiter )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>split( "John Doe", "\\s" ) = ["John", "Doe"]
+split( "a;b;c;;", ";" ) = ["a","b","c","",""]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>string</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>delimiter</code></td>
+<td><code>string</code> for a regular expression pattern</td>
+</tr>
+</tbody></table>
+
+<p>Returns a list of the original string and splits it at the delimiter
+regular expression pattern.</p>
+
+<aside class="notice">
+This function uses regular expression parameters as defined in
+<a href="https://www.w3.org/TR/xquery-operators/#regex-syntax">XQuery 1.0 and XPath 2.0 Functions and Operators</a>.
+</aside>
+<h2 id='string-join-list-delimiter'>string join( list, delimiter )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>string join(["a","b","c"], "_and_") = "a_and_b_and_c"
+string join(["a","b","c"], "") = "abc"
+string join(["a","b","c"], null) = "abc"
+string join(["a"], "X") = "a"
+string join(["a",null,"c"], "X") = "aXc"
+string join([], "X") = ""
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>string</code></td>
+</tr>
+<tr>
+<td><code>delimiter</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a string which is composed by joining all the string elements from the list parameter, separated by the delimiter.
+The <code>delimiter</code> can be an empty string.
+Null elements in the list parameter are ignored.
+If <code>list</code> is empty, the result is the empty string.
+If <code>delimiter</code> is null, the string elements are joined without a separator.</p>
+<h2 id='string-join-list'>string join( list )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>string join(["a","b","c"], "_and_") = "a_and_b_and_c"
+string join(["a","b","c"], "") = "abc"
+string join(["a","b","c"], null) = "abc"
+string join(["a"], "X") = "a"
+string join(["a",null,"c"], "X") = "aXc"
+string join([], "X") = ""
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a string which is composed by joining all the string elements from the list parameter.
+Null elements in the <code>list</code> parameter are ignored.
+If <code>list</code> is empty, the result is the empty string.</p>
+<h1 id='list-functions'>List functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for <code>list</code>s.</p>
+
+<aside class="notice">
+In FEEL, the index of the first element in a list is <code>1</code>. The index of
+the last element in a list can be identified as <code>-1</code>.
+</aside>
+<h2 id='list-contains-list-element'>list contains( list, element )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>list contains( [1,2,3], 2 ) = true
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>element</code></td>
+<td>Any type, including null</td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if the list contains the element.</p>
+<h2 id='count-list'>count( list )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>count( [1,2,3] ) = 3
+count( [] ) = 0
+count( [1,[2,3]] ) = 2
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Counts the elements in the list.</p>
+<h2 id='min-list'>min( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>min( e1, e2, ..., eN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>min( [1,2,3] ) = 1
+min( 1 ) = 1
+min( [1] ) = 1
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the minimum comparable element in the list.</p>
+<h2 id='max-list'>max( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>max( e1, e2, ..., eN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>max( 1,2,3 ) = 3
+max( [] ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the maximum comparable element in the list.</p>
+<h2 id='sum-list'>sum( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>sum( n1, n2, ..., nN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>sum( [1,2,3] ) = 6
+sum( 1,2,3 ) = 6
+sum( 1 ) = 1
+sum( [] ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>number</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns the sum of the numbers in the list.</p>
+<h2 id='mean-list'>mean( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>mean( n1, n2, ..., nN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>mean( [1,2,3] ) = 2
+mean( 1,2,3 ) = 2
+mean( 1 ) = 1
+mean( [] ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>number</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Calculates the average (arithmetic mean) of the elements in the
+list.</p>
+<h2 id='all-list'>all( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>all( b1, b2, ..., bN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>all( [false,null,true] ) = false
+all( true ) = true
+all( [true] ) = true
+all( [] ) = true
+all( 0 ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>boolean</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if all elements in the list are true.</p>
+<h2 id='any-list'>any( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>any( b1, b2, ..., bN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>any( [false,null,true] ) = true
+any( false ) = false
+any( [] ) = false
+any( 0 ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>boolean</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if any element in the list is true.</p>
+<h2 id='sublist-list-start-position-length'>sublist( list, start position, length? )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>sublist( [4,5,6], 1, 2 ) = [4,5]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>start position</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>length</code>      (Optional)</td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the sublist from the start position, limited to the length
+elements.</p>
+<h2 id='append-list-item'>append( list, item )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>append( [1], 2, 3 ) = [1,2,3]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>item</code></td>
+<td>Any type</td>
+</tr>
+</tbody></table>
+
+<p>Creates a list that is appended to the item or items.</p>
+<h2 id='concatenate-list'>concatenate( list )</h2>
+<blockquote>
+<p>Examples: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>concatenate( [1,2],[3] ) = [1,2,3]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Creates a list that is the result of the concatenated lists.</p>
+<h2 id='insert-before-list-position-newitem'>insert before( list, position, newItem )</h2>
+<blockquote>
+<p>Examples: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>insert before( [1,3],1,2 ) = [2,1,3]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>newItem</code></td>
+<td>Any type</td>
+</tr>
+</tbody></table>
+
+<p>Creates a list with the <code>newItem</code> inserted at the specified
+position.</p>
+<h2 id='remove-list-position'>remove( list, position )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>remove( [1,2,3], 2 ) = [1,3]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>position</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Creates a list with the removed element excluded from the specified
+position.</p>
+<h2 id='reverse-list'>reverse( list )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>reverse( [1,2,3] ) = [3,2,1]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a reversed list.</p>
+<h2 id='index-of-list-match'>index of( list, match )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>index of( [1,2,3,2],2 ) = [2,4]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td>Any type</td>
+</tr>
+</tbody></table>
+
+<p>Returns indexes matching the element.</p>
+<h2 id='union-list'>union( list )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>union( [1,2],[2,3] ) = [1,2,3]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a list of all the elements from multiple lists and excludes
+duplicates.</p>
+<h2 id='distinct-values-list'>distinct values( list )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>distinct values( [1,2,3,2,1] ) = [1,2,3]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a list of elements from a single list and excludes
+duplicates.</p>
+<h2 id='flatten-list'>flatten( list )</h2>
+<blockquote>
+<p>Examples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>flatten( [[1,2],[[3]], 4] ) = [1,2,3,4]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a flattened list.</p>
+<h2 id='product-list'>product( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>product( n1, n2, ..., nN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>product( [2, 3, 4] ) = 24
+product( [] ) = null
+product( 2, 3, 4 ) = 24
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>number</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns the product of the numbers in the list.</p>
+<h2 id='median-list'>median( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>median( n1, n2, ..., nN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>median( 8, 2, 5, 3, 4 ) = 4
+median( [6, 1, 2, 3] ) = 2.5
+median( [ ] ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>number</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns the median of the numbers in the list. If the number of
+elements is odd, the result is the middle element. If the number of
+elements is even, the result is the average of the two middle
+elements.</p>
+<h2 id='stddev-list'>stddev( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>stddev( n1, n2, ..., nN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>stddev( 2, 4, 7, 5 ) = 2.081665999466132735282297706979931
+stddev( [47] ) = null
+stddev( 47 ) = null
+stddev( [ ] ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>number</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns the standard deviation of the numbers in the list.</p>
+<h2 id='mode-list'>mode( list )</h2>
+<blockquote>
+<p>Alternative signature: <code>mode( n1, n2, ..., nN )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>mode( 6, 3, 9, 6, 6 ) = [6]
+mode( [6, 1, 9, 6, 1] ) = [1, 6]
+mode( [ ] ) = [ ]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code> of <code>number</code> elements</td>
+</tr>
+</tbody></table>
+
+<p>Returns the mode of the numbers in the list. If multiple elements
+are returned, the numbers are sorted in ascending order.</p>
+<h1 id='numeric-functions'>Numeric functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for <code>number</code>s.</p>
+<h2 id='decimal-n-scale'>decimal( n, scale )</h2>
+<blockquote>
+<p>Examples: </p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>decimal( 1/3, 2 ) = .33
+decimal( 1.5, 0 ) = 2
+decimal( 2.5, 0 ) = 2
+decimal( 1.035, 2 ) = 1.04
+decimal( 1.045, 2 ) = 1.04
+decimal( 1.055, 2 ) = 1.06
+decimal( 1.065, 2 ) = 1.06
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td><code>number</code> in the range <code>[−6111..6176]</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a number with the specified scale.</p>
+
+<aside class="notice">
+This function is implemented to be consistent with the
+<code>FEEL:number</code> definition for rounding decimal numbers to the
+nearest even decimal number.
+</aside>
+<h2 id='floor-n'>floor( n )</h2>
+<blockquote>
+<p>Alternative signature: <code>floor( n, scale )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>floor( 1.5 ) = 1
+floor( -1.56, 1 ) = -1.6
+floor( -1.5 ) = -2
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>n</code> with given scale and rounding mode <em>flooring</em>.
+If at least one of <code>n</code> or <code>scale</code> is null, the result is null.</p>
+<h2 id='ceiling-n'>ceiling( n )</h2>
+<blockquote>
+<p>Alternative signature: <code>ceiling( n, scale )</code></p>
+
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>ceiling( 1.5 ) = 2
+ceiling( -1.56, 1 ) = -1.5
+ceiling( -1.5 ) = -1
+</code></pre></div>
+<p>Returns <code>n</code> with given scale and rounding mode <em>ceiling</em>.
+If at least one of <code>n</code> or <code>scale</code> is null, the result is null.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+<h2 id='round-up-n-scale'>round up( n, scale )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>round up( 5.5, 0 ) = 6 
+round up( -5.5, 0 ) = -6 
+round up( 1.121, 2 ) = 1.13
+round up( -1.126, 2 ) = -1.13
+</code></pre></div>
+<p>Returns <code>n</code> with given scale and rounding mode <em>round up</em>.
+If at least one of <code>n</code> or <code>scale</code> is null, the result is null.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+<h2 id='round-down-n-scale'>round down( n, scale )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>round down( 5.5, 0 ) = 5 
+round down( -5.5, 0 ) = -5 
+round down( 1.121, 2 ) = 1.12
+round down( -1.126, 2 ) = -1.12
+</code></pre></div>
+<p>Returns <code>n</code> with given scale and rounding mode <em>round down</em>.
+If at least one of <code>n</code> or <code>scale</code> is null, the result is null.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+<h2 id='round-half-up-n-scale'>round half up( n, scale )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>round half up( 5.5, 0 ) = 6 
+round half up( -5.5, 0 ) = -6 
+round half up( 1.121, 2 ) = 1.12
+round half up( -1.126, 2 ) = -1.13
+</code></pre></div>
+<p>Returns <code>n</code> with given scale and rounding mode <em>round half up</em>.
+If at least one of <code>n</code> or <code>scale</code> is null, the result is null.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+<h2 id='round-hald-down-n-scale'>round hald down( n, scale )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>round half down( 5.5, 0 ) = 5 
+round half down( -5.5, 0 ) = -5 
+round half down( 1.121, 2 ) = 1.12
+round half down( -1.126, 2 ) = -1.13
+</code></pre></div>
+<p>Returns <code>n</code> with given scale and rounding mode <em>round half down</em>.
+If at least one of <code>n</code> or <code>scale</code> is null, the result is null.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+<h2 id='abs-n'>abs( n )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>abs( 10 ) = 10
+abs( -10 ) = 10
+abs( @"PT5H" ) = @"PT5H"
+abs( @"-PT5H" ) = @"PT5H"
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code>, <code>days and time duration</code>, or  <code>years and months duration</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the absolute value.</p>
+<h2 id='modulo-dividend-divisor'>modulo( dividend, divisor )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>modulo( 12, 5 ) = 2
+modulo( -12,5 )= 3
+modulo( 12,-5 )= -3
+modulo( -12,-5 )= -2
+modulo( 10.1, 4.5 )= 1.1
+modulo( -10.1, 4.5 )= 3.4
+modulo( 10.1, -4.5 )= -3.4
+modulo( -10.1, -4.5 )= -1.1
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>dividend</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>divisor</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the remainder of the division of the dividend by the
+divisor. If either the dividend or divisor is negative, the result
+is of the same sign as the divisor.</p>
+
+<aside class="notice">
+This function is also expressed as
+<code>modulo(dividend, divisor) = dividend - divisor*floor(dividen/divisor)</code>.
+</aside>
+<h2 id='sqrt-number'>sqrt( number )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>sqrt( 16 ) = 4
+</code></pre></div>
+<p>Returns the square root of the specified number.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+<h2 id='log-number'>log( number )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>decimal( log( 10 ), 2 ) = 2.30
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the logarithm of the specified number.</p>
+<h2 id='exp-number'>exp( number )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>decimal( exp( 5 ), 2 ) = 148.41
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns Euler&#39;s number <code>e</code> raised to the power of the specified
+number.</p>
+<h2 id='odd-number'>odd( number )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>odd( 5 ) = true
+odd( 2 ) = false
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if the specified number is odd.</p>
+<h2 id='even-number'>even( number )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>even( 5 ) = false
+even ( 2 ) = true
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>n</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if the specified number is even.</p>
+<h1 id='boolean-functions'>Boolean functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for <code>boolean</code>s.</p>
+<h2 id='not-negand'>not( negand )</h2>
+<blockquote>
+<p>Examples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>not( true ) = false
+not( null ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>negand</code></td>
+<td><code>boolean</code></td>
+</tr>
+</tbody></table>
+
+<p>Performs the logical negation of the <code>negand</code> operand.</p>
+<h1 id='date-and-time-functions'>Date and time functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for temporal <code>date and time</code> comparisons.</p>
+<h2 id='is-value1-value2'>is( value1, value2 )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>is( date( "2012-12-25" ), time( "23:00:50" ) ) = false
+is( date( "2012-12-25" ), date( "2012-12-25" ) ) = true
+is( time( "23:00:50z" ), time( "23:00:50" ) ) = false
+is( time( "23:00:50z" ), time( "23:00:50+00:00" ) ) = true
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>value1</code></td>
+<td>Any type</td>
+</tr>
+<tr>
+<td><code>value2</code></td>
+<td>Any type</td>
+</tr>
+</tbody></table>
+
+<p>Returns <code>true</code> if both values are the same element in the FEEL
+semantic domain.</p>
+<h1 id='range-functions'>Range functions</h1>
+<p>The following functions support temporal ordering operations to
+establish relationships between single scalar values and ranges of such
+values. These functions are similar to the components in the Health
+Level Seven (HL7) International <a href="https://cql.hl7.org/08-a-cqlsyntax.html">Clinical Quality Language (CQL) 1.4
+syntax</a>.</p>
+<h2 id='before'>before( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>before( 1, 10 ) = true
+before( 10, 1 ) = false
+before( 1, [1..10] ) = false
+before( 1, (1..10] ) = true
+before( 1, [5..10] ) = true
+before( [1..10], 10 ) = false
+before( [1..10), 10 ) = true
+before( [1..10], 15 ) = true
+before( [1..10], [15..20] ) = true
+before( [1..10], [10..20] ) = false
+before( [1..10), [10..20] ) = true
+before( [1..10], (10..20] ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> is before an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>before( point1 point2 )</code></p>
+
+<p>b.  <code>before( point, range )</code></p>
+
+<p>c.  <code>before( range, point )</code></p>
+
+<p>d.  <code>before( range1,range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>point1 &lt; point2</code></p>
+
+<p>b.  <code>point &lt; range.start or ( point = range.start and not(range.start included) )</code></p>
+
+<p>c.  <code>range.end &lt; point or ( range.end = point and not(range.end included) )</code></p>
+
+<p>d.  <code>range1.end &lt; range2.start or (( not(range1.end included) or not(range2.start included) ) and range1.end = range2.start )</code></p>
+<h2 id='after'>after( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>after( 10, 5 ) = true
+after( 5, 10 ) = false
+after( 12, [1..10] ) = true
+after( 10, [1..10) ) = true
+after( 10, [1..10] ) = false
+after( [11..20], 12 ) = false
+after( [11..20], 10 ) = true
+after( (11..20], 11 ) = true
+after( [11..20], 11 ) = false
+after( [11..20], [1..10] ) = true
+after( [1..10], [11..20] ) = false
+after( [11..20], [1..11) ) = true
+after( (11..20], [1..11] ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> is after an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>after( point1 point2 )</code></p>
+
+<p>b.  <code>after( point range )</code></p>
+
+<p>c.  <code>after( range, point )</code></p>
+
+<p>d.  <code>after( range1 range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>point1 &gt; point2</code></p>
+
+<p>b.  <code>point &gt; range.end or ( point = range.end and not(range.end included) )</code></p>
+
+<p>c.  <code>range.start &gt; point or ( range.start = point and not(range.start included) )</code></p>
+
+<p>d.  <code>range1.start &gt; range2.end or (( not(range1.start included) or not(range2.end included) ) and range1.start = range2.end )</code></p>
+<h2 id='meets'>meets( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>meets( [1..5], [5..10] ) = true
+meets( [1..5), [5..10] ) = false
+meets( [1..5], (5..10] ) = false
+meets( [1..5], [6..10] ) = false
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> meets an element <code>B</code> and when the
+relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>meets( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>range1.end included and range2.start included and range1.end = range2.start</code></p>
+<h2 id='met-by'>met by( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>met by( [5..10], [1..5] ) = true
+met by( [5..10], [1..5) ) = false
+met by( (5..10], [1..5] ) = false
+met by( [6..10], [1..5] ) = false
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> is met by an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>met by( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>range1.start included and range2.end included and range1.start = range2.end</code></p>
+<h2 id='overlaps'>overlaps( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>overlaps( [1..5], [3..8] ) = true
+overlaps( [3..8], [1..5] ) = true
+overlaps( [1..8], [3..5] ) = true
+overlaps( [3..5], [1..8] ) = true
+overlaps( [1..5], [6..8] ) = false
+overlaps( [6..8], [1..5] ) = false
+overlaps( [1..5], [5..8] ) = true
+overlaps( [1..5], (5..8] ) = false
+overlaps( [1..5), [5..8] ) = false
+overlaps( [1..5), (5..8] ) = false
+overlaps( [5..8], [1..5] ) = true
+overlaps( (5..8], [1..5] ) = false
+overlaps( [5..8], [1..5) ) = false
+overlaps( (5..8], [1..5) ) = false
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> overlaps an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>overlaps( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a. <code>( range1.end &gt; range2.start or (range1.end = range2.start and range1.end included and range2.end included) ) and ( range1.start &lt; range2.end or (range1.start = range2.end and range1.start included and range2.end included) )</code></p>
+<h2 id='overlaps-before'>overlaps before( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>overlaps before( [1..5], [3..8] ) = true
+overlaps before( [1..5], [6..8] ) = false
+overlaps before( [1..5], [5..8] ) = true
+overlaps before( [1..5], (5..8] ) = false
+overlaps before( [1..5), [5..8] ) = false
+overlaps before( [1..5), (1..5] ) = true
+overlaps before( [1..5], (1..5] ) = true
+overlaps before( [1..5), [1..5] ) = false
+overlaps before( [1..5], [1..5] ) = false
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> overlaps before an element <code>B</code>
+and when the relevant requirements for evaluating to <code>true</code> are also
+met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>overlaps before( range1 range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a. <code>( range1.start &lt; range2.start or (range1.start = range2.start and range1.start included and not(range2.start included)) ) and ( range1.end &gt; range2.start or (range1.end = range2.start and range1.end included and range2.start included) ) and ( range1.end &lt; range2.end or (range1.end = range2.end and (not(range1.end included) or range2.end included )) )</code></p>
+<h2 id='overlaps-after'>overlaps after( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>overlaps after( [3..8], [1..5] )= true
+overlaps after( [6..8], [1..5] )= false
+overlaps after( [5..8], [1..5] )= true
+overlaps after( (5..8], [1..5] )= false
+overlaps after( [5..8], [1..5) )= false
+overlaps after( (1..5], [1..5) )= true
+overlaps after( (1..5], [1..5] )= true
+overlaps after( [1..5], [1..5) )= false
+overlaps after( [1..5], [1..5] )= false
+overlaps after( (1..5), [1..5] )= false
+overlaps after( (1..5], [1..6] )= false
+overlaps after( (1..5], (1..5] )= false
+overlaps after( (1..5], [2..5] )= false
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> overlaps after an element <code>B</code> and
+when the relevant requirements for evaluating to <code>true</code> are also
+met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>overlaps after( range1 range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>( range2.start &lt; range1.start or (range2.start = range1.start and range2.start included and not( range1.start included)) ) and ( range2.end &gt; range1.start or (range2.end = range1.start  and range2.end included and range1.start included) ) and ( range2.end &lt; range1.end or (range2.end = range1.end and (not(range2.end included) or range1.end included)) )</code></p>
+<h2 id='finishes'>finishes( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>finishes( 10, [1..10] ) = true
+finishes( 10, [1..10) ) = false
+finishes( [5..10], [1..10] ) = true
+finishes( [5..10), [1..10] ) = false
+finishes( [5..10), [1..10) ) = true
+finishes( [1..10], [1..10] ) = true
+finishes( (1..10], [1..10] ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> finishes an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>finishes( point, range )</code></p>
+
+<p>b.  <code>finishes( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>range.end included and range.end = point</code></p>
+
+<p>b.  <code>range1.end included = range2.end included and range1.end = range2.end and ( range1.start &gt; range2.start or (range1.start = range2.start and (not(range1.start included) or range2.start included)) )</code></p>
+<h2 id='finished-by'>finished by( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>finished by( [1..10], 10 ) = true
+finished by( [1..10), 10 ) = false
+finished by( [1..10], [5..10] ) = true
+finished by( [1..10], [5..10) ) = false
+finished by( [1..10), [5..10) ) = true
+finished by( [1..10], [1..10] ) = true
+finished by( [1..10], (1..10] ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> is finished by an element <code>B</code> and
+when the relevant requirements for evaluating to <code>true</code> are also
+met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>finished by( range, point )</code></p>
+
+<p>b.  <code>finished by( range1 range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>range.end included and range.end = point</code></p>
+
+<p>b.  <code>range1.end included = range2.end included and range1.end = range2.end and ( range1.start &lt; range2.start or (range1.start = range2.start and (range1.start included or not(range2.start included))) )</code></p>
+<h2 id='includes'>includes( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>includes( [1..10], 5 ) = true
+includes( [1..10], 12 ) = false
+includes( [1..10], 1 ) = true
+includes( [1..10], 10 ) = true
+includes( (1..10], 1 ) = false
+includes( [1..10), 10 ) = false
+includes( [1..10], [4..6] ) = true
+includes( [1..10], [1..5] ) = true
+includes( (1..10], (1..5] ) = true
+includes( [1..10], (1..10) ) = true
+includes( [1..10), [5..10) ) = true
+includes( [1..10], [1..10) ) = true
+includes( [1..10], (1..10] ) = true
+includes( [1..10], [1..10] ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> includes an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>includes( range, point )</code></p>
+
+<p>b.  <code>includes( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>(range.start &lt; point and range.end &gt; point) or (range.start = point and range.start included) or (range.end = point and range.end included)</code></p>
+
+<p>b.  <code>( range1.start &lt; range2.start or (range1.start = range2.start and (range1.start included or not(range2.start included))) ) and ( range1.end &gt; range2.end or (range1.end = range2.end and (range1.end included or not(range2.end included))) )</code></p>
+<h2 id='during'>during( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>during( 5, [1..10] ) = true
+during( 12, [1..10] ) = false
+during( 1, [1..10] ) = true
+during( 10, [1..10] ) = true
+during( 1, (1..10] ) = false
+during( 10, [1..10) ) = false
+during( [4..6], [1..10] ) = true
+during( [1..5], [1..10] ) = true
+during( (1..5], (1..10] ) = true
+during( (1..10), [1..10] ) = true
+during( [5..10), [1..10) ) = true
+during( [1..10), [1..10] ) = true
+during( (1..10], [1..10] ) = true
+during( [1..10], [1..10] ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> is during an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>during( point, range )</code></p>
+
+<p>b.  <code>during( range1 range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>(range.start &lt; point and range.end &gt; point) or (range.start = point and range.start included) or (range.end = point and range.end included)</code></p>
+
+<p>b.  <code>( range2.start &lt; range1.start or (range2.start = range1.start and (range2.start included or not(range1.start included))) ) and ( range2.end &gt; range1.end or (range2.end = range1.end and (range2.end included or not(range1.end included))) )</code></p>
+<h2 id='starts'>starts( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>starts( 1, [1..10] ) = true
+starts( 1, (1..10] ) = false
+starts( 2, [1..10] ) = false
+starts( [1..5], [1..10] ) = true
+starts( (1..5], (1..10] ) = true
+starts( (1..5], [1..10] ) = false
+starts( [1..5], (1..10] ) = false
+starts( [1..10], [1..10] ) = true
+starts( [1..10), [1..10] ) = true
+starts( (1..10), (1..10) ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> starts an element <code>B</code> and when
+the relevant requirements for evaluating to <code>true</code> are also met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>starts( point, range )</code></p>
+
+<p>b.  <code>starts( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>range.start = point and range.start included</code></p>
+
+<p>b.  <code>range1.start = range2.start and range1.start included = range2.start included and ( range1.end &lt; range2.end or (range1.end = range2.end and (not(range1.end included) or range2.end included)) )</code></p>
+<h2 id='started-by'>started by( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>started by( [1..10], 1 ) = true
+started by( (1..10], 1 ) = false
+started by( [1..10], 2 ) = false
+started by( [1..10], [1..5] ) = true
+started by( (1..10], (1..5] ) = true
+started by( [1..10], (1..5] ) = false
+started by( (1..10], [1..5] ) = false
+started by( [1..10], [1..10] ) = true
+started by( [1..10], [1..10) ) = true
+started by( (1..10), (1..10) ) = true
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> is started by an element <code>B</code> and
+when the relevant requirements for evaluating to <code>true</code> are also
+met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>started by( range, point )</code></p>
+
+<p>b.  <code>started by( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>range.start = point and range.start included</code></p>
+
+<p>b.  <code>range1.start = range2.start and range1.start included = range2.start included and ( range2.end &lt; range1.end or (range2.end = range1.end and (not(range2.end included) or range1.end included)) )</code></p>
+<h2 id='coincides'>coincides( )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>coincides( 5, 5 ) = true
+coincides( 3, 4 ) = false
+coincides( [1..5], [1..5] ) = true
+coincides( (1..5), [1..5] ) = false
+coincides( [1..5], [2..6] ) = false
+</code></pre></div>
+<p>Returns <code>true</code> when an element <code>A</code> coincides with an element <code>B</code> and
+when the relevant requirements for evaluating to <code>true</code> are also
+met.</p>
+
+<p>Signatures:</p>
+
+<p>a.  <code>coincides( point1, point2 )</code></p>
+
+<p>b.  <code>coincides( range1, range2 )</code></p>
+
+<p>Semantic:</p>
+
+<p>a.  <code>point1 = point2</code></p>
+
+<p>b.  <code>range1.start = range2.start and range1.start included = range2.start included and range1.end = range2.end and range1.end included = range2.end included</code></p>
+<h1 id='temporal-functions'>Temporal functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for temporal operations.</p>
+<h2 id='day-of-year-date'>day of year( date )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>day of year( date(2019, 9, 17) ) = 260
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the Gregorian number of the day of the year.</p>
+<h2 id='day-of-week-date'>day of week( date )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>day of week( date(2019, 9, 17) ) = "Tuesday"
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the Gregorian day of the week: <code>&quot;Monday&quot;</code>, <code>&quot;Tuesday&quot;</code>,
+<code>&quot;Wednesday&quot;</code>, <code>&quot;Thursday&quot;</code>, <code>&quot;Friday&quot;</code>, <code>&quot;Saturday&quot;</code>, or
+<code>&quot;Sunday&quot;</code>.</p>
+<h2 id='month-of-year-date'>month of year( date )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>month of year( date(2019, 9, 17) ) = "September"
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the Gregorian month of the year: <code>&quot;January&quot;</code>, <code>&quot;February&quot;</code>,
+<code>&quot;March&quot;</code>, <code>&quot;April&quot;</code>, <code>&quot;May&quot;</code>, <code>&quot;June&quot;</code>, <code>&quot;July&quot;</code>, <code>&quot;August&quot;</code>,
+<code>&quot;September&quot;</code>, <code>&quot;October&quot;</code>, <code>&quot;November&quot;</code>, or <code>&quot;December&quot;</code>.</p>
+<h2 id='month-of-year-date-2'>month of year( date )</h2>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the Gregorian week of the year as defined by ISO 8601.</p>
+
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>week of year( date(2019, 9, 17) ) = 38
+week of year( date(2003, 12, 29) ) = 1
+week of year( date(2004, 1, 4) ) = 1
+week of year( date(2005, 1, 1) ) = 53
+week of year( date(2005, 1, 3) ) = 1
+week of year( date(2005, 1, 9) ) = 1
+</code></pre></div><h1 id='sort-functions'>Sort functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for sorting operations.</p>
+<h2 id='sort-list-precedes'>sort( list, precedes )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>sort( list: [3,1,4,5,2], precedes: function(x,y) x &lt; y ) = [1,2,3,4,5]
+</code></pre></div>
+<p>Returns a list of the same elements but ordered according to the
+sorting function.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>list</code></td>
+<td><code>list</code></td>
+</tr>
+<tr>
+<td><code>precedes</code></td>
+<td><code>function</code></td>
+</tr>
+</tbody></table>
+<h1 id='context-functions'>Context functions</h1>
+<p>This chapter explores the DMN FEEL specification built-in functions for <code>context</code>s.</p>
+<h2 id='get-value-m-key'>get value( m, key )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get value( {key1 : "value1"}, "key1" ) = "value1"
+get value( {key1 : "value1"}, "unexistent-key" ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>m</code></td>
+<td><code>context</code></td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td><code>string</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the value from the context for the specified entry key.</p>
+<h2 id='get-entries-m'>get entries( m )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>get entries( {key1 : "value1", key2 : "value2"} ) =
+  [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>m</code></td>
+<td><code>context</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a list of key-value pairs for the specified context.</p>
+<h2 id='context-entries'>context( entries )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>context([{key:"a", value:1}, {key:"b", value:2}]) = {a:1, b:2}
+context([{key:"a", value:1}, {key:"b", value:2, something: "else"}]) = {a:1, b:2}
+context([{key:"a", value:1}, {key:"b"}]) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>entries</code></td>
+<td><code>list</code> of <code>context</code> , each item SHALL have two entries having keys named &quot;key&quot; and &quot;value&quot; respectively</td>
+</tr>
+</tbody></table>
+
+<p>Returns a new context that includes all specified entries.
+If a context item contains additional entries beyond the required &quot;key&quot; and &quot;value&quot; entries, the additional entries are ignored.
+If a context item is missing the required &quot;key&quot; and &quot;value&quot; entries, the final result is null.
+See also: get entries() built-in function.</p>
+<h2 id='context-put-context-key-value'>context put( context, key, value )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>context put({x:1}, "y", 2) = {x:1, y:2}
+context put({x:1, y:0}, "y", 2) = {x:1, y:2}
+context put({x:1, y:0, z:0}, "y", 2) = {x:1, y:2, z:0}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>context</code></td>
+<td><code>context</code></td>
+</tr>
+<tr>
+<td><code>key</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td><code>Any</code> type</td>
+</tr>
+</tbody></table>
+
+<p>Returns a new context that includes the new entry, or overrides the existing value if an entry for the same key already exists in the supplied context parameter.
+A new entry is added as the last entry of the new context.
+If overriding an existing entry, the order of the keys maintains the same order as in the original context.</p>
+<h2 id='context-put-context-keys-value'>context put( context, keys, value )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>context put({x:1}, ["y"], 2) = context put({x:1}, "y", 2)
+context put({x:1}, ["y"], 2) = {x:1, y:2}
+context put({x:1, y: {a: 0} }, ["y", "a"], 2) = context put({x:1, y: {a: 0} }, "y", context put({a: 0}, ["a"], 2))
+context put({x:1, y: {a: 0} }, ["y", "a"], 2) = {x:1, y: {a: 2} }
+context put({x:1, y: {a: 0} }, [], 2) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>context</code></td>
+<td><code>context</code></td>
+</tr>
+<tr>
+<td><code>keys</code></td>
+<td><code>list</code> of <code>string</code></td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td><code>Any</code> type</td>
+</tr>
+</tbody></table>
+
+<p>Returns the composite of nested invocations to <code>context put()</code> for each item in <code>keys</code> hierarchy in context.</p>
+
+<p>If <code>keys</code> is a list of 1 element, this is equivalent to <code>context put(context, key&#39;, value)</code>, where <code>key&#39;</code> is the only element in the list keys.</p>
+
+<p>If <code>keys</code> is a list of 2 or more elements, this is equivalent of calling <code>context put(context, key&#39;, value&#39;)</code>, with: <br/>
+<code>key&#39;</code> is the head element in the list keys, <br/>
+<code>value&#39;</code> is the result of invocation of <code>context put(context&#39;, keys&#39;, value)</code>, where: <br/>
+<code>context&#39;</code> is the result of <code>context.key&#39;</code>, <br/>
+<code>keys&#39;</code> is the remainder of the list keys without the head element <code>key&#39;</code>.</p>
+
+<p>If <code>keys</code> is an empty list or null, the result is null.</p>
+<h2 id='context-merge-contexts'>context merge( contexts )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>context merge([{x:1}, {y:2}]) = {x:1, y:2}
+context merge([{x:1, y:0}, {y:2}]) = {x:1, y:2}
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>contexts</code></td>
+<td><code>list</code> of <code>context</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns a new context that includes all entries from the given contexts; if some of the keys are equal, the entries are overridden.
+The entries are overridden in the same order as specified by the supplied parameter, with new entries added as the last entry in the new context.</p>
+<h1 id='conversion-functions'>Conversion functions</h1>
+<p>The following functions support conversion between values of different
+types. Some of these functions use specific string formats, such as the
+following examples:</p>
+
+<ul>
+<li><p><code>date string</code>: Follows the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#date">XML Schema Part 2:
+Datatypes</a> document, such
+as <code>2020-06-01</code></p></li>
+<li><p><code>time string</code>: Follows one of the following formats:</p>
+
+<ul>
+<li>  Format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#time">XML Schema Part 2:
+Datatypes</a> document,
+such as <code>23:59:00z</code></li>
+<li>  Format for a local time defined by ISO 8601 followed by <code>@</code> and
+an IANA Timezone, such as <code>00:01:00@Etc/UTC</code></li>
+</ul></li>
+<li><p><code>date time string</code>: Follows the format of a <code>date string</code> followed
+by <code>T</code> and a <code>time string</code>, such as <code>2012-12-25T11:00:00Z</code></p></li>
+<li><p><code>duration string</code>: Follows the format of <code>days and time duration</code>
+and <code>years and months duration</code> defined in the <a href="https://www.w3.org/TR/xpath-datamodel/#types">XQuery 1.0 and XPath
+2.0 Data Model</a>, such
+as <code>P1Y2M</code></p></li>
+</ul>
+<h2 id='date-from-string'>date( from: string )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date( "2012-12-25" ) - date( "2012-12-24" ) = duration( "P1D" )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>string</code></td>
+<td><code>date string</code></td>
+</tr>
+</tbody></table>
+
+<p>Converts <code>from</code> to a <code>date</code> value.</p>
+<h2 id='date-from-date-and-time'>date( from: date and time )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date(date and time( "2012-12-25T11:00:00Z" )) = date( "2012-12-25" )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>date and time</code></td>
+</tr>
+</tbody></table>
+
+<p>Converts <code>from</code> to a <code>date</code> value and sets time components to null.</p>
+<h2 id='date-year-month-day'>date( year, month, day )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date( 2012, 12, 25 ) = date( "2012-12-25" )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>year</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>month</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>day</code></td>
+<td><code>number</code></td>
+</tr>
+</tbody></table>
+
+<p>Produces a <code>date</code> from the specified year, month, and day values.</p>
+<h2 id='date-and-time-date-time'>date and time( date, time )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date and time ( "2012-12-24T23:59:00" ) = date and time(date( "2012-12-24" ), time( "23:59:00" ))
+</code></pre></div>
+<p>Produces a <code>date and time</code> from the specified date and ignores any
+time components and the specified time.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>date</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td><code>time</code></td>
+</tr>
+</tbody></table>
+<h2 id='date-and-time-from'>date and time( from )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date and time( "2012-12-24T23:59:00" ) + duration( "PT1M" ) = date and time( "2012-12-25T00:00:00" )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>string</code></td>
+<td><code>date time string</code></td>
+</tr>
+</tbody></table>
+
+<p>Produces a <code>date and time</code> from the specified string.</p>
+<h2 id='time-from-string'>time( from: string )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>time( "23:59:00z" ) + duration( "PT2M" ) = time( "00:01:00@Etc/UTC" )
+</code></pre></div>
+<p>Produces a <code>time</code> from the specified string.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>string</code></td>
+<td><code>time string</code></td>
+</tr>
+</tbody></table>
+<h2 id='time-from-date-and-time'>time( from: date and time )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>time(date and time( "2012-12-25T11:00:00Z" )) = time( "11:00:00Z" )
+</code></pre></div>
+<p>Produces a <code>time</code> from the specified parameter and ignores any date
+components.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>time</code> or <code>date and time</code></td>
+</tr>
+</tbody></table>
+<h2 id='time-hour-minute-second-offset'>time( hour, minute, second, offset? )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>time( "23:59:00z" ) = time(23, 59, 0, duration( "PT0H" ))
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>hour</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>minute</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>second</code></td>
+<td><code>number</code></td>
+</tr>
+<tr>
+<td><code>offset</code>     (Optional)</td>
+<td><code>days and time duration</code> or null</td>
+</tr>
+</tbody></table>
+
+<p>Produces a <code>time</code> from the specified hour, minute, and second
+component values.</p>
+<h2 id='number-from-grouping-separator-decimal-separator'>number( from, grouping separator, decimal separator )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>number( "1 000,0", " ", "," ) = number( "1,000.0", ",", "." )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>string</code> representing a valid number</td>
+</tr>
+<tr>
+<td><code>grouping separator</code></td>
+<td>Space (<code></code>), comma (<code>,</code>), period (<code>.</code>), or null</td>
+</tr>
+<tr>
+<td><code>decimal separator</code></td>
+<td>Same types as <code>grouping separator</code>, but the values cannot match</td>
+</tr>
+</tbody></table>
+
+<p>Converts <code>from</code> to a <code>number</code> using the specified separators.</p>
+<h2 id='string-from'>string( from )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>string( 1.1 ) = "1.1"
+string( null ) = null
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td>Non-null value</td>
+</tr>
+</tbody></table>
+
+<p>Provides a string representation of the specified parameter.</p>
+<h2 id='duration-from'>duration( from )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date and time( "2012-12-24T23:59:00" ) - date and time( "2012-12-22T03:45:00" ) = duration( "P2DT20H14M" )
+duration( "P2Y2M" ) = duration( "P26M" )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Format</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>string</code></td>
+<td><code>duration string</code></td>
+</tr>
+</tbody></table>
+
+<p>Converts <code>from</code> to a <code>days and time duration</code> value or
+<code>years and months duration</code> value.</p>
+<h2 id='years-and-months-duration-from-to'>years and months duration( from, to )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>years and months duration( date( "2011-12-22" ), date( "2013-08-24" ) ) = duration( "P1Y8M" )
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>from</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+<tr>
+<td><code>to</code></td>
+<td><code>date</code> or <code>date and time</code></td>
+</tr>
+</tbody></table>
+
+<p>Calculates the <code>years and months duration</code> between the two specified
+parameters.</p>
+<h1 id='miscellaneous-functions'>Miscellaneous functions</h1>
+<p>These functions provide support utilities for several miscellaneous use-cases.
+For example, when a decision depends on the current date, like deciding the support SLA over the weekends, additional charges for weekend delivery, etc.</p>
+
+<p>It is important to note that the functions in this section are intended to be side-effect-free, but they are not deterministic and not idempotent from the perspective of an external observer.</p>
+
+<p>As a user, you are encouraged to isolate the decision logic that uses these functions in specific DRG elements, such as Decisions.
+The encapsulation enables them to be overridden with synthetic values during scenario testing, that remain constant across executions of the DMN model&#39;s test cases.</p>
+<h2 id='now'>now()</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>now()
+</code></pre></div>
+<p>Returns the current <code>date and time</code>.</p>
+<h2 id='today'>today()</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>today()
+</code></pre></div>
+<p>Returns the current <code>date</code>.</p>
+<h1 id='kie-extended-functions'>KIE Extended functions</h1>
+<p>These functions are provided as an extension to the DMN Standard to enable support for various use-cases on top of the <a href='https://www.drools.org/learn/dmn.html'>Drools DMN Engine</a>.</p>
+<h2 id='invoke-namespace-modelname-decisionname-parameters'>invoke( namespace, modelName, decisionName, parameters )</h2>
+<blockquote>
+<p>Examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>invoke(
+    "http://namespace_of_model",
+    "my model name",
+    "my decision name",
+    { a:1, b:2 }
+)
+</code></pre></div>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>namespace</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>modelName</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>decisionName</code></td>
+<td><code>string</code></td>
+</tr>
+<tr>
+<td><code>parameters</code></td>
+<td><code>context</code></td>
+</tr>
+</tbody></table>
+
+<p>Returns the result of the decision evaluation in the specified DMN model available to the <code>DMNRuntime</code> environment in the current DMN model is executed.</p>
+
+<p>This function is <em>deprecated</em> in favor of encouraging the usage of DMN Standard capabilities wherever possible; since DMNv1.2 it shall be possible to use the DMN standard&#39;s <em>Import</em> functionality to import Business Knowledge Model (BKM) nodes and Decision Service nodes, to be invoked from another model.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
