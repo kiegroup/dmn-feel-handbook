@@ -379,7 +379,7 @@ In FEEL, the string literal <code>"\U01F40Eab"</code> is the <code>"🐎ab"</cod
 
 > Examples: 
 
-``` {.FEEL}
+```FEEL
 string length( "tes" ) = 3
 string length( "\U01F40Eab" ) = 3
 ```
@@ -394,7 +394,7 @@ Calculates the length of the specified string.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 upper case( "aBc4" ) = "ABC4"
 ```
 
@@ -408,7 +408,7 @@ Produces an uppercase version of the specified string.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 lower case( "aBc4" ) = "abc4"
 ```
 
@@ -422,7 +422,7 @@ Produces a lowercase version of the specified string.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 substring before( "testing", "ing" ) = "test"
 substring before( "testing", "xyz" ) = ""
 ```
@@ -438,7 +438,7 @@ Calculates the substring before the match.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 substring after( "testing", "test" ) = "ing"
 substring after( "", "a" ) = ""
 ```
@@ -454,7 +454,7 @@ Calculates the substring after the match.
 
 > Examples: 
 
-``` {.FEEL}
+```FEEL
 replace( "banana", "a", "o" ) = "bonono"
 replace( "abcd", "(ab)|(a)", "[1=$1][2=$2]" ) = "[1=ab][2=]cd"
 ```
@@ -477,7 +477,7 @@ This function uses regular expression parameters as defined in
 
 > Examples: 
 
-``` {.FEEL}
+```FEEL
 contains( "testing", "to" ) = false
 ```
 
@@ -492,7 +492,7 @@ Returns `true` if the string contains the match.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 starts with( "testing", "te" ) = true
 ```
 
@@ -507,7 +507,7 @@ Returns `true` if the string starts with the match
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 ends with( "testing", "g" ) = true
 ```
 
@@ -522,7 +522,7 @@ Returns `true` if the string ends with the match.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 matches( "teeesting", "^te*sting" ) = true
 ```
 
@@ -543,7 +543,7 @@ This function uses regular expression parameters as defined in
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 split( "John Doe", "\\s" ) = ["John", "Doe"]
 split( "a;b;c;;", ";" ) = ["a","b","c","",""]
 ```
@@ -565,7 +565,7 @@ This function uses regular expression parameters as defined in
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 string join(["a","b","c"], "_and_") = "a_and_b_and_c"
 string join(["a","b","c"], "") = "abc"
 string join(["a","b","c"], null) = "abc"
@@ -589,7 +589,7 @@ If `delimiter` is null, the string elements are joined without a separator.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 string join(["a","b","c"], "_and_") = "a_and_b_and_c"
 string join(["a","b","c"], "") = "abc"
 string join(["a","b","c"], null) = "abc"
@@ -619,7 +619,7 @@ the last element in a list can be identified as <code>-1</code>.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 list contains( [1,2,3], 2 ) = true
 ```
 
@@ -634,7 +634,7 @@ Returns `true` if the list contains the element.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 count( [1,2,3] ) = 3
 count( [] ) = 0
 count( [1,[2,3]] ) = 2
@@ -652,7 +652,7 @@ Counts the elements in the list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 min( [1,2,3] ) = 1
 min( 1 ) = 1
 min( [1] ) = 1
@@ -670,7 +670,7 @@ Returns the minimum comparable element in the list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 max( 1,2,3 ) = 3
 max( [] ) = null
 ```
@@ -687,7 +687,7 @@ Returns the maximum comparable element in the list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 sum( [1,2,3] ) = 6
 sum( 1,2,3 ) = 6
 sum( 1 ) = 1
@@ -706,7 +706,7 @@ Returns the sum of the numbers in the list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 mean( [1,2,3] ) = 2
 mean( 1,2,3 ) = 2
 mean( 1 ) = 1
@@ -726,7 +726,7 @@ list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 all( [false,null,true] ) = false
 all( true ) = true
 all( [true] ) = true
@@ -746,7 +746,7 @@ Returns `true` if all elements in the list are true.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 any( [false,null,true] ) = true
 any( false ) = false
 any( [] ) = false
@@ -763,7 +763,7 @@ Returns `true` if any element in the list is true.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 sublist( [4,5,6], 1, 2 ) = [4,5]
 ```
 
@@ -780,7 +780,7 @@ elements.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 append( [1], 2, 3 ) = [1,2,3]
 ```
 
@@ -795,7 +795,7 @@ Creates a list that is appended to the item or items.
 
 > Examples: 
 
-``` {.FEEL}
+```FEEL
 concatenate( [1,2],[3] ) = [1,2,3]
 ```
 
@@ -809,7 +809,7 @@ Creates a list that is the result of the concatenated lists.
 
 > Examples: 
 
-``` {.FEEL}
+```FEEL
 insert before( [1,3],1,2 ) = [2,1,3]
 ```
 
@@ -826,7 +826,7 @@ position.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 remove( [1,2,3], 2 ) = [1,3]
 ```
 
@@ -842,7 +842,7 @@ position.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 reverse( [1,2,3] ) = [3,2,1]
 ```
 
@@ -856,7 +856,7 @@ Returns a reversed list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 index of( [1,2,3,2],2 ) = [2,4]
 ```
 
@@ -871,7 +871,7 @@ Returns indexes matching the element.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 union( [1,2],[2,3] ) = [1,2,3]
 ```
 
@@ -886,7 +886,7 @@ duplicates.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 distinct values( [1,2,3,2,1] ) = [1,2,3]
 ```
 
@@ -902,7 +902,7 @@ duplicates.
 
 > Examples
 
-``` {.FEEL}
+```FEEL
 flatten( [[1,2],[[3]], 4] ) = [1,2,3,4]
 ```
 
@@ -918,7 +918,7 @@ Returns a flattened list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 product( [2, 3, 4] ) = 24
 product( [] ) = null
 product( 2, 3, 4 ) = 24
@@ -936,7 +936,7 @@ Returns the product of the numbers in the list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 median( 8, 2, 5, 3, 4 ) = 4
 median( [6, 1, 2, 3] ) = 2.5
 median( [ ] ) = null
@@ -957,7 +957,7 @@ elements.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 stddev( 2, 4, 7, 5 ) = 2.081665999466132735282297706979931
 stddev( [47] ) = null
 stddev( 47 ) = null
@@ -976,7 +976,7 @@ Returns the standard deviation of the numbers in the list.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 mode( 6, 3, 9, 6, 6 ) = [6]
 mode( [6, 1, 9, 6, 1] ) = [1, 6]
 mode( [ ] ) = [ ]
@@ -997,7 +997,7 @@ This chapter explores the DMN FEEL specification built-in functions for `number`
 
 > Examples: 
 
-``` {.FEEL}
+```FEEL
 decimal( 1/3, 2 ) = .33
 decimal( 1.5, 0 ) = 2
 decimal( 2.5, 0 ) = 2
@@ -1026,7 +1026,7 @@ nearest even decimal number.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 floor( 1.5 ) = 1
 floor( -1.56, 1 ) = -1.6
 floor( -1.5 ) = -2
@@ -1045,7 +1045,7 @@ If at least one of `n` or `scale` is null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 ceiling( 1.5 ) = 2
 ceiling( -1.56, 1 ) = -1.5
 ceiling( -1.5 ) = -1
@@ -1062,7 +1062,7 @@ If at least one of `n` or `scale` is null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 round up( 5.5, 0 ) = 6 
 round up( -5.5, 0 ) = -6 
 round up( 1.121, 2 ) = 1.13
@@ -1081,7 +1081,7 @@ If at least one of `n` or `scale` is null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 round down( 5.5, 0 ) = 5 
 round down( -5.5, 0 ) = -5 
 round down( 1.121, 2 ) = 1.12
@@ -1100,7 +1100,7 @@ If at least one of `n` or `scale` is null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 round half up( 5.5, 0 ) = 6 
 round half up( -5.5, 0 ) = -6 
 round half up( 1.121, 2 ) = 1.12
@@ -1119,7 +1119,7 @@ If at least one of `n` or `scale` is null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 round half down( 5.5, 0 ) = 5 
 round half down( -5.5, 0 ) = -5 
 round half down( 1.121, 2 ) = 1.12
@@ -1138,7 +1138,7 @@ If at least one of `n` or `scale` is null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 abs( 10 ) = 10
 abs( -10 ) = 10
 abs( @"PT5H" ) = @"PT5H"
@@ -1155,7 +1155,7 @@ Returns the absolute value.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 modulo( 12, 5 ) = 2
 modulo( -12,5 )= 3
 modulo( 12,-5 )= -3
@@ -1184,7 +1184,7 @@ This function is also expressed as
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 sqrt( 16 ) = 4
 ```
 
@@ -1198,7 +1198,7 @@ Returns the square root of the specified number.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 decimal( log( 10 ), 2 ) = 2.30
 ```
 
@@ -1212,7 +1212,7 @@ Returns the logarithm of the specified number.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 decimal( exp( 5 ), 2 ) = 148.41
 ```
 
@@ -1227,7 +1227,7 @@ number.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 odd( 5 ) = true
 odd( 2 ) = false
 ```
@@ -1242,7 +1242,7 @@ Returns `true` if the specified number is odd.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 even( 5 ) = false
 even ( 2 ) = true
 ```
@@ -1261,7 +1261,7 @@ This chapter explores the DMN FEEL specification built-in functions for `boolean
 
 > Examples
 
-``` {.FEEL}
+```FEEL
 not( true ) = false
 not( null ) = null
 ```
@@ -1280,7 +1280,7 @@ This chapter explores the DMN FEEL specification built-in functions for temporal
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 is( date( "2012-12-25" ), time( "23:00:50" ) ) = false
 is( date( "2012-12-25" ), date( "2012-12-25" ) ) = true
 is( time( "23:00:50z" ), time( "23:00:50" ) ) = false
@@ -1307,7 +1307,7 @@ syntax](https://cql.hl7.org/08-a-cqlsyntax.html).
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 before( 1, 10 ) = true
 before( 10, 1 ) = false
 before( 1, [1..10] ) = false
@@ -1349,7 +1349,7 @@ d.  `range1.end < range2.start or (( not(range1.end included) or not(range2.star
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 after( 10, 5 ) = true
 after( 5, 10 ) = false
 after( 12, [1..10] ) = true
@@ -1392,7 +1392,7 @@ d.  `range1.start > range2.end or (( not(range1.start included) or not(range2.en
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 meets( [1..5], [5..10] ) = true
 meets( [1..5), [5..10] ) = false
 meets( [1..5], (5..10] ) = false
@@ -1414,7 +1414,7 @@ a.  `range1.end included and range2.start included and range1.end = range2.start
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 met by( [5..10], [1..5] ) = true
 met by( [5..10], [1..5) ) = false
 met by( (5..10], [1..5] ) = false
@@ -1436,7 +1436,7 @@ a.  `range1.start included and range2.end included and range1.start = range2.end
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 overlaps( [1..5], [3..8] ) = true
 overlaps( [3..8], [1..5] ) = true
 overlaps( [1..8], [3..5] ) = true
@@ -1468,7 +1468,7 @@ a. `( range1.end > range2.start or (range1.end = range2.start and range1.end inc
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 overlaps before( [1..5], [3..8] ) = true
 overlaps before( [1..5], [6..8] ) = false
 overlaps before( [1..5], [5..8] ) = true
@@ -1496,7 +1496,7 @@ a. `( range1.start < range2.start or (range1.start = range2.start and range1.sta
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 overlaps after( [3..8], [1..5] )= true
 overlaps after( [6..8], [1..5] )= false
 overlaps after( [5..8], [1..5] )= true
@@ -1528,7 +1528,7 @@ a.  `( range2.start < range1.start or (range2.start = range1.start and range2.st
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 finishes( 10, [1..10] ) = true
 finishes( 10, [1..10) ) = false
 finishes( [5..10], [1..10] ) = true
@@ -1557,7 +1557,7 @@ b.  `range1.end included = range2.end included and range1.end = range2.end and (
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 finished by( [1..10], 10 ) = true
 finished by( [1..10), 10 ) = false
 finished by( [1..10], [5..10] ) = true
@@ -1587,7 +1587,7 @@ b.  `range1.end included = range2.end included and range1.end = range2.end and (
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 includes( [1..10], 5 ) = true
 includes( [1..10], 12 ) = false
 includes( [1..10], 1 ) = true
@@ -1623,7 +1623,7 @@ b.  `( range1.start < range2.start or (range1.start = range2.start and (range1.s
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 during( 5, [1..10] ) = true
 during( 12, [1..10] ) = false
 during( 1, [1..10] ) = true
@@ -1659,7 +1659,7 @@ b.  `( range2.start < range1.start or (range2.start = range1.start and (range2.s
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 starts( 1, [1..10] ) = true
 starts( 1, (1..10] ) = false
 starts( 2, [1..10] ) = false
@@ -1691,7 +1691,7 @@ b.  `range1.start = range2.start and range1.start included = range2.start includ
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 started by( [1..10], 1 ) = true
 started by( (1..10], 1 ) = false
 started by( [1..10], 2 ) = false
@@ -1724,7 +1724,7 @@ b.  `range1.start = range2.start and range1.start included = range2.start includ
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 coincides( 5, 5 ) = true
 coincides( 3, 4 ) = false
 coincides( [1..5], [1..5] ) = true
@@ -1756,7 +1756,7 @@ This chapter explores the DMN FEEL specification built-in functions for temporal
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 day of year( date(2019, 9, 17) ) = 260
 ```
 
@@ -1770,7 +1770,7 @@ Returns the Gregorian number of the day of the year.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 day of week( date(2019, 9, 17) ) = "Tuesday"
 ```
 
@@ -1786,7 +1786,7 @@ Returns the Gregorian day of the week: `"Monday"`, `"Tuesday"`,
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 month of year( date(2019, 9, 17) ) = "September"
 ```
 
@@ -1808,7 +1808,7 @@ Returns the Gregorian week of the year as defined by ISO 8601.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 week of year( date(2019, 9, 17) ) = 38
 week of year( date(2003, 12, 29) ) = 1
 week of year( date(2004, 1, 4) ) = 1
@@ -1825,7 +1825,7 @@ This chapter explores the DMN FEEL specification built-in functions for sorting 
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 sort( list: [3,1,4,5,2], precedes: function(x,y) x < y ) = [1,2,3,4,5]
 ```
 
@@ -1845,7 +1845,7 @@ This chapter explores the DMN FEEL specification built-in functions for `context
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 get value( {key1 : "value1"}, "key1" ) = "value1"
 get value( {key1 : "value1"}, "unexistent-key" ) = null
 ```
@@ -1861,7 +1861,7 @@ Returns the value from the context for the specified entry key.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 get entries( {key1 : "value1", key2 : "value2"} ) =
   [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
 ```
@@ -1876,7 +1876,7 @@ Returns a list of key-value pairs for the specified context.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 context([{key:"a", value:1}, {key:"b", value:2}]) = {a:1, b:2}
 context([{key:"a", value:1}, {key:"b", value:2, something: "else"}]) = {a:1, b:2}
 context([{key:"a", value:1}, {key:"b"}]) = null
@@ -1895,7 +1895,7 @@ See also: get entries() built-in function.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 context put({x:1}, "y", 2) = {x:1, y:2}
 context put({x:1, y:0}, "y", 2) = {x:1, y:2}
 context put({x:1, y:0, z:0}, "y", 2) = {x:1, y:2, z:0}
@@ -1915,7 +1915,7 @@ If overriding an existing entry, the order of the keys maintains the same order 
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 context put({x:1}, ["y"], 2) = context put({x:1}, "y", 2)
 context put({x:1}, ["y"], 2) = {x:1, y:2}
 context put({x:1, y: {a: 0} }, ["y", "a"], 2) = context put({x:1, y: {a: 0} }, "y", context put({a: 0}, ["a"], 2))
@@ -1945,7 +1945,7 @@ If `keys` is an empty list or null, the result is null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 context merge([{x:1}, {y:2}]) = {x:1, y:2}
 context merge([{x:1, y:0}, {y:2}]) = {x:1, y:2}
 ```
@@ -1988,7 +1988,7 @@ following examples:
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 date( "2012-12-25" ) - date( "2012-12-24" ) = duration( "P1D" )
 ```
 
@@ -2002,7 +2002,7 @@ Converts `from` to a `date` value.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 date(date and time( "2012-12-25T11:00:00Z" )) = date( "2012-12-25" )
 ```
 
@@ -2016,7 +2016,7 @@ Converts `from` to a `date` value and sets time components to null.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 date( 2012, 12, 25 ) = date( "2012-12-25" )
 ```
 
@@ -2032,7 +2032,7 @@ Produces a `date` from the specified year, month, and day values.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 date and time ( "2012-12-24T23:59:00" ) = date and time(date( "2012-12-24" ), time( "23:59:00" ))
 ```
 
@@ -2048,7 +2048,7 @@ time components and the specified time.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 date and time( "2012-12-24T23:59:00" ) + duration( "PT1M" ) = date and time( "2012-12-25T00:00:00" )
 ```
 
@@ -2062,7 +2062,7 @@ Produces a `date and time` from the specified string.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 time( "23:59:00z" ) + duration( "PT2M" ) = time( "00:01:00@Etc/UTC" )
 ```
 
@@ -2076,7 +2076,7 @@ Produces a `time` from the specified string.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 time(date and time( "2012-12-25T11:00:00Z" )) = time( "11:00:00Z" )
 ```
 
@@ -2091,7 +2091,7 @@ components.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 time( "23:59:00z" ) = time(23, 59, 0, duration( "PT0H" ))
 ```
 
@@ -2109,7 +2109,7 @@ component values.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 number( "1 000,0", " ", "," ) = number( "1,000.0", ",", "." )
 ```
 
@@ -2125,7 +2125,7 @@ Converts `from` to a `number` using the specified separators.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 string( 1.1 ) = "1.1"
 string( null ) = null
 ```
@@ -2140,7 +2140,7 @@ Provides a string representation of the specified parameter.
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 date and time( "2012-12-24T23:59:00" ) - date and time( "2012-12-22T03:45:00" ) = duration( "P2DT20H14M" )
 duration( "P2Y2M" ) = duration( "P26M" )
 ```
@@ -2156,7 +2156,7 @@ Converts `from` to a `days and time duration` value or
 
 > Examples:
 
-``` {.FEEL}
+```FEEL
 years and months duration( date( "2011-12-22" ), date( "2013-08-24" ) ) = duration( "P1Y8M" )
 ```
 
