@@ -928,10 +928,10 @@ For example, the following expression returns <code>4</code>:<br/>
 <blockquote>
 <p>Examples:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>if 20 &gt; 0 then "YES" else "NO" = "YES"
-if (20 - (10 * 2)) &gt; 0 then "YES" else "NO" = "NO"
-if (2 ** 3) = 16 then "YES" else "NO" = "YES"
-if (4 / 2) != 2 then "YES" else "NO" = "NO"
+<div class="highlight"><pre class="highlight plaintext"><code>if 20 &gt; 0 then "YES" else "NO"   //➔ "YES"
+if (20 - (10 * 2)) &gt; 0 then "YES" else "NO"   //➔ "NO"
+if (2 ** 3) = 8 then "YES" else "NO"   //➔ "YES"
+if (4 / 2) != 2 then "YES" else "NO"   //➔ "NO"
 </code></pre></div>
 <p>You can use the <code>if expression</code> as the classic if-then-else operator in other languages.</p>
 
@@ -942,8 +942,8 @@ Please notice that the <code>else</code> part is always mandatory.
 <blockquote>
 <p>Examples:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>for i in [1, 2, 3] return i * i = [1, 4, 9]
-for i in [1,2,3], j in [1,2,3] return i*j = [1, 2, 3, 2, 4, 6, 3, 6, 9]
+<div class="highlight"><pre class="highlight plaintext"><code>for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
+for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
 </code></pre></div>
 <p>You can use the <code>for expression</code> to produce new values based on the iteration context(s).</p>
 
@@ -954,26 +954,26 @@ for i in [1,2,3], j in [1,2,3] return i*j = [1, 2, 3, 2, 4, 6, 3, 6, 9]
 <blockquote>
 <p>Examples:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>some i in [1, 2, 3] satisfies i &gt; 3 = true
-some i in [1, 2, 3] satisfies i &gt; 4 = false
+<div class="highlight"><pre class="highlight plaintext"><code>some i in [1, 2, 3] satisfies i &gt; 2   //➔ true
+some i in [1, 2, 3] satisfies i &gt; 4   //➔ false
 </code></pre></div>
 <p>You can use the <code>some</code> to check if at least some element satisfies specific conditions from iteration context(s) built from the supplied list.</p>
 <h3 id='every-name-in-list-satisfies-predicate'>every (name) in (list) satisfies (predicate)</h3>
 <blockquote>
 <p>Examples:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>every i in [1, 2, 3] satisfies i &gt; 1 = false
-every i in [1, 2, 3] satisfies i &gt; 0 = true
+<div class="highlight"><pre class="highlight plaintext"><code>every i in [1, 2, 3] satisfies i &gt; 1   //➔ false
+every i in [1, 2, 3] satisfies i &gt; 0   //➔ true
 </code></pre></div>
 <p>You can use the <code>every</code> to check if all the elements satisfies specific conditions from iteration context(s) built from the supplied list.</p>
 <h2 id='in-expression'>in expression</h2>
 <blockquote>
 <p>Examples:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>1 in [1..10] = true
-1 in (1..10] = false
-10 in [1..10] = true
-10 in [1..10) = false
+<div class="highlight"><pre class="highlight plaintext"><code>1 in [1..10]   //➔ true
+1 in (1..10]   //➔ false
+10 in [1..10]   //➔ true
+10 in [1..10)   //➔ false
 </code></pre></div>
 <p>You can use the <code>in expression</code> to check if a given value is matched by a specified range.</p>
 <h1 id='string-functions'>String functions</h1>
@@ -2816,8 +2816,7 @@ get value( {key1 : "value1"}, "unexistent-key" ) = null
 <blockquote>
 <p>Examples:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>get entries( {key1 : "value1", key2 : "value2"} ) =
-  [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
+<div class="highlight"><pre class="highlight plaintext"><code>get entries( {key1 : "value1", key2 : "value2"} ) = [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
 </code></pre></div>
 <table><thead>
 <tr>
