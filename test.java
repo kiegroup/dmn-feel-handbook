@@ -52,7 +52,7 @@ public class test {
     private static final List<String> failedExpressions = new ArrayList<>();
 
     public static void main(String... args) throws Exception {
-        String md = Files.readString(Paths.get("/Users/mmortari/git/dmn-feel-handbook/source/index.html.md"));
+        String md = Files.readString(Paths.get("source/index.html.md"));
         Parser parser = Parser.builder().build();
         Node document = parser.parse(md);
         NodeVisitor visitor = new NodeVisitor(
