@@ -1,0 +1,25 @@
+name: Test FEEL expressions
+
+on:
+  push:
+    branches: [ '*' ]
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  jbang:
+    runs-on: ubuntu-latest
+    name: Testing FEEL expressions in the MarkDown with JBang
+    steps:
+    - name: checkout
+      uses: actions/checkout@v1
+    - uses: actions/cache@v1
+      with:
+        path: /root/.jbang
+        key: $-jbang-$
+        restore-keys: |
+            $-jbang-
+    - name: jbang
+      uses: jbangdev/jbang-action@v0.94.0
+      with:
+        script: test.java

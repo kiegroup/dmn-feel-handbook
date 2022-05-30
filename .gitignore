@@ -31,3 +31,5 @@ ubuntu-*-console.log
 
 # Used to perform semi-automatic translation following: https://pandoc.org/MANUAL.html https://michelf.ca/projects/php-markdown/extra/
 temp
+
+.vscode

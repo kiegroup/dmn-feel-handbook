@@ -65,7 +65,7 @@ FEEL: supports the following data types:
 
 > Examples:
 
-```text
+```FEEL,justValid
 47
 -9.123
 1.2*10**3 // expression resulting in 1.2e3
@@ -87,7 +87,7 @@ Drools extends the DMN specification and supports additional number notations:
 
 > Example:
 
-```text
+```FEEL,justValid
 "John Doe"
 ```
 
@@ -97,7 +97,7 @@ Strings in FEEL are any sequence of characters delimited by double quotation mar
 
 > Example:
 
-```text
+```FEEL,justValid
 true
 ```
 
@@ -107,7 +107,7 @@ FEEL uses three-valued boolean logic, so a boolean logic expression may have val
 
 > Example:
 
-```text
+```FEEL,justValid
 date( "2017-06-23" )
 ```
 
@@ -121,7 +121,7 @@ Date objects have time equal to `"00:00:00"`, which is midnight. The dates are c
 
 > Examples:
 
-```text
+```FEEL,justValid
 time( "04:25:12" )
 time( "14:10:00+02:00" )
 time( "22:35:40.345-05:00" )
@@ -142,7 +142,7 @@ Time values that define an offset or a timezone cannot be compared to local time
 
 > Examples:
 
-```text
+```FEEL,justValid
 date and time( "2017-10-22T23:59:00" )
 date and time( "2017-06-13T14:10:00+02:00" )
 date and time( "2017-02-05T22:35:40.345-05:00" )
@@ -158,7 +158,7 @@ The format is `"<date>T<time>"`, where `<date>` and `<time>` follow the prescrib
 
 > Examples:
 
-```text
+```FEEL,justValid
 duration( "P1DT23H12M30S" )
 duration( "P23D" )
 duration( "PT12H" )
@@ -172,7 +172,7 @@ Days and time duration strings in FEEL follow the format defined in the <a href=
 
 > Examples:
 
-```text
+```FEEL,justValid
 duration( "P3Y5M" )
 duration( "P2Y" )
 duration( "P10M" )
@@ -186,7 +186,7 @@ Days and time duration strings in FEEL follow the format defined in the <a href=
 
 > Example:
 
-```text
+```FEEL,justValid
 function(a, b) a + b
 ```
 
@@ -198,7 +198,7 @@ In the example, the FEEL expression creates a function that adds the parameters 
 
 > Example:
 
-```text
+```FEEL,justValid
 { x : 5, y : 3 }
 ```
 
@@ -218,13 +218,13 @@ The Drools DMN API supports DMN `ItemDefinition` structural types in a `DMNConte
 
 > Example interval between 1 and 10, including the boundaries (a closed interval on both endpoints):
 
-```text
+```FEEL,justValid
 [ 1 .. 10 ]
 ```
 
 > Example interval between 1 hour and 12 hours, including the lower boundary (a closed interval), but excluding the upper boundary (an open interval):
 
-```text
+```FEEL,justValid
 [ duration("PT1H") .. duration("PT12H") )
 ```
 
@@ -243,7 +243,7 @@ For example, the following literal expression returns `true` if the value of a v
 
 > Example:
 
-```text
+```FEEL,justValid
 [ 2, 3, 4, 5 ]
 ```
 
@@ -278,11 +278,11 @@ This chapter explores some of the most useful FEEL operators to build basic expr
 
 > Examples:
 
-```FEEL
-if 20 > 0 then "YES" else "NO" = "YES"
-if (20 - (10 * 2)) > 0 then "YES" else "NO" = "NO"
-if (2 ** 3) = 16 then "YES" else "NO" = "YES"
-if (4 / 2) != 2 then "YES" else "NO" = "NO"
+```FEEL,commented
+if 20 > 0 then "YES" else "NO"   //➔ "YES"
+if (20 - (10 * 2)) > 0 then "YES" else "NO"   //➔ "NO"
+if (2 ** 3) = 8 then "YES" else "NO"   //➔ "YES"
+if (4 / 2) != 2 then "YES" else "NO"   //➔ "NO"
 ```
 
 You can use the `if expression` as the classic if-then-else operator in other languages.
@@ -295,9 +295,9 @@ Please notice that the <code>else</code> part is always mandatory.
 
 > Examples:
 
-```FEEL
-for i in [1, 2, 3] return i * i = [1, 4, 9]
-for i in [1,2,3], j in [1,2,3] return i*j = [1, 2, 3, 2, 4, 6, 3, 6, 9]
+```FEEL,commented
+for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
+for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
 ```
 
 You can use the `for expression` to produce new values based on the iteration context(s).
@@ -312,9 +312,9 @@ These operators (`some`, `every`) are similar to list comprehension for filterin
 
 > Examples:
 
-```FEEL
-some i in [1, 2, 3] satisfies i > 3 = true
-some i in [1, 2, 3] satisfies i > 4 = false
+```FEEL,commented
+some i in [1, 2, 3] satisfies i > 2   //➔ true
+some i in [1, 2, 3] satisfies i > 4   //➔ false
 ```
 
 You can use the `some` to check if at least some element satisfies specific conditions from iteration context(s) built from the supplied list.
@@ -323,9 +323,9 @@ You can use the `some` to check if at least some element satisfies specific cond
 
 > Examples:
 
-```FEEL
-every i in [1, 2, 3] satisfies i > 1 = false
-every i in [1, 2, 3] satisfies i > 0 = true
+```FEEL,commented
+every i in [1, 2, 3] satisfies i > 1   //➔ false
+every i in [1, 2, 3] satisfies i > 0   //➔ true
 ```
 
 You can use the `every` to check if all the elements satisfies specific conditions from iteration context(s) built from the supplied list.
@@ -334,11 +334,11 @@ You can use the `every` to check if all the elements satisfies specific conditio
 
 > Examples:
 
-```FEEL
-1 in [1..10] = true
-1 in (1..10] = false
-10 in [1..10] = true
-10 in [1..10) = false
+```FEEL,commented
+1 in [1..10]   //➔ true
+1 in (1..10]   //➔ false
+10 in [1..10]   //➔ true
+10 in [1..10)   //➔ false
 ```
 
 You can use the `in expression` to check if a given value is matched by a specified range.
@@ -1862,8 +1862,7 @@ Returns the value from the context for the specified entry key.
 > Examples:
 
 ```FEEL
-get entries( {key1 : "value1", key2 : "value2"} ) =
-  [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
+get entries( {key1 : "value1", key2 : "value2"} ) = [ { key : "key1", value : "value1" }, {key : "key2", value : "value2"} ]
 ```
 
 | Parameter          | Type                                            |
@@ -2182,7 +2181,7 @@ The encapsulation enables them to be overridden with synthetic values during sce
 
 > Examples:
 
-```text
+```FEEL,justValid
 now()
 ```
 
@@ -2192,7 +2191,7 @@ Returns the current `date and time`.
 
 > Examples:
 
-```text
+```FEEL,justValid
 today()
 ```
 
