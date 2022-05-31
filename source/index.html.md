@@ -2164,6 +2164,8 @@ years and months duration( date( "2011-12-22" ), date( "2013-08-24" ) ) = durati
 | `from`             | `date` or `date and time`                       |
 | `to`               | `date` or `date and time`                       |
 
+The parameters must be both of the same type: both parameters of `date` type, or both parameters of `date and time` type.
+
 Calculates the `years and months duration` between the two specified
 parameters.
 
