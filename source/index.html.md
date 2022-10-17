@@ -117,6 +117,17 @@ The format is `"YYYY-MM-DD"` where `YYYY` is the year with four digits, `MM` is 
 
 Date objects have time equal to `"00:00:00"`, which is midnight. The dates are considered to be local, without a timezone.
 
+> Semantic of date properties; examples:
+
+```FEEL
+date( "2022-12-31" ).year = 2022
+date( "2022-12-31" ).month = 12
+date( "2022-12-31" ).day = 31
+date( "2017-11-08" ).weekday = 3
+```
+
+You can access `year`, `month`, `day`, `weekday` properties on a `date` value, for the values of its named components.
+
 ## time
 
 > Examples:
@@ -138,6 +149,20 @@ If no offset is defined, the time is considered to be local.
 
 Time values that define an offset or a timezone cannot be compared to local times that do not define an offset or a timezone.
 
+> Semantic of time properties; examples:
+
+```FEEL
+time( "13:20:00-05:00" ).hour = 13
+time( "13:20:00-05:00" ).minute = 20
+time( "13:20:00-05:00" ).second = 0
+time( "13:20:00-05:00" ).time offset = duration("PT-5H")
+time( "13:20:00@Europe/Rome" ).timezone = "Europe/Rome"
+time( "13:20:00@Etc/UTC" ).timezone = "Etc/UTC"
+time( "13:20:00@Etc/GMT" ).timezone = "Etc/GMT"
+```
+
+You can access `hour`, `minute`, `second`, `time offset`, `timezone` properties on a `time` value, for the values of its named components.
+
 ## date and time
 
 > Examples:
@@ -154,6 +179,23 @@ Date and time literals are not supported in FEEL, but you can use the built-in `
 Date and time strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">XML Schema Part 2: Datatypes</a> document.
 The format is `"<date>T<time>"`, where `<date>` and `<time>` follow the prescribed XML schema formatting, conjoined by `T`.
 
+> Semantic of date and time properties; examples:
+
+```FEEL
+date and time( "2016-07-29T05:48:23.765-05:00" ).year = 2016
+date and time( "2016-07-29T05:48:23.765-05:00" ).month = 7
+date and time( "2016-07-29T05:48:23.765-05:00" ).day = 29
+date and time( "2016-07-29T05:48:23.765-05:00" ).weekday = 5
+date and time( "2016-07-29T05:48:23.765-05:00" ).hour = 5
+date and time( "2016-07-29T05:48:23.765-05:00" ).minute = 48
+date and time( "2016-07-29T05:48:23.765-05:00" ).second = 23
+date and time( "2016-07-29T05:48:23.765-05:00" ).time offset = duration("PT-5H")
+date and time( "2018-12-10T10:30:00@Europe/Rome" ).timezone = "Europe/Rome"
+date and time( "2018-12-10T10:30:00@Etc/UTC" ).timezone = "Etc/UTC"
+```
+
+You can access `year`, `month`, `day`, `weekday`, `hour`, `minute`, `second`, `time offset`, `timezone` properties on a `date and time` value, for the values of its named components.
+
 ## days and time duration
 
 > Examples:
@@ -168,6 +210,17 @@ duration( "PT35M" )
 Days and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `days and time duration` values.
 Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only days, hours, minutes and seconds. Months and years are not supported.
 
+> Semantic of days and time duration properties; examples:
+
+```FEEL
+duration( "P2DT20H14M" ).days = 2
+duration( "P2DT20H14M" ).hours = 20
+duration( "P2DT20H14M" ).minutes = 14
+duration( "P2DT20H14M5S" ).seconds = 5
+```
+
+You can access `days`, `hours`, `minutes`, `seconds`, properties on a `days and time duration` value, for the values of its named components.
+
 ## years and month duration
 
 > Examples:
@@ -181,6 +234,15 @@ duration( "P25M" )
 
 Years and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `years and month duration` values.
 Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only years and months. Days, hours, minutes, or seconds are not supported.
+
+> Semantic of years and month duration properties; examples:
+
+```FEEL
+duration( "P1Y" ).years = 1
+duration( "P1Y" ).months = 0
+```
+
+You can access `years`, `months`, properties on a `years and month duration` value, for the values of its named components.
 
 ## function
 
@@ -239,6 +301,17 @@ You can use ranges in decision tables to test for ranges of values, or use range
 For example, the following literal expression returns `true` if the value of a variable `x` is between `0` and `100`:<br/>
 `x in [ 1 .. 100 ]`
 
+> Semantic of range properties; examples:
+
+```FEEL
+(1..10].start included = false
+(1..10].start = 1
+(1..10].end = 10
+(1..10].end included = true
+```
+
+You can access `start`, `end`, `start included`, `end included`, properties on a `range` value, for the values of its named components.
+
 ## list
 
 > Example:
@@ -269,6 +342,29 @@ Negative indexes can access elements starting from the end of the list so that `
 Elements in a list can also be counted by the function count, which uses the list of elements as the parameter.
 For example, the following expression returns `4`:<br/>
 `count([ 2, 3, 4, 5 ])`
+
+## Properties of FEEL values
+
+When the type is `date and time`, `date`, `time`, `days and time duration`, `years and month duration` or `range`,
+you can access the named components mentioned in each of the sections above.
+
+The semantic of the component is:
+
+- `year` is the year number, in the interval `[-999999999..999999999]`
+- `month` is the month number, in the interval `[1..12]`, where `1` is January and `12` is December
+- `day` is the day of the month, in the interval `[1 ..31]`
+- `hour` is the hour of the day, in the interval `[0..23]`
+- `minute` is the minute of the hour, in the interval `[0..59]`
+- `second` is the second of the minute, in the interval `[0..60)`
+- `weekday` is the day of the week, in the interval `[1..7]` where `1` is Monday and `7` is Sunday
+- `time offset` is the duration offset corresponding to the timezone the date or date and time value represents. The time offset property returns `null` when the value instance does not have a time offset set
+- `timezone` is the timezone identifier as defined in the IANA Time Zones database. The timezone property returns `null` when the value instance does not have an IANA timezone defined
+- `years` the years component of a `years and month duration`
+- `months` the months components of a `years and month duration` in the interval `[1..11]`
+- `days` the days components of a `days and time duration`
+- `hours` the hours component of a `days and time duration` in the interval `[0..23]`
+- `minutes` the minutes component of a `days and time duration` in the interval `[0..59]`
+- `seconds` the seconds component of a `days and time duration` in the interval `[0..60)`
 
 # FEEL expressions
 
@@ -1115,7 +1211,7 @@ If at least one of `n` or `scale` is null, the result is null.
 | `n`                | `number`                                        |
 | `scale`            | `number`                                        |
 
-## round hald down( n, scale )
+## round half down( n, scale )
 
 > Examples:
 
