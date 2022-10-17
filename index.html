@@ -347,6 +347,9 @@
                   <li>
                     <a href="#list" class="toc-h2 toc-link" data-title="list">list</a>
                   </li>
+                  <li>
+                    <a href="#properties-of-feel-values" class="toc-h2 toc-link" data-title="Properties of FEEL values">Properties of FEEL values</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -506,7 +509,7 @@
                     <a href="#round-half-up-n-scale" class="toc-h2 toc-link" data-title="round half up( n, scale )">round half up( n, scale )</a>
                   </li>
                   <li>
-                    <a href="#round-hald-down-n-scale" class="toc-h2 toc-link" data-title="round hald down( n, scale )">round hald down( n, scale )</a>
+                    <a href="#round-half-down-n-scale" class="toc-h2 toc-link" data-title="round half down( n, scale )">round half down( n, scale )</a>
                   </li>
                   <li>
                     <a href="#abs-n" class="toc-h2 toc-link" data-title="abs( n )">abs( n )</a>
@@ -795,6 +798,16 @@ Date strings in FEEL follow the format defined in the <a href="https://www.w3.or
 The format is <code>&quot;YYYY-MM-DD&quot;</code> where <code>YYYY</code> is the year with four digits, <code>MM</code> is the number of the month with two digits, and <code>DD</code> is the number of the day.</p>
 
 <p>Date objects have time equal to <code>&quot;00:00:00&quot;</code>, which is midnight. The dates are considered to be local, without a timezone.</p>
+
+<blockquote>
+<p>Semantic of date properties; examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date( "2022-12-31" ).year = 2022
+date( "2022-12-31" ).month = 12
+date( "2022-12-31" ).day = 31
+date( "2017-11-08" ).weekday = 3
+</code></pre></div>
+<p>You can access <code>year</code>, <code>month</code>, <code>day</code>, <code>weekday</code> properties on a <code>date</code> value, for the values of its named components.</p>
 <h2 id='time'>time</h2>
 <blockquote>
 <p>Examples:</p>
@@ -813,6 +826,19 @@ Instead of using an offset, you can also use the symbol <code>@</code> followed 
 If no offset is defined, the time is considered to be local.</p>
 
 <p>Time values that define an offset or a timezone cannot be compared to local times that do not define an offset or a timezone.</p>
+
+<blockquote>
+<p>Semantic of time properties; examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>time( "13:20:00-05:00" ).hour = 13
+time( "13:20:00-05:00" ).minute = 20
+time( "13:20:00-05:00" ).second = 0
+time( "13:20:00-05:00" ).time offset = duration("PT-5H")
+time( "13:20:00@Europe/Rome" ).timezone = "Europe/Rome"
+time( "13:20:00@Etc/UTC" ).timezone = "Etc/UTC"
+time( "13:20:00@Etc/GMT" ).timezone = "Etc/GMT"
+</code></pre></div>
+<p>You can access <code>hour</code>, <code>minute</code>, <code>second</code>, <code>time offset</code>, <code>timezone</code> properties on a <code>time</code> value, for the values of its named components.</p>
 <h2 id='date-and-time'>date and time</h2>
 <blockquote>
 <p>Examples:</p>
@@ -826,6 +852,22 @@ date and time( "2017-06-13T09:30:00@Europe/Rome" )
 <p>Date and time literals are not supported in FEEL, but you can use the built-in <code>date and time()</code> function to construct <code>date and time</code> values.
 Date and time strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#dateTime">XML Schema Part 2: Datatypes</a> document.
 The format is <code>&quot;&lt;date&gt;T&lt;time&gt;&quot;</code>, where <code>&lt;date&gt;</code> and <code>&lt;time&gt;</code> follow the prescribed XML schema formatting, conjoined by <code>T</code>.</p>
+
+<blockquote>
+<p>Semantic of date and time properties; examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>date and time( "2016-07-29T05:48:23.765-05:00" ).year = 2016
+date and time( "2016-07-29T05:48:23.765-05:00" ).month = 7
+date and time( "2016-07-29T05:48:23.765-05:00" ).day = 29
+date and time( "2016-07-29T05:48:23.765-05:00" ).weekday = 5
+date and time( "2016-07-29T05:48:23.765-05:00" ).hour = 5
+date and time( "2016-07-29T05:48:23.765-05:00" ).minute = 48
+date and time( "2016-07-29T05:48:23.765-05:00" ).second = 23
+date and time( "2016-07-29T05:48:23.765-05:00" ).time offset = duration("PT-5H")
+date and time( "2018-12-10T10:30:00@Europe/Rome" ).timezone = "Europe/Rome"
+date and time( "2018-12-10T10:30:00@Etc/UTC" ).timezone = "Etc/UTC"
+</code></pre></div>
+<p>You can access <code>year</code>, <code>month</code>, <code>day</code>, <code>weekday</code>, <code>hour</code>, <code>minute</code>, <code>second</code>, <code>time offset</code>, <code>timezone</code> properties on a <code>date and time</code> value, for the values of its named components.</p>
 <h2 id='days-and-time-duration'>days and time duration</h2>
 <blockquote>
 <p>Examples:</p>
@@ -837,6 +879,16 @@ duration( "PT35M" )
 </code></pre></div>
 <p>Days and time duration literals are not supported in FEEL, but you can use the built-in <code>duration()</code> function to construct <code>days and time duration</code> values.
 Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only days, hours, minutes and seconds. Months and years are not supported.</p>
+
+<blockquote>
+<p>Semantic of days and time duration properties; examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>duration( "P2DT20H14M" ).days = 2
+duration( "P2DT20H14M" ).hours = 20
+duration( "P2DT20H14M" ).minutes = 14
+duration( "P2DT20H14M5S" ).seconds = 5
+</code></pre></div>
+<p>You can access <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code>, properties on a <code>days and time duration</code> value, for the values of its named components.</p>
 <h2 id='years-and-month-duration'>years and month duration</h2>
 <blockquote>
 <p>Examples:</p>
@@ -848,6 +900,14 @@ duration( "P25M" )
 </code></pre></div>
 <p>Years and time duration literals are not supported in FEEL, but you can use the built-in <code>duration()</code> function to construct <code>years and month duration</code> values.
 Days and time duration strings in FEEL follow the format defined in the <a href="https://www.w3.org/TR/xmlschema-2/#duration">XML Schema Part 2: Datatypes</a> document, but are restricted to only years and months. Days, hours, minutes, or seconds are not supported.</p>
+
+<blockquote>
+<p>Semantic of years and month duration properties; examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>duration( "P1Y" ).years = 1
+duration( "P1Y" ).months = 0
+</code></pre></div>
+<p>You can access <code>years</code>, <code>months</code>, properties on a <code>years and month duration</code> value, for the values of its named components.</p>
 <h2 id='function'>function</h2>
 <blockquote>
 <p>Example:</p>
@@ -896,6 +956,16 @@ Days and time duration strings in FEEL follow the format defined in the <a href=
 
 <p>For example, the following literal expression returns <code>true</code> if the value of a variable <code>x</code> is between <code>0</code> and <code>100</code>:<br/>
 <code>x in [ 1 .. 100 ]</code></p>
+
+<blockquote>
+<p>Semantic of range properties; examples:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>(1..10].start included = false
+(1..10].start = 1
+(1..10].end = 10
+(1..10].end included = true
+</code></pre></div>
+<p>You can access <code>start</code>, <code>end</code>, <code>start included</code>, <code>end included</code>, properties on a <code>range</code> value, for the values of its named components.</p>
 <h2 id='list'>list</h2>
 <blockquote>
 <p>Example:</p>
@@ -922,6 +992,29 @@ Negative indexes can access elements starting from the end of the list so that <
 <p>Elements in a list can also be counted by the function count, which uses the list of elements as the parameter.
 For example, the following expression returns <code>4</code>:<br/>
 <code>count([ 2, 3, 4, 5 ])</code></p>
+<h2 id='properties-of-feel-values'>Properties of FEEL values</h2>
+<p>When the type is <code>date and time</code>, <code>date</code>, <code>time</code>, <code>days and time duration</code>, <code>years and month duration</code> or <code>range</code>,
+you can access the named components mentioned in each of the sections above.</p>
+
+<p>The semantic of the component is:</p>
+
+<ul>
+<li><code>year</code> is the year number, in the interval <code>[-999999999..999999999]</code></li>
+<li><code>month</code> is the month number, in the interval <code>[1..12]</code>, where <code>1</code> is January and <code>12</code> is December</li>
+<li><code>day</code> is the day of the month, in the interval <code>[1 ..31]</code></li>
+<li><code>hour</code> is the hour of the day, in the interval <code>[0..23]</code></li>
+<li><code>minute</code> is the minute of the hour, in the interval <code>[0..59]</code></li>
+<li><code>second</code> is the second of the minute, in the interval <code>[0..60)</code></li>
+<li><code>weekday</code> is the day of the week, in the interval <code>[1..7]</code> where <code>1</code> is Monday and <code>7</code> is Sunday</li>
+<li><code>time offset</code> is the duration offset corresponding to the timezone the date or date and time value represents. The time offset property returns <code>null</code> when the value instance does not have a time offset set</li>
+<li><code>timezone</code> is the timezone identifier as defined in the IANA Time Zones database. The timezone property returns <code>null</code> when the value instance does not have an IANA timezone defined</li>
+<li><code>years</code> the years component of a <code>years and month duration</code></li>
+<li><code>months</code> the months components of a <code>years and month duration</code> in the interval <code>[1..11]</code></li>
+<li><code>days</code> the days components of a <code>days and time duration</code></li>
+<li><code>hours</code> the hours component of a <code>days and time duration</code> in the interval <code>[0..23]</code></li>
+<li><code>minutes</code> the minutes component of a <code>days and time duration</code> in the interval <code>[0..59]</code></li>
+<li><code>seconds</code> the seconds component of a <code>days and time duration</code> in the interval <code>[0..60)</code></li>
+</ul>
 <h1 id='feel-expressions'>FEEL expressions</h1>
 <p>This chapter explores some of the most useful FEEL operators to build basic expressions.</p>
 <h2 id='if-expression'>if expression</h2>
@@ -2029,7 +2122,7 @@ If at least one of <code>n</code> or <code>scale</code> is null, the result is n
 <td><code>number</code></td>
 </tr>
 </tbody></table>
-<h2 id='round-hald-down-n-scale'>round hald down( n, scale )</h2>
+<h2 id='round-half-down-n-scale'>round half down( n, scale )</h2>
 <blockquote>
 <p>Examples:</p>
 </blockquote>
