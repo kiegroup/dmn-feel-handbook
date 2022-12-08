@@ -439,7 +439,7 @@ You can use the `every` to check if all the elements satisfies specific conditio
 
 You can use the `in expression` to check if a given value is matched by a specified range.
 
-## boolean expression(and, or)
+## Three-valued logic(and, or)
 
 > Examples
 
@@ -453,7 +453,8 @@ false or null or false  //➔ null
 true or false and false   //➔ true
 (true or false) and false   //➔ false
 ```
-You can use `and` and `or expressions` as the classic and (&&), and or (||) operators in other languages, with the addition that the result can evaluate to null.
+
+FEEL supports three-valued logic (3VL) semantic. You can use `and` and `or` as the classic and (`&&`), and or (`||`) boolean operators in other languages, with the addition that the result can evaluate to null.
 
 <aside class="warning">
 Please notice that <code>and</code> is evaluated before <code>or</code>.
