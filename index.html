@@ -367,6 +367,9 @@
                   <li>
                     <a href="#in-expression" class="toc-h2 toc-link" data-title="in expression">in expression</a>
                   </li>
+                  <li>
+                    <a href="#three-valued-logic-and-or" class="toc-h2 toc-link" data-title="Three-valued logic(and, or)">Three-valued logic(and, or)</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -1069,6 +1072,24 @@ every i in [1, 2, 3] satisfies i &gt; 0   //➔ true
 10 in [1..10)   //➔ false
 </code></pre></div>
 <p>You can use the <code>in expression</code> to check if a given value is matched by a specified range.</p>
+<h2 id='three-valued-logic-and-or'>Three-valued logic(and, or)</h2>
+<blockquote>
+<p>Examples</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>true and true   //➔ true
+true and false and null   //➔ false
+true and null and true   //➔ null
+true or false or null   //➔ true
+false or false   //➔ false
+false or null or false  //➔ null
+true or false and false   //➔ true
+(true or false) and false   //➔ false
+</code></pre></div>
+<p>FEEL supports three-valued logic (3VL) semantic. You can use <code>and</code> and <code>or</code> as the classic and (<code>&amp;&amp;</code>), and or (<code>||</code>) boolean operators in other languages, with the addition that the result can evaluate to null.</p>
+
+<aside class="warning">
+Please notice that <code>and</code> is evaluated before <code>or</code>.
+</aside>
 <h1 id='string-functions'>String functions</h1>
 <p>This chapter explores the DMN FEEL specification built-in functions for <code>string</code>s.</p>
 
