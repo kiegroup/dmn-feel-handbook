@@ -439,6 +439,27 @@ You can use the `every` to check if all the elements satisfies specific conditio
 
 You can use the `in expression` to check if a given value is matched by a specified range.
 
+## Three-valued logic(and, or)
+
+> Examples
+
+```FEEL,commented
+true and true   //➔ true
+true and false and null   //➔ false
+true and null and true   //➔ null
+true or false or null   //➔ true
+false or false   //➔ false
+false or null or false  //➔ null
+true or false and false   //➔ true
+(true or false) and false   //➔ false
+```
+
+FEEL supports three-valued logic (3VL) semantic. You can use `and` and `or` as the classic and (`&&`), and or (`||`) boolean operators in other languages, with the addition that the result can evaluate to null.
+
+<aside class="warning">
+Please notice that <code>and</code> is evaluated before <code>or</code>.
+</aside>
+
 # String functions
 
 This chapter explores the DMN FEEL specification built-in functions for `string`s.
