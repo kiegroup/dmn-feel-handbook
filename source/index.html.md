@@ -464,7 +464,7 @@ Please notice that <code>and</code> is evaluated before <code>or</code>.
 
 > Examples
 
-```FEEL,commented
+```FEEL
 "some" + "string" = "somestring"
 "very" + "long" + "word" = "verylongword"
 ```
