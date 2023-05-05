@@ -460,6 +460,17 @@ FEEL supports three-valued logic (3VL) semantic. You can use `and` and `or` as t
 Please notice that <code>and</code> is evaluated before <code>or</code>.
 </aside>
 
+## String concatenation
+
+> Examples
+
+```FEEL
+"some" + "string" = "somestring"
+"very" + "long" + "word" = "verylongword"
+```
+
+In FEEL, string concatenation is done by using `+` character. 
+
 # String functions
 
 This chapter explores the DMN FEEL specification built-in functions for `string`s.
