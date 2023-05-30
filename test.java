@@ -1,6 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 11+
-//DEPS org.kie:kie-dmn-feel:8.38.0.Final
+//DEPS org.kie:kie-dmn-feel:8.39.0.Final
 //DEPS org.slf4j:slf4j-simple:1.7.36
 //DEPS info.picocli:picocli:4.6.3
 //DEPS com.vladsch.flexmark:flexmark-all:0.64.0

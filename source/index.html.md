@@ -393,6 +393,7 @@ Please notice that the <code>else</code> part is always mandatory.
 
 ```FEEL,commented
 for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
+for i in 1..3 return i * i   //➔ [1, 4, 9]
 for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
 ```
 
