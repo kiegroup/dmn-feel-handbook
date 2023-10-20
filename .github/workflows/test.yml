@@ -20,6 +20,6 @@ jobs:
         restore-keys: |
             $-jbang-
     - name: jbang
-      uses: jbangdev/jbang-action@v0.94.0
+      uses: jbangdev/jbang-action@v0.111.0
       with:
         script: test.java
