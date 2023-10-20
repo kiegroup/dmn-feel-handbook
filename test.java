@@ -1,11 +1,11 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 11+
-//DEPS org.kie:kie-dmn-feel:8.39.0.Final
+//DEPS org.kie:kie-dmn-feel:9.44.0.Final
 //DEPS org.slf4j:slf4j-simple:1.7.36
-//DEPS info.picocli:picocli:4.6.3
-//DEPS com.vladsch.flexmark:flexmark-all:0.64.0
-//DEPS com.fasterxml.jackson.jr:jackson-jr-objects:2.13.3
-//DEPS com.fasterxml.jackson.jr:jackson-jr-stree:2.13.3
+//DEPS info.picocli:picocli:4.7.5
+//DEPS com.vladsch.flexmark:flexmark-all:0.64.8
+//DEPS com.fasterxml.jackson.jr:jackson-jr-objects:2.15.3
+//DEPS com.fasterxml.jackson.jr:jackson-jr-stree:2.15.3
 
 import java.io.IOException;
 import java.net.URI;
@@ -33,7 +33,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
-import org.drools.core.util.Drools;
+import org.drools.base.util.Drools;
 import org.kie.dmn.api.feel.runtime.events.FEELEvent;
 import org.kie.dmn.api.feel.runtime.events.FEELEventListener;
 import org.kie.dmn.api.feel.runtime.events.FEELEvent.Severity;
