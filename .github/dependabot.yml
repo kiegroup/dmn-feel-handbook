@@ -4,6 +4,8 @@ updates:
   directory: "/"
   schedule:
     interval: daily
-  open-pull-requests-limit: 10
-  target-branch: dev
-  versioning-strategy: increase-if-necessary
+  # ignore "Development dependency group" e.g.: devDependencies 
+  allow:
+    - dependency-type: "production"
+  # only require security updates and want to exclude version updates, ref https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/configuring-dependabot-security-updates
+  open-pull-requests-limit: 0
