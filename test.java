@@ -8,6 +8,7 @@
 //DEPS com.fasterxml.jackson.jr:jackson-jr-stree:2.15.3
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -17,7 +18,9 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.jr.ob.JSON;
@@ -90,8 +93,46 @@ public class test {
             String v = ((JrsString) docs.get(i).get("v")).getValue();
             versionsFromMavenCentral.add(v);
         }
-        String latestFromMavenCentral = versionsFromMavenCentral.stream().filter(x -> !x.toLowerCase().contains("beta")).findFirst().orElse("unknown");
+        String latestFromMavenCentral = versionsFromMavenCentral.stream()
+            .filter(x -> !x.toLowerCase().contains("beta"))
+            .sorted(new SemVerComparator().reversed())
+            .findFirst()
+            .orElse("unknown");
         return latestFromMavenCentral;
+    }
+
+    public static final class SemVerComparator implements Comparator<String> {
+
+        @Override
+        public final int compare(String o1, String o2) {
+            if (o1 == null || o2 == null) {
+                return o1 == null ? o2 == null ? 0 : -1 : 1;
+            }
+    
+            String[] split1 = o1.split("\\.");
+            String[] split2 = o2.split("\\.");
+            int length = Math.min(split1.length, split2.length);
+    
+            for (int i = 0; i < length; i++) {
+                char c1 = split1[i].charAt(0);
+                char c2 = split2[i].charAt(0);
+                int cmp = 0;
+    
+                if (c1 >= '0' && c1 <= '9' && c2 >= '0' && c2 <= '9') {
+                    cmp = new BigInteger(split1[i]).compareTo(new BigInteger(split2[i]));
+                }
+    
+                if (cmp == 0) {
+                    cmp = split1[i].compareTo(split2[i]);
+                }
+    
+                if (cmp != 0) {
+                    return cmp;
+                }
+            }
+    
+            return split1.length - split2.length;
+        }
     }
 
     public static void visit(FencedCodeBlock text) {
