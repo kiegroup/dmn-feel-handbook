@@ -6,6 +6,7 @@
 //DEPS com.vladsch.flexmark:flexmark-all:0.64.8
 //DEPS com.fasterxml.jackson.jr:jackson-jr-objects:2.15.3
 //DEPS com.fasterxml.jackson.jr:jackson-jr-stree:2.15.3
+//DEPS org.assertj:assertj-core:3.25.1
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -36,6 +37,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import org.assertj.core.api.Assertions;
 import org.drools.base.util.Drools;
 import org.kie.dmn.api.feel.runtime.events.FEELEvent;
 import org.kie.dmn.api.feel.runtime.events.FEELEventListener;
@@ -55,6 +57,9 @@ public class test {
     private static final List<String> failedExpressions = new ArrayList<>();
 
     public static void main(String... args) throws Exception {
+        inlineTest();
+
+        // check FEEL expressions in the .md
         String md = Files.readString(Paths.get("source/index.html.md"));
         Parser parser = Parser.builder().build();
         Node document = parser.parse(md);
@@ -67,6 +72,8 @@ public class test {
             failedExpressions.forEach(System.out::println);
             System.exit(-1);
         }
+
+        // check if Drools used version is the latest available from Maven central
         final String usedVersion = Drools.getFullVersion();
         System.out.println("Used Drools DMN engine version: "+usedVersion);
         final String latestVersion = checkLatestVersionFromMavenCentral();
@@ -77,6 +84,19 @@ public class test {
             System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
             System.exit(-1);
         }
+    }
+
+    /**
+     * inline tests by embedding in script.
+     */
+    private static void inlineTest() {
+        semVerComparatorTest();
+    }
+
+    private static void semVerComparatorTest() {
+       var inputList = List.of("9.0", "9.0.x", "9.0.aa", "9.0.a", "9", "10", "10.0", "1", "1.1", "1.0.1", "1.2");
+       var orderedList = inputList.stream().sorted(new SemVerComparator()).collect(Collectors.toList());
+       Assertions.assertThat(orderedList).containsExactly("1", "1.0.1", "1.1", "1.2", "9", "9.0", "9.0.a", "9.0.aa", "9.0.x", "10", "10.0");
     }
 
     private static String checkLatestVersionFromMavenCentral() throws URISyntaxException, IOException, InterruptedException, JSONObjectException {
