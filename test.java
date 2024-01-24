@@ -6,8 +6,10 @@
 //DEPS com.vladsch.flexmark:flexmark-all:0.64.8
 //DEPS com.fasterxml.jackson.jr:jackson-jr-objects:2.15.3
 //DEPS com.fasterxml.jackson.jr:jackson-jr-stree:2.15.3
+//DEPS org.assertj:assertj-core:3.25.1
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -17,7 +19,9 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.jr.ob.JSON;
@@ -33,6 +37,7 @@ import com.vladsch.flexmark.util.ast.VisitHandler;
 import com.vladsch.flexmark.util.collection.iteration.ReversiblePeekingIterator;
 import com.vladsch.flexmark.util.sequence.BasedSequence;
 
+import org.assertj.core.api.Assertions;
 import org.drools.base.util.Drools;
 import org.kie.dmn.api.feel.runtime.events.FEELEvent;
 import org.kie.dmn.api.feel.runtime.events.FEELEventListener;
@@ -52,6 +57,9 @@ public class test {
     private static final List<String> failedExpressions = new ArrayList<>();
 
     public static void main(String... args) throws Exception {
+        inlineTest();
+
+        // check FEEL expressions in the .md
         String md = Files.readString(Paths.get("source/index.html.md"));
         Parser parser = Parser.builder().build();
         Node document = parser.parse(md);
@@ -64,6 +72,8 @@ public class test {
             failedExpressions.forEach(System.out::println);
             System.exit(-1);
         }
+
+        // check if Drools used version is the latest available from Maven central
         final String usedVersion = Drools.getFullVersion();
         System.out.println("Used Drools DMN engine version: "+usedVersion);
         final String latestVersion = checkLatestVersionFromMavenCentral();
@@ -74,6 +84,19 @@ public class test {
             System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
             System.exit(-1);
         }
+    }
+
+    /**
+     * inline tests by embedding in script.
+     */
+    private static void inlineTest() {
+        semVerComparatorTest();
+    }
+
+    private static void semVerComparatorTest() {
+       var inputList = List.of("9.0", "9.0.x", "9.0.aa", "9.0.a", "9", "10", "10.0", "1", "1.1", "1.0.1", "1.2");
+       var orderedList = inputList.stream().sorted(new SemVerComparator()).collect(Collectors.toList());
+       Assertions.assertThat(orderedList).containsExactly("1", "1.0.1", "1.1", "1.2", "9", "9.0", "9.0.a", "9.0.aa", "9.0.x", "10", "10.0");
     }
 
     private static String checkLatestVersionFromMavenCentral() throws URISyntaxException, IOException, InterruptedException, JSONObjectException {
@@ -90,8 +113,46 @@ public class test {
             String v = ((JrsString) docs.get(i).get("v")).getValue();
             versionsFromMavenCentral.add(v);
         }
-        String latestFromMavenCentral = versionsFromMavenCentral.stream().filter(x -> !x.toLowerCase().contains("beta")).findFirst().orElse("unknown");
+        String latestFromMavenCentral = versionsFromMavenCentral.stream()
+            .filter(x -> !x.toLowerCase().contains("beta"))
+            .sorted(new SemVerComparator().reversed())
+            .findFirst()
+            .orElse("unknown");
         return latestFromMavenCentral;
+    }
+
+    public static final class SemVerComparator implements Comparator<String> {
+
+        @Override
+        public final int compare(String o1, String o2) {
+            if (o1 == null || o2 == null) {
+                return o1 == null ? o2 == null ? 0 : -1 : 1;
+            }
+    
+            String[] split1 = o1.split("\\.");
+            String[] split2 = o2.split("\\.");
+            int length = Math.min(split1.length, split2.length);
+    
+            for (int i = 0; i < length; i++) {
+                char c1 = split1[i].charAt(0);
+                char c2 = split2[i].charAt(0);
+                int cmp = 0;
+    
+                if (c1 >= '0' && c1 <= '9' && c2 >= '0' && c2 <= '9') {
+                    cmp = new BigInteger(split1[i]).compareTo(new BigInteger(split2[i]));
+                }
+    
+                if (cmp == 0) {
+                    cmp = split1[i].compareTo(split2[i]);
+                }
+    
+                if (cmp != 0) {
+                    return cmp;
+                }
+            }
+    
+            return split1.length - split2.length;
+        }
     }
 
     public static void visit(FencedCodeBlock text) {
