@@ -759,6 +759,38 @@ list contains( [1,2,3], 2 ) = true
 
 Returns `true` if the list contains the element.
 
+## list replace(list, position, newItem)
+
+> Examples:
+
+```FEEL
+list replace( [2, 4, 7, 8], 3, 6) = [2, 4, 6, 8]
+```
+
+| Parameter   | Type                                                                    |
+|-------------|-------------------------------------------------------------------------|
+| `list`      | `list`                                                                  |
+| `position`  | non-zero integer in the range [1..L], where L is the length of the list |
+| `newItem`   | Any type, including null                                                |
+
+Returns new list with `newItem` replaced at `position`.
+
+## list replace(list, match, newItem)
+
+> Examples:
+
+```FEEL
+list replace ( [2, 4, 7, 8], function(item, newItem) item < newItem, 5) = [5, 5, 7, 8]
+```
+
+| Parameter  | Type                            |
+|------------|---------------------------------|
+| `list`     | `list`                          |
+| `match`    | boolean function(item, newItem) |
+| `newItem`  | Any type, including null        |
+
+Returns new list with `newItem` replaced at all positions where the `match` function returned `true`.
+
 ## count( list )
 
 > Examples:
