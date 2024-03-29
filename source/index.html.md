@@ -205,6 +205,7 @@ duration( "P1DT23H12M30S" )
 duration( "P23D" )
 duration( "PT12H" )
 duration( "PT35M" )
+-duration( "P23D" )
 ```
 
 Days and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `days and time duration` values.
@@ -230,6 +231,7 @@ duration( "P3Y5M" )
 duration( "P2Y" )
 duration( "P10M" )
 duration( "P25M" )
+-duration( "P2Y" )
 ```
 
 Years and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `years and month duration` values.
@@ -395,6 +397,7 @@ Please notice that the <code>else</code> part is always mandatory.
 for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
 for i in 1..3 return i * i   //➔ [1, 4, 9]
 for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
+for x in @"2021-01-01"..@"2021-01-03" return x+1   //➔ ["2021-01-02", "2021-01-03", "2021-01-04"]
 ```
 
 You can use the `for expression` to produce new values based on the iteration context(s).
@@ -1471,6 +1474,8 @@ syntax](https://cql.hl7.org/08-a-cqlsyntax.html).
 ```FEEL
 before( 1, 10 ) = true
 before( 10, 1 ) = false
+before( @”2020-01-01”, [@”2021-01-01”..@”2022-01-01] ) = true
+before( @”2022-01-01”..@”2021-01-01 ) = false
 before( 1, [1..10] ) = false
 before( 1, (1..10] ) = true
 before( 1, [5..10] ) = true
@@ -1513,6 +1518,8 @@ d.  `range1.end < range2.start or (( not(range1.end included) or not(range2.star
 ```FEEL
 after( 10, 5 ) = true
 after( 5, 10 ) = false
+after( @”2022-01-01”..@”2021-01-01 ) = true
+after( @”2021-01-01”..@”2022-01-01 ) = false
 after( 12, [1..10] ) = true
 after( 10, [1..10) ) = true
 after( 10, [1..10] ) = false
