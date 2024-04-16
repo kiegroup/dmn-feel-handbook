@@ -397,7 +397,7 @@ Please notice that the <code>else</code> part is always mandatory.
 for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
 for i in 1..3 return i * i   //➔ [1, 4, 9]
 for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
-for x in @"2021-01-01"..@"2021-01-03" return x+1   //➔ ["2021-01-02", "2021-01-03", "2021-01-04"]
+for x in "@2021-01-01".."@2021-01-03" return x+1   //➔ ["2021-01-02", "2021-01-03", "2021-01-04"]
 ```
 
 You can use the `for expression` to produce new values based on the iteration context(s).
@@ -1484,8 +1484,8 @@ before( [1..10], [15..20] ) = true
 before( [1..10], [10..20] ) = false
 before( [1..10), [10..20] ) = true
 before( [1..10], (10..20] ) = true
-before( \"@2020-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = true
-before( \"@2024-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = false
+before( "@2020-01-01", ["@2021-01-01".."@2022-01-01"]) = true
+before( "@2024-01-01", ["@2021-01-01".."@2022-01-01"]) = false
 ```
 
 Returns `true` when an element `A` is before an element `B` and when
@@ -1529,8 +1529,8 @@ after( [11..20], [1..10] ) = true
 after( [1..10], [11..20] ) = false
 after( [11..20], [1..11) ) = true
 after( (11..20], [1..11] ) = true
-after( \"@2020-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = false
-after( \"@2024-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = true
+after( "@2020-01-01", ["@2021-01-01".."@2022-01-01"]) = false
+after( "@2024-01-01", ["@2021-01-01".."@2022-01-01"]) = true
 ```
 
 Returns `true` when an element `A` is after an element `B` and when
