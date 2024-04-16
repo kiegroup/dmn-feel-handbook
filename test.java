@@ -1,5 +1,6 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //JAVA 11+
+//REPOS mavencentral,apache=https://repository.apache.org/content/groups/public/
 //DEPS org.kie:kie-dmn-feel:${drools.version:9.44.0.Final}
 //DEPS org.slf4j:slf4j-simple:1.7.36
 //DEPS info.picocli:picocli:4.7.5
