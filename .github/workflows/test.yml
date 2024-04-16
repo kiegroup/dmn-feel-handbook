@@ -9,7 +9,7 @@ on:
 jobs:
   drools-matrix:
     runs-on: ubuntu-latest
-    name: Testing FEEL expressions with the Drools engine
+    name: Test with Drools
     strategy:
       matrix:
         drools_version: [9.44.0.Final, 999-SNAPSHOT]
