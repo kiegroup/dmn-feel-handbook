@@ -7,9 +7,9 @@ on:
     branches: [ '*' ]
 
 jobs:
-  jbang:
+  jbang-drools-stable:
     runs-on: ubuntu-latest
-    name: Testing FEEL expressions in the MarkDown with JBang
+    name: Testing FEEL expressions in the MarkDown with JBang with Drools latest stable release
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -23,3 +23,21 @@ jobs:
       uses: jbangdev/jbang-action@v0.111.0
       with:
         script: test.java
+  jbang-drools-snapshot:
+    runs-on: ubuntu-latest
+    name: Testing FEEL expressions in the MarkDown with JBang with Drools latest SNAPSHOT release
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - uses: actions/cache@v1
+        with:
+          path: /root/.jbang
+          key: $-jbang-$
+          restore-keys: |
+            $-jbang-
+      - name: jbang
+        uses: jbangdev/jbang-action@v0.111.0
+        with:
+          script: test.java
+        env:
+          drools_version: 999-SNAPSHOT
