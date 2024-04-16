@@ -15,15 +15,15 @@ jobs:
         drools_version: [9.44.0.Final, 999-SNAPSHOT]
     steps:
       - name: checkout
-        uses: actions/checkout@v4.1.1
-      - uses: actions/cache@v4.0.2
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: /root/.jbang
           key: $-jbang-$
           restore-keys: |
             $-jbang-
       - name: jbang
-        uses: jbangdev/jbang-action@v0.115.0
+        uses: jbangdev/jbang-action@v0
         with:
           script: test.java
           jbangargs: -Ddrools.version=${{ matrix.drools_version }}
