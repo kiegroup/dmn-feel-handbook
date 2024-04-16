@@ -82,8 +82,13 @@ public class test {
         if (usedVersion.equals(latestVersion)) {
             System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@"));
         } else {
-            System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
-            System.exit(-1);
+            if (usedVersion.endsWith("-SNAPSHOT")) {
+                System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@"));
+                System.out.println("Using a SNAPSHOT version, the previous version check was automatically marked as OK. ");
+            } else {
+                System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
+                System.exit(-1);
+            }
         }
     }
 
