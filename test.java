@@ -1,6 +1,7 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
-//JAVA 11+
-//DEPS org.kie:kie-dmn-feel:9.44.0.Final
+//JAVA 17+
+//REPOS mavencentral,apache=https://repository.apache.org/content/groups/public/
+//DEPS org.kie:kie-dmn-feel:${drools.version:9.44.0.Final}
 //DEPS org.slf4j:slf4j-simple:1.7.36
 //DEPS info.picocli:picocli:4.7.5
 //DEPS com.vladsch.flexmark:flexmark-all:0.64.8
@@ -81,8 +82,13 @@ public class test {
         if (usedVersion.equals(latestVersion)) {
             System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@"));
         } else {
-            System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
-            System.exit(-1);
+            if (usedVersion.endsWith("-SNAPSHOT")) {
+                System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@"));
+                System.out.println("Using a SNAPSHOT version, the previous version check was automatically marked as OK. ");
+            } else {
+                System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
+                System.exit(-1);
+            }
         }
     }
 
@@ -128,29 +134,29 @@ public class test {
             if (o1 == null || o2 == null) {
                 return o1 == null ? o2 == null ? 0 : -1 : 1;
             }
-    
+
             String[] split1 = o1.split("\\.");
             String[] split2 = o2.split("\\.");
             int length = Math.min(split1.length, split2.length);
-    
+
             for (int i = 0; i < length; i++) {
                 char c1 = split1[i].charAt(0);
                 char c2 = split2[i].charAt(0);
                 int cmp = 0;
-    
+
                 if (c1 >= '0' && c1 <= '9' && c2 >= '0' && c2 <= '9') {
                     cmp = new BigInteger(split1[i]).compareTo(new BigInteger(split2[i]));
                 }
-    
+
                 if (cmp == 0) {
                     cmp = split1[i].compareTo(split2[i]);
                 }
-    
+
                 if (cmp != 0) {
                     return cmp;
                 }
             }
-    
+
             return split1.length - split2.length;
         }
     }
