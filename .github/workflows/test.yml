@@ -39,5 +39,4 @@ jobs:
         uses: jbangdev/jbang-action@v0.111.0
         with:
           script: test.java
-        env:
-          drools_version: 999-SNAPSHOT
+          jbangargs: -Ddrools.version=999-SNAPSHOT
