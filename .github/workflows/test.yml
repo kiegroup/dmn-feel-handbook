@@ -15,8 +15,8 @@ jobs:
         drools_version: [9.44.0.Final, 999-SNAPSHOT]
     steps:
       - name: checkout
-        uses: actions/checkout@v1
-      - uses: actions/cache@v1
+        uses: actions/checkout@v4.1.1
+      - uses: actions/cache@v4.0.2
         with:
           path: /root/.jbang
           key: $-jbang-$
