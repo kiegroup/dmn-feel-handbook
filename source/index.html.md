@@ -1474,8 +1474,6 @@ syntax](https://cql.hl7.org/08-a-cqlsyntax.html).
 ```FEEL
 before( 1, 10 ) = true
 before( 10, 1 ) = false
-before( @”2020-01-01”, [@”2021-01-01”..@”2022-01-01] ) = true
-before( @”2022-01-01”..@”2021-01-01 ) = false
 before( 1, [1..10] ) = false
 before( 1, (1..10] ) = true
 before( 1, [5..10] ) = true
@@ -1486,6 +1484,8 @@ before( [1..10], [15..20] ) = true
 before( [1..10], [10..20] ) = false
 before( [1..10), [10..20] ) = true
 before( [1..10], (10..20] ) = true
+before( \"@2020-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = true
+before( \"@2024-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = false
 ```
 
 Returns `true` when an element `A` is before an element `B` and when
@@ -1518,8 +1518,6 @@ d.  `range1.end < range2.start or (( not(range1.end included) or not(range2.star
 ```FEEL
 after( 10, 5 ) = true
 after( 5, 10 ) = false
-after( @”2022-01-01”..@”2021-01-01 ) = true
-after( @”2021-01-01”..@”2022-01-01 ) = false
 after( 12, [1..10] ) = true
 after( 10, [1..10) ) = true
 after( 10, [1..10] ) = false
@@ -1531,6 +1529,8 @@ after( [11..20], [1..10] ) = true
 after( [1..10], [11..20] ) = false
 after( [11..20], [1..11) ) = true
 after( (11..20], [1..11] ) = true
+after( \"@2020-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = false
+after( \"@2024-01-01\", [\"@2021-01-01\"..\"@2022-01-01\"]) = true
 ```
 
 Returns `true` when an element `A` is after an element `B` and when
