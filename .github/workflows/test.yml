@@ -7,25 +7,10 @@ on:
     branches: [ '*' ]
 
 jobs:
-  jbang-drools-stable:
-    runs-on: ubuntu-latest
-    name: Testing with Drools latest stable release
-    steps:
-    - name: checkout
-      uses: actions/checkout@v1
-    - uses: actions/cache@v1
-      with:
-        path: /root/.jbang
-        key: $-jbang-$
-        restore-keys: |
-            $-jbang-
-    - name: jbang
-      uses: jbangdev/jbang-action@v0.111.0
-      with:
-        script: test.java
-  jbang-drools-snapshot:
-    runs-on: ubuntu-latest
-    name: Testing with Drools latest SNAPSHOT release
+  drools-matrix:
+    strategy:
+      matrix:
+        drools_version: [9.44.0.Final, 999-SNAPSHOT]
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -36,7 +21,7 @@ jobs:
           restore-keys: |
             $-jbang-
       - name: jbang
-        uses: jbangdev/jbang-action@v0.111.0
+        uses: jbangdev/jbang-action@v0.116.0
         with:
           script: test.java
-          jbangargs: -Ddrools.version=999-SNAPSHOT
+          jbangargs: -Ddrools.version=${{ matrix.drools_version }}
