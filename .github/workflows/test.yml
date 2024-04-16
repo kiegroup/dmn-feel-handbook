@@ -9,7 +9,7 @@ on:
 jobs:
   jbang-drools-stable:
     runs-on: ubuntu-latest
-    name: Testing FEEL expressions in the MarkDown with JBang with Drools latest stable release
+    name: Testing with Drools latest stable release
     steps:
     - name: checkout
       uses: actions/checkout@v1
@@ -25,7 +25,7 @@ jobs:
         script: test.java
   jbang-drools-snapshot:
     runs-on: ubuntu-latest
-    name: Testing FEEL expressions in the MarkDown with JBang with Drools latest SNAPSHOT release
+    name: Testing with Drools latest SNAPSHOT release
     steps:
       - name: checkout
         uses: actions/checkout@v1
