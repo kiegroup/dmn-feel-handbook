@@ -397,7 +397,7 @@ Please notice that the <code>else</code> part is always mandatory.
 for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
 for i in 1..3 return i * i   //➔ [1, 4, 9]
 for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
-for x in "@2021-01-01".."@2021-01-03" return x+1   //➔ ["2021-01-02", "2021-01-03", "2021-01-04"]
+for x in @"2021-01-01"..@"2021-01-03" return x + 1 //➔ [date("2021-01-02"), date("2021-01-03"), date("2021-01-04")]
 ```
 
 You can use the `for expression` to produce new values based on the iteration context(s).
