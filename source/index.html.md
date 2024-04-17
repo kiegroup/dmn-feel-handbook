@@ -205,6 +205,7 @@ duration( "P1DT23H12M30S" )
 duration( "P23D" )
 duration( "PT12H" )
 duration( "PT35M" )
+-duration( "P23D" )
 ```
 
 Days and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `days and time duration` values.
@@ -230,6 +231,7 @@ duration( "P3Y5M" )
 duration( "P2Y" )
 duration( "P10M" )
 duration( "P25M" )
+-duration( "P2Y" )
 ```
 
 Years and time duration literals are not supported in FEEL, but you can use the built-in `duration()` function to construct `years and month duration` values.
@@ -395,6 +397,7 @@ Please notice that the <code>else</code> part is always mandatory.
 for i in [1, 2, 3] return i * i   //➔ [1, 4, 9]
 for i in 1..3 return i * i   //➔ [1, 4, 9]
 for i in [1,2,3], j in [1,2,3] return i*j   //➔ [1, 2, 3, 2, 4, 6, 3, 6, 9]
+for x in @"2021-01-01"..@"2021-01-03" return x + 1 //➔ [date("2021-01-02"), date("2021-01-03"), date("2021-01-04")]
 ```
 
 You can use the `for expression` to produce new values based on the iteration context(s).
@@ -758,6 +761,38 @@ list contains( [1,2,3], 2 ) = true
 | `element`          | Any type, including null                        |
 
 Returns `true` if the list contains the element.
+
+## list replace(list, position, newItem)
+
+> Examples:
+
+```FEEL
+list replace( [2, 4, 7, 8], 3, 6) = [2, 4, 6, 8]
+```
+
+| Parameter   | Type                                                                    |
+|-------------|-------------------------------------------------------------------------|
+| `list`      | `list`                                                                  |
+| `position`  | non-zero integer in the range [1..L], where L is the length of the list |
+| `newItem`   | Any type, including null                                                |
+
+Returns new list with `newItem` replaced at `position`.
+
+## list replace(list, match, newItem)
+
+> Examples:
+
+```FEEL
+list replace ( [2, 4, 7, 8], function(item, newItem) item < newItem, 5) = [5, 5, 7, 8]
+```
+
+| Parameter  | Type                            |
+|------------|---------------------------------|
+| `list`     | `list`                          |
+| `match`    | boolean function(item, newItem) |
+| `newItem`  | Any type, including null        |
+
+Returns new list with `newItem` replaced at all positions where the `match` function returned `true`.
 
 ## count( list )
 
@@ -1449,6 +1484,8 @@ before( [1..10], [15..20] ) = true
 before( [1..10], [10..20] ) = false
 before( [1..10), [10..20] ) = true
 before( [1..10], (10..20] ) = true
+before( "@2020-01-01", ["@2021-01-01".."@2022-01-01"]) = true
+before( "@2024-01-01", ["@2021-01-01".."@2022-01-01"]) = false
 ```
 
 Returns `true` when an element `A` is before an element `B` and when
@@ -1492,6 +1529,8 @@ after( [11..20], [1..10] ) = true
 after( [1..10], [11..20] ) = false
 after( [11..20], [1..11) ) = true
 after( (11..20], [1..11] ) = true
+after( "@2020-01-01", ["@2021-01-01".."@2022-01-01"]) = false
+after( "@2024-01-01", ["@2021-01-01".."@2022-01-01"]) = true
 ```
 
 Returns `true` when an element `A` is after an element `B` and when

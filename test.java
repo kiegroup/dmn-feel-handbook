@@ -214,9 +214,10 @@ public class test {
         if (Boolean.TRUE.equals(feelResult)) {
             System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,green OK|@"));
         } else {
-            failedExpressions.add(evaluate);
-            System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
-            System.out.println(feelResult);
+          Object evaluateComparison = feel.evaluate(expression);
+          String toAdd = String.format("%s; actual result: %s", evaluate, evaluateComparison);
+          failedExpressions.add(toAdd);
+          System.out.println(CommandLine.Help.Ansi.AUTO.string("@|bold,red FAIL|@"));
         }
     }
 
