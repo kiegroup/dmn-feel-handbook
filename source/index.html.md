@@ -1966,7 +1966,7 @@ Returns the Gregorian month of the year: `"January"`, `"February"`,
 `"March"`, `"April"`, `"May"`, `"June"`, `"July"`, `"August"`,
 `"September"`, `"October"`, `"November"`, or `"December"`.
 
-## month of year( date )
+## week of year( date )
 
 | Parameter          | Type                                            |
 |-|-|
